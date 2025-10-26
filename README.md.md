@@ -9,4 +9,3 @@ a system for managing clinic appointments ,payments,and queue
 ## team members
 -aya rawag 
 -nour al-iman
-
