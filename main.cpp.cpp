@@ -278,7 +278,7 @@ public:
     : ElectronicPayment(id, amt, "Digital Wallet", trans), walletType(wallet) {}
 
     void processPayment(Appointment& appt) override {
-        cout << "\n📱 Processing " << walletType << " payment of $" << amount << "...\n";
+        cout << "\nProcessing " << walletType << " payment of $" << amount << "...\n";
         appt.setStatus("Paid");
         cout << " Payment successful! Appointment marked as 'Paid'.\n";
         sendReceipt();
