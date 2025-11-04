@@ -45,7 +45,6 @@ private:
     int nextID = 100;
 
 public:
-    // Registration (FR1)
     int registerPatient() {
         string name, phone, email, password;
         cout << "\n--- User Registration (FR1) ---\n";
@@ -67,7 +66,6 @@ public:
             return -1;
         }
 
-        // check duplicates in file
         ifstream checkFile("patients.txt");
         string line;
         while (getline(checkFile, line)) {
@@ -91,12 +89,11 @@ public:
         file << newID << "," << name << "," << phone << "," << email << "," << hash << endl;
         file.close();
 
-        cout << " Registration successful!\n";
+        cout << "Registration successful!\n";
         cout << "Your Patient ID: " << newID << endl;
         return newID;
     }
 
-    // Login (FR2)
     int loginPatient() {
         cout << "\n--- User Login (FR2) ---\n";
         string emailOrPhone, password;
@@ -107,7 +104,7 @@ public:
 
         ifstream file("patients.txt");
         if (!file) {
-            cout << " No users registered yet.\n";
+            cout << "No users registered yet.\n";
             return -1;
         }
 
@@ -123,7 +120,7 @@ public:
 
             if (email == emailOrPhone || phone == emailOrPhone) {
                 if (hash == hashPassword(password)) {
-                    cout << "Login successful. Welcome, " << name << "!\n";
+                    cout << " Login successful. Welcome, " << name << "!\n";
                     return stoi(idStr);
                 } else {
                     cout << " Wrong password.\n";
@@ -149,6 +146,10 @@ public:
 
     Appointment(int aid, int pid, int did, string d, string t)
         : appointmentID(aid), patientID(pid), doctorID(did), date(d), time(t), status("Booked") {}
+
+    void setStatus(string newStatus) {
+        status = newStatus;
+    }
 };
 
 // ---------------- Appointment Manager ----------------
@@ -160,13 +161,13 @@ public:
     bool isSlotAvailable(int doctorID, string date, string time) {
         for (auto &appt : appointments) {
             if (appt.doctorID == doctorID && appt.date == date && appt.time == time) {
-                return false; // slot already booked
+                return false;
             }
         }
         return true;
     }
 
-    void bookAppointment(int patientID) {
+    Appointment* bookAppointment(int patientID) {
         cout << "\n--- Book Appointment ---\n";
         int doctorID;
         string date, time;
@@ -180,16 +181,20 @@ public:
         getline(cin, time);
 
         if (!isSlotAvailable(doctorID, date, time)) {
-            cout << " This time slot is already booked. Please choose another.\n";
-            return;
+            cout << "This time slot is already booked. Please choose another.\n";
+            return nullptr;
         }
 
         int appointmentID = patientID * 1000 + doctorID;
         appointments.push_back(Appointment(appointmentID, patientID, doctorID, date, time));
 
         cout << "\n Appointment booked successfully!\n";
-        cout << "Appointment ID: " << appointmentID << "\nDoctor ID: " << doctorID
-             << "\nDate: " << date << "\nTime: " << time << endl;
+        cout << "Appointment ID: " << appointmentID
+             << "\nDoctor ID: " << doctorID
+             << "\nDate: " << date
+             << "\nTime: " << time << endl;
+
+        return &appointments.back();
     }
 
     void showAllAppointments() {
@@ -206,6 +211,81 @@ public:
                  << " | Time: " << appt.time
                  << " | Status: " << appt.status << endl;
         }
+    }
+};
+
+// ---------------- Payment Classes ----------------
+class Payment {
+protected:
+    int paymentID;
+    double amount;
+    string method;
+
+public:
+    Payment(int id, double amt, string m) : paymentID(id), amount(amt), method(m) {}
+    virtual void processPayment(Appointment& appt) = 0;
+    virtual void refundPayment() = 0;
+    virtual ~Payment() {}
+};
+
+// Electronic Payment (Base for Card and Digital Wallet)
+class ElectronicPayment : public Payment {
+protected:
+    string transactionID;
+
+public:
+    ElectronicPayment(int id, double amt, string m, string trans)
+        : Payment(id, amt, m), transactionID(trans) {}
+
+    void sendReceipt() {
+        cout << " Digital receipt sent successfully!\n";
+    }
+
+    void showError() {
+        cout << " Payment failed due to transaction error.\n";
+    }
+};
+
+// Card Payment (Visa/MasterCard)
+class CardPayment : public ElectronicPayment {
+private:
+    string cardNumber;
+    string cardType;
+
+public:
+    CardPayment(int id, double amt, string type, string cardNum, string trans)
+        : ElectronicPayment(id, amt, type, trans), cardNumber(cardNum), cardType(type) {}
+
+    void processPayment(Appointment& appt) override {
+        cout << "\n Processing " << cardType << " card payment of $" << amount << "...\n";
+        appt.setStatus("Paid");
+        cout << "Payment successful! Appointment marked as 'Paid'.\n";
+        sendReceipt();
+    }
+
+    void refundPayment() override {
+        cout << "Refunding card payment to " << cardType << " card: " << cardNumber << endl;
+    }
+};
+
+// Digital Wallet Payment (PayPal, Google Pay, etc.)
+class DigitalWalletPayment : public ElectronicPayment {
+private:
+    string walletType;
+
+public:
+    DigitalWalletPayment(int id, double amt, string wallet, string trans)
+    : ElectronicPayment(id, amt, "Digital Wallet", trans), walletType(wallet) {}
+
+    void processPayment(Appointment& appt) override {
+        cout << "\n📱 Processing " << walletType << " payment of $" << amount << "...\n";
+        appt.setStatus("Paid");
+        cout << " Payment successful! Appointment marked as 'Paid'.\n";
+        sendReceipt();
+    }
+
+    void refundPayment() override {
+        cout << "Refunding payment via " << walletType << "...\n";
     }
 };
 
@@ -239,9 +319,26 @@ int main() {
                     cin >> option;
                     cin.ignore();
 
-                    if (option == 1)
-                        appointmentManager.bookAppointment(patientID);
-                    else if (option == 2)
+                    if (option == 1) {
+                        Appointment* appt = appointmentManager.bookAppointment(patientID);
+                        if (appt != nullptr) {
+                            cout << "\nSelect Payment Method:\n";
+                            cout << "1. Card Payment (Visa/MasterCard)\n";
+                            cout << "2. Digital Wallet (PayPal/Google Pay)\n";
+                            cout << "Enter choice: ";
+                            int payChoice;
+                            cin >> payChoice;
+                            cin.ignore();
+
+                            if (payChoice == 1) {
+                                CardPayment card(1, 100.0, "Visa", "1234-5678-9999", "TX123");
+                                card.processPayment(*appt);
+                            } else if (payChoice == 2) {
+                                DigitalWalletPayment wallet(2, 100.0, "PayPal", "TX789");
+                                wallet.processPayment(*appt);
+                            }
+                        }
+                    } else if (option == 2)
                         appointmentManager.showAllAppointments();
 
                 } while (option != 3);
@@ -253,6 +350,5 @@ int main() {
             cout << "Invalid choice.\n";
         }
     }
-
     return 0;
 }
