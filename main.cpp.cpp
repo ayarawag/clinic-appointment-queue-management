@@ -350,5 +350,6 @@ int main() {
             cout << "Invalid choice.\n";
         }
     }
-    system ("pause");
+    return 0;
 }
+
