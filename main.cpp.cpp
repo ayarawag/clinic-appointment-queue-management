@@ -55,7 +55,7 @@ public:
     int registerPatient() {
         string name, phone, email, password;
         cout << "\n--- User Registration ---\n";
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // تنظيف أي مدخلات سابقة
         cout << "Enter your name: "; getline(cin, name);
         cout << "Enter your phone: "; getline(cin, phone);
         cout << "Enter your email: "; getline(cin, email);
@@ -91,7 +91,7 @@ public:
 
     int loginPatient() {
         string emailOrPhone, password;
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // تنظيف أي مدخلات سابقة
         cout << "\n--- User Login ---\n";
         cout << "Enter email or phone: "; getline(cin, emailOrPhone);
         cout << "Enter password: "; getline(cin, password);
@@ -200,16 +200,22 @@ public:
     void showQueue(int doctorID) {
         const char* sql = "SELECT appointmentID, patientID, emergency, queue_position FROM appointments WHERE doctorID=? AND status!='Cancelled' ORDER BY queue_position ASC;";
         sqlite3_stmt* stmt=nullptr;
-        if(sqlite3_prepare_v2(db,sql,-1,&stmt,nullptr)!=SQLITE_OK) return;
+        if(sqlite3_prepare_v2(db,sql,-1,&stmt,nullptr)!=SQLITE_OK) {
+            cout << "DB prepare error: " << sqlite3_errmsg(db) << endl;
+            return;
+        }
         sqlite3_bind_int(stmt,1,doctorID);
         cout<<"\n--- Queue for Doctor "<<doctorID<<" ---\n";
-        while(sqlite3_step(stmt)==SQLITE_ROW){
-            int apptID=sqlite3_column_int(stmt,0);
-            int pid=sqlite3_column_int(stmt,1);
-            int em=sqlite3_column_int(stmt,2);
-            int qpos=sqlite3_column_int(stmt,3);
+        bool any = false;
+        while(sqlite3_step(stmt) == SQLITE_ROW){
+            any = true;
+            int apptID = sqlite3_column_int(stmt,0);
+            int pid = sqlite3_column_int(stmt,1);
+            int em = sqlite3_column_int(stmt,2);
+            int qpos = sqlite3_column_int(stmt,3);
             cout<<"Pos "<<qpos<<": ApptID="<<apptID<<" PatientID="<<pid<<" Emergency="<<(em?"Yes":"No")<<endl;
         }
+        if(!any) cout << "No appointments for this doctor.\n";
         sqlite3_finalize(stmt);
     }
 
@@ -229,12 +235,10 @@ public:
         cout<<"Enter appointment IDs in desired order (end with 0): ";
         vector<int> newOrder; int id;
         while(cin>>id && id!=0) newOrder.push_back(id); cin.ignore();
-
         vector<int> current = getCurrentQueue(doctorID);
         sort(current.begin(), current.end());
         vector<int> temp = newOrder; sort(temp.begin(), temp.end());
         if(current!=temp){ cout<<"Order invalid, abort.\n"; return; }
-
         const char* upd = "UPDATE appointments SET queue_position=? WHERE appointmentID=?;";
         sqlite3_stmt* stmt=nullptr;
         if(sqlite3_prepare_v2(db,upd,-1,&stmt,nullptr)!=SQLITE_OK) return;
@@ -249,7 +253,6 @@ public:
         showQueue(doctorID);
     }
 
-    // ---------------- Book Appointment ----------------
     int bookAppointment(int patientID) {
         int doctorID;
         string date,timeStr;
@@ -280,7 +283,7 @@ public:
         sqlite3_finalize(stmt);
         int apptID=static_cast<int>(sqlite3_last_insert_rowid(db));
 
-        if(isEmergency) reorderQueue(doctorID); // ترتيب تلقائي للطوارئ
+        if(isEmergency) reorderQueue(doctorID);
 
         cout<<"Appointment booked! ID: "<<apptID<<endl;
         cout<<"Select Payment: 1.Card 2.Wallet: "; int pay; cin>>pay; cin.ignore();
@@ -290,6 +293,7 @@ public:
             sqlite3_bind_int(pstmt,1,apptID); sqlite3_step(pstmt); sqlite3_finalize(pstmt);
             cout<<"Payment successful!\n";
         }
+
         return apptID;
     }
 };
