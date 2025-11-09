@@ -3,6 +3,7 @@
 #include <vector>
 #include <ctime>
 #include <algorithm>
+#include <limits>
 #include <sqlite3.h>
 
 using namespace std;
@@ -289,14 +290,12 @@ public:
             sqlite3_bind_int(pstmt,1,apptID); sqlite3_step(pstmt); sqlite3_finalize(pstmt);
             cout<<"Payment successful!\n";
         }
-
         return apptID;
     }
 };
 
 // ----------------- Main -----------------
 int main(){
-    cout<<"=== Clinic Appointment System ===\n";
     sqlite3* db=nullptr;
     if(sqlite3_open("clinic.db",&db)!=SQLITE_OK){ cerr<<"Failed to open DB\n"; return 1; }
 
@@ -305,8 +304,11 @@ int main(){
     if(!userManager.initTables()||!appointmentManager.initTables()){ cerr<<"Failed to init DB tables\n"; return 1; }
 
     while(true){
-        cout<<"\n1.Register\n2.Login\n3.Doctor Queue Tools\n4.Exit\nChoice: ";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // تنظيف أي إدخال سابق
+        cout<<"\n=== Clinic Appointment System ===\n";
+        cout<<"1.Register\n2.Login\n3.Doctor Queue Tools\n4.Exit\nChoice: ";
         int choice; if(!(cin>>choice)){cin.clear(); string tmp; getline(cin,tmp); continue;}
+
         if(choice==1) userManager.registerPatient();
         else if(choice==2){
             int pid=userManager.loginPatient();
