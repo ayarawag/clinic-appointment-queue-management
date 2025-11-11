@@ -297,6 +297,7 @@ public:
 
 // ----------------- MAIN -----------------
 int main() {
+    cout << ">>> TEST CHANGE <<<" << endl;
     sqlite3* db = nullptr;
     if (sqlite3_open("clinic.db", &db) != SQLITE_OK) {
         cerr << "Failed to open DB\n"; return 1;
