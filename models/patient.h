@@ -5,11 +5,7 @@
 
 class Patient {
 public:
-    int id;
-    std::string name;
-    std::string phone;
-    std::string email;
-    std::string password;
+    std::string name, phone, email, password;
 
     Patient() = default;
     Patient(std::string n, std::string p, std::string e, std::string pw);

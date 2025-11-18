@@ -1,5 +1,6 @@
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
+
 #include <string>
 
 class Appointment {
@@ -8,7 +9,7 @@ public:
     int patientId;
     int doctorId;
     std::string dateTime;
-    bool paid;
+    bool paid = false;
 
     bool book();
     bool cancel();

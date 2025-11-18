@@ -1,5 +1,9 @@
 #include <iostream>
-using namespace std;
+#include "database/db_connection.h"
+#include "models/patient.h"
+#include "models/doctor.h"
+#include "models/appointment.h"
+#include "models/queue.h"
 
 void registerUser();
 bool loginUser();
@@ -7,8 +11,13 @@ void bookAppointment();
 void payAppointment();
 void updateQueue();
 void cancelAppointment();
-void setDoctorSchedule(); 
+void setDoctorSchedule();
+
 int main() {
+    std::cout << "Program started...\n";
+
+    DBConnection db("clinic.db");
+
     int choice;
     do {
         std::cout << "\n1- Register\n2- Login\n3- Book Appointment\n4- Pay\n5- Update Queue\n6- Cancel Appointment\n7- Set Doctor Schedule\n0- Exit\nChoice: ";

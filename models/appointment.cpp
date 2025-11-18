@@ -1,6 +1,5 @@
 #include "appointment.h"
 #include "../database/db_connection.h"
-#include <iostream>
 
 bool Appointment::book() {
     DBConnection db("clinic.db");
