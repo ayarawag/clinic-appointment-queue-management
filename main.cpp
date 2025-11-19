@@ -15,6 +15,7 @@ void setDoctorSchedule();
 
 int main() {
     std::cout << "Program started...\n";
+        
 
     DBConnection db("clinic.db");
 
