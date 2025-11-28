@@ -1,8 +1,10 @@
 #include "doctor.h"
 #include "../database/db_connection.h"
+#include <iostream>
+using namespace std;
 
-void Doctor::setSchedule(const std::string& schedule) {
+void Doctor::setSchedule(const string& schedule) {
     DBConnection db("clinic.db");
-    std::string query = "UPDATE doctors SET schedule='" + schedule + "' WHERE id=" + std::to_string(id) + ";";
-    db.execute(query);
+    string sql = "UPDATE doctors SET schedule='" + schedule + "' WHERE id=" + to_string(id) + ";";
+    if (!db.execute(sql)) cout << "Failed to update schedule.\n";
 }

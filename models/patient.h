@@ -2,16 +2,27 @@
 #define PATIENT_H
 
 #include <string>
+using namespace std;
 
 class Patient {
-public:
-    std::string name, phone, email, password;
+private:
+    string name;
+    string phone;
+    string email;
+    string password;
+    int failedAttempts;
+    long long lockedUntil;
+    string preferredChannel; // email / sms / app
 
-    Patient() = default;
-    Patient(std::string n, std::string p, std::string e, std::string pw);
+    long long nowEpoch();
+    bool isValidEmail(const string& email);
+    string hashPassword(const string& input);
+
+public:
+    Patient(string n, string p, string e, string pw);
 
     bool registerPatient();
-    bool loginPatient(const std::string& emailOrPhone, const std::string& pw);
+    bool loginPatient(const string& user, const string& pw);
 };
 
 #endif

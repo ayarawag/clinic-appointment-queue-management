@@ -2,18 +2,18 @@
 #define APPOINTMENT_H
 
 #include <string>
+using namespace std;
 
 class Appointment {
 public:
-    int id;
-    int patientId;
-    int doctorId;
-    std::string dateTime;
-    bool paid = false;
+    int id, patientId, doctorId;
+    string dateTime;
+    bool paid;
 
     bool book();
     bool cancel();
-    bool reschedule(const std::string& newTime);
+    bool reschedule(const string& newTime);
+    bool setPaid();
 };
 
 #endif

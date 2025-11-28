@@ -1,13 +1,15 @@
 #include "../models/patient.h"
 #include <iostream>
+using namespace std;
 
 void registerUser() {
-    std::string name, phone, email, password;
-    std::cout << "Name: "; std::cin >> name;
-    std::cout << "Phone: "; std::cin >> phone;
-    std::cout << "Email: "; std::cin >> email;
-    std::cout << "Password: "; std::cin >> password;
+    string name, phone, email, password;
+    cout << "Name: "; cin.ignore(); getline(cin, name);
+    cout << "Phone: "; cin >> phone;
+    cout << "Email: "; cin >> email;
+    cout << "Password: "; cin >> password;
 
     Patient p(name, phone, email, password);
-    if(p.registerPatient()) std::cout << "Registered!\n";
+    if (p.registerPatient()) cout << "Registered successfully.\n";
+    else cout << "Registration failed.\n";
 }

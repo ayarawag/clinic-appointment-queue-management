@@ -1,16 +1,19 @@
 #include "../models/appointment.h"
 #include <iostream>
+using namespace std;
 
 void bookAppointment() {
-    int patientId, doctorId;
-    std::string dateTime;
-    std::cout << "Patient ID: "; std::cin >> patientId;
-    std::cout << "Doctor ID: "; std::cin >> doctorId;
-    std::cout << "Date & Time: "; std::cin >> dateTime;
+    int pid, did;
+    string date;
+    cout << "Patient ID: "; cin >> pid;
+    cout << "Doctor ID: "; cin >> did;
+    cin.ignore();
+    cout << "Date & Time (YYYY-MM-DD HH:MM): "; getline(cin, date);
 
-    Appointment app;
-    app.patientId = patientId;
-    app.doctorId = doctorId;
-    app.dateTime = dateTime;
-    if(app.book()) std::cout << "Appointment booked!\n";
+    Appointment a;
+    a.patientId = pid;
+    a.doctorId = did;
+    a.dateTime = date;
+    if (a.book()) cout << "Appointment booked.\n";
+    else cout << "Booking failed.\n";
 }

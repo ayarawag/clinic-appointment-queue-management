@@ -1,14 +1,11 @@
 #include "../models/doctor.h"
 #include <iostream>
+using namespace std;
 
 void setDoctorSchedule() {
-    int doctorId;
-    std::string schedule;
-    std::cout << "Doctor ID: "; std::cin >> doctorId;
-    std::cout << "Schedule: "; std::cin >> schedule;
-
-    Doctor doc;
-    doc.id = doctorId;
-    doc.setSchedule(schedule);
-    std::cout << "Doctor schedule updated!\n";
+    int id; cout << "Doctor ID: "; cin >> id;
+    cin.ignore();
+    string s; cout << "Schedule (e.g. Mon-Fri 09:00-12:00): "; getline(cin, s);
+    Doctor d; d.id = id; d.setSchedule(s);
+    cout << "Schedule updated.\n";
 }

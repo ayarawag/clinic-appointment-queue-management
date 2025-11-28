@@ -1,20 +1,18 @@
 #ifndef DB_CONNECTION_H
 #define DB_CONNECTION_H
 
+#include <sqlite3.h>
 #include <string>
-#include <iostream>
+using namespace std;
 
 class DBConnection {
 public:
-    DBConnection(const std::string& dbFile) {
-        std::cout << "Pretend opening DB: " << dbFile << "\n";
-    }
+    sqlite3* db;
+    DBConnection(const string& filename);
+    ~DBConnection();
 
-    bool isOpen() const { return true; }
-    bool execute(const std::string& query) {
-        std::cout << "Pretend executing query: " << query << "\n";
-        return true;
-    }
+    bool execute(const string& sql);
+    bool query(const string& sql, int (*callback)(void*, int, char**, char**), void* data);
 };
 
 #endif

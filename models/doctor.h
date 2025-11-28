@@ -2,11 +2,13 @@
 #define DOCTOR_H
 
 #include <string>
+using namespace std;
 
 class Doctor {
 public:
     int id;
-    void setSchedule(const std::string& schedule);
+    string schedule;
+    void setSchedule(const string& schedule);
 };
 
 #endif

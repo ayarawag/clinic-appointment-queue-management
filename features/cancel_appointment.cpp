@@ -1,10 +1,11 @@
 #include "../models/appointment.h"
 #include <iostream>
+using namespace std;
 
 void cancelAppointment() {
-    int appointmentId;
-    std::cout << "Appointment ID to cancel: "; std::cin >> appointmentId;
-    Appointment app;
-    app.id = appointmentId;
-    if(app.cancel()) std::cout << "Appointment canceled!\n";
+    int id;
+    cout << "Appointment ID: "; cin >> id;
+    Appointment a; a.id = id;
+    if (a.cancel()) cout << "Appointment canceled.\n";
+    else cout << "Cancel failed.\n";
 }
