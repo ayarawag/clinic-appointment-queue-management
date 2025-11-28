@@ -10,4 +10,4 @@ void viewAppointments() {
                  << " | Time:" << (vals[3]?vals[3]:"") << " | Paid:" << (vals[4]?vals[4]:"0") << "\n";
             return 0;
         }, nullptr);
-}
+    }
