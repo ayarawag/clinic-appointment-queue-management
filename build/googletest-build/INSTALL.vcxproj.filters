@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ECS\Documents\GitHub\clinic-appointment-queue-management\build\CMakeFiles\8fb19515ace3be9756e10ebe37e8cac2\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{84361F42-A792-3A19-BF00-9F1F9405E576}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

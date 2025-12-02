@@ -1,0 +1,15 @@
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/clinic.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/run_tests.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/INSTALL.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/CMakeFiles/INSTALL.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/CMakeFiles/ALL_BUILD.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googlemock/CMakeFiles/gmock.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googlemock/CMakeFiles/gmock_main.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googlemock/CMakeFiles/INSTALL.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googlemock/CMakeFiles/ALL_BUILD.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googletest/CMakeFiles/gtest.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googletest/CMakeFiles/gtest_main.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googletest/CMakeFiles/INSTALL.dir
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googletest/CMakeFiles/ALL_BUILD.dir

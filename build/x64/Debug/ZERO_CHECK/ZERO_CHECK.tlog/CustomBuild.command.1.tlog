@@ -1,0 +1,10 @@
+^C:\USERS\ECS\DOCUMENTS\GITHUB\CLINIC-APPOINTMENT-QUEUE-MANAGEMENT\BUILD\CMAKEFILES\B8D8BCE2388B793FAADB31DA3FB4036B\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management -BC:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/ClinicApp.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

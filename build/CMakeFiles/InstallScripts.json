@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/cmake_install.cmake",
+		"C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/cmake_install.cmake",
+		"C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googlemock/cmake_install.cmake",
+		"C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/googletest-build/googletest/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,0 +1,16 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-4.1/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in
+C:/Program Files/CMake/share/cmake-4.1/Modules/CMakePackageConfigHelpers.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/CheckCSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/CheckIncludeFile.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/CheckLibraryExists.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/FindThreads.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CheckSourceCompiles.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/WriteBasicConfigVersionFile.cmake
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/CMakeLists.txt
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/cmake/Config.cmake.in
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/cmake/gtest.pc.in
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/cmake/gtest_main.pc.in
+C:/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/cmake/internal_utils.cmake
