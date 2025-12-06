@@ -67,7 +67,7 @@ include CMakeFiles/coverage.dir/compiler_depend.make
 include CMakeFiles/coverage.dir/progress.make
 
 CMakeFiles/coverage: run_tests
-	cd /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management && /usr/bin/lcov --capture --directory /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build --output-file coverage.info
+	cd /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management && /usr/bin/lcov -c --directory /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build --output-file coverage.info --rc geninfo_ignore_errors=mismatch
 	cd /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management && /usr/bin/lcov --remove coverage.info '*/googletest/*' '*/sqlite3.c' '*_autogen/*' --output-file coverage.info.cleaned
 	cd /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management && /usr/bin/genhtml coverage.info.cleaned --output-directory /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/coverage-html
 

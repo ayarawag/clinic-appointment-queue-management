@@ -23,8 +23,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/run_tests.dir/features/queue_managment.cpp.o.d"
   "CMakeFiles/run_tests.dir/features/register.cpp.o"
   "CMakeFiles/run_tests.dir/features/register.cpp.o.d"
-  "CMakeFiles/run_tests.dir/main.cpp.o"
-  "CMakeFiles/run_tests.dir/main.cpp.o.d"
   "CMakeFiles/run_tests.dir/models/appointment.cpp.o"
   "CMakeFiles/run_tests.dir/models/appointment.cpp.o.d"
   "CMakeFiles/run_tests.dir/models/doctor.cpp.o"

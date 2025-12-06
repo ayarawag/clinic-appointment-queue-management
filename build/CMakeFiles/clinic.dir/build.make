@@ -167,24 +167,10 @@ CMakeFiles/clinic.dir/database/sqlite3.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/clinic.dir/database/sqlite3.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/sqlite3.c -o CMakeFiles/clinic.dir/database/sqlite3.c.s
 
-CMakeFiles/clinic.dir/main.cpp.o: CMakeFiles/clinic.dir/flags.make
-CMakeFiles/clinic.dir/main.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp
-CMakeFiles/clinic.dir/main.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/clinic.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/main.cpp.o -MF CMakeFiles/clinic.dir/main.cpp.o.d -o CMakeFiles/clinic.dir/main.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp
-
-CMakeFiles/clinic.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/clinic.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp > CMakeFiles/clinic.dir/main.cpp.i
-
-CMakeFiles/clinic.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clinic.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp -o CMakeFiles/clinic.dir/main.cpp.s
-
 CMakeFiles/clinic.dir/features/Reschedule.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/Reschedule.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/Reschedule.cpp
 CMakeFiles/clinic.dir/features/Reschedule.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/clinic.dir/features/Reschedule.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/clinic.dir/features/Reschedule.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/Reschedule.cpp.o -MF CMakeFiles/clinic.dir/features/Reschedule.cpp.o.d -o CMakeFiles/clinic.dir/features/Reschedule.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/Reschedule.cpp
 
 CMakeFiles/clinic.dir/features/Reschedule.cpp.i: cmake_force
@@ -198,7 +184,7 @@ CMakeFiles/clinic.dir/features/Reschedule.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/ViewAppointments.cpp
 CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o -MF CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o.d -o CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/ViewAppointments.cpp
 
 CMakeFiles/clinic.dir/features/ViewAppointments.cpp.i: cmake_force
@@ -212,7 +198,7 @@ CMakeFiles/clinic.dir/features/ViewAppointments.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/booking.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/booking.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/booking.cpp
 CMakeFiles/clinic.dir/features/booking.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/clinic.dir/features/booking.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/clinic.dir/features/booking.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/booking.cpp.o -MF CMakeFiles/clinic.dir/features/booking.cpp.o.d -o CMakeFiles/clinic.dir/features/booking.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/booking.cpp
 
 CMakeFiles/clinic.dir/features/booking.cpp.i: cmake_force
@@ -226,7 +212,7 @@ CMakeFiles/clinic.dir/features/booking.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/cancel_appointment.cpp
 CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o -MF CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o.d -o CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/cancel_appointment.cpp
 
 CMakeFiles/clinic.dir/features/cancel_appointment.cpp.i: cmake_force
@@ -240,7 +226,7 @@ CMakeFiles/clinic.dir/features/cancel_appointment.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/doctor_schedule.cpp
 CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o -MF CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o.d -o CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/doctor_schedule.cpp
 
 CMakeFiles/clinic.dir/features/doctor_schedule.cpp.i: cmake_force
@@ -254,7 +240,7 @@ CMakeFiles/clinic.dir/features/doctor_schedule.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/login.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/login.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/login.cpp
 CMakeFiles/clinic.dir/features/login.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/clinic.dir/features/login.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/clinic.dir/features/login.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/login.cpp.o -MF CMakeFiles/clinic.dir/features/login.cpp.o.d -o CMakeFiles/clinic.dir/features/login.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/login.cpp
 
 CMakeFiles/clinic.dir/features/login.cpp.i: cmake_force
@@ -268,7 +254,7 @@ CMakeFiles/clinic.dir/features/login.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/notification.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/notification.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/notification.cpp
 CMakeFiles/clinic.dir/features/notification.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/clinic.dir/features/notification.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/clinic.dir/features/notification.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/notification.cpp.o -MF CMakeFiles/clinic.dir/features/notification.cpp.o.d -o CMakeFiles/clinic.dir/features/notification.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/notification.cpp
 
 CMakeFiles/clinic.dir/features/notification.cpp.i: cmake_force
@@ -282,7 +268,7 @@ CMakeFiles/clinic.dir/features/notification.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/payment.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/payment.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/payment.cpp
 CMakeFiles/clinic.dir/features/payment.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/clinic.dir/features/payment.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/clinic.dir/features/payment.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/payment.cpp.o -MF CMakeFiles/clinic.dir/features/payment.cpp.o.d -o CMakeFiles/clinic.dir/features/payment.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/payment.cpp
 
 CMakeFiles/clinic.dir/features/payment.cpp.i: cmake_force
@@ -296,7 +282,7 @@ CMakeFiles/clinic.dir/features/payment.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/queue_managment.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/queue_managment.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/queue_managment.cpp
 CMakeFiles/clinic.dir/features/queue_managment.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/clinic.dir/features/queue_managment.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/clinic.dir/features/queue_managment.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/queue_managment.cpp.o -MF CMakeFiles/clinic.dir/features/queue_managment.cpp.o.d -o CMakeFiles/clinic.dir/features/queue_managment.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/queue_managment.cpp
 
 CMakeFiles/clinic.dir/features/queue_managment.cpp.i: cmake_force
@@ -310,7 +296,7 @@ CMakeFiles/clinic.dir/features/queue_managment.cpp.s: cmake_force
 CMakeFiles/clinic.dir/features/register.cpp.o: CMakeFiles/clinic.dir/flags.make
 CMakeFiles/clinic.dir/features/register.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/register.cpp
 CMakeFiles/clinic.dir/features/register.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/clinic.dir/features/register.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/clinic.dir/features/register.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/features/register.cpp.o -MF CMakeFiles/clinic.dir/features/register.cpp.o.d -o CMakeFiles/clinic.dir/features/register.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/register.cpp
 
 CMakeFiles/clinic.dir/features/register.cpp.i: cmake_force
@@ -321,6 +307,20 @@ CMakeFiles/clinic.dir/features/register.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clinic.dir/features/register.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/register.cpp -o CMakeFiles/clinic.dir/features/register.cpp.s
 
+CMakeFiles/clinic.dir/main.cpp.o: CMakeFiles/clinic.dir/flags.make
+CMakeFiles/clinic.dir/main.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp
+CMakeFiles/clinic.dir/main.cpp.o: CMakeFiles/clinic.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/clinic.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clinic.dir/main.cpp.o -MF CMakeFiles/clinic.dir/main.cpp.o.d -o CMakeFiles/clinic.dir/main.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp
+
+CMakeFiles/clinic.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/clinic.dir/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp > CMakeFiles/clinic.dir/main.cpp.i
+
+CMakeFiles/clinic.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clinic.dir/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp -o CMakeFiles/clinic.dir/main.cpp.s
+
 # Object files for target clinic
 clinic_OBJECTS = \
 "CMakeFiles/clinic.dir/models/patient.cpp.o" \
@@ -330,7 +330,6 @@ clinic_OBJECTS = \
 "CMakeFiles/clinic.dir/models/notification.cpp.o" \
 "CMakeFiles/clinic.dir/database/db_connection.cpp.o" \
 "CMakeFiles/clinic.dir/database/sqlite3.c.o" \
-"CMakeFiles/clinic.dir/main.cpp.o" \
 "CMakeFiles/clinic.dir/features/Reschedule.cpp.o" \
 "CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o" \
 "CMakeFiles/clinic.dir/features/booking.cpp.o" \
@@ -340,7 +339,8 @@ clinic_OBJECTS = \
 "CMakeFiles/clinic.dir/features/notification.cpp.o" \
 "CMakeFiles/clinic.dir/features/payment.cpp.o" \
 "CMakeFiles/clinic.dir/features/queue_managment.cpp.o" \
-"CMakeFiles/clinic.dir/features/register.cpp.o"
+"CMakeFiles/clinic.dir/features/register.cpp.o" \
+"CMakeFiles/clinic.dir/main.cpp.o"
 
 # External object files for target clinic
 clinic_EXTERNAL_OBJECTS =
@@ -352,7 +352,6 @@ clinic: CMakeFiles/clinic.dir/models/queue.cpp.o
 clinic: CMakeFiles/clinic.dir/models/notification.cpp.o
 clinic: CMakeFiles/clinic.dir/database/db_connection.cpp.o
 clinic: CMakeFiles/clinic.dir/database/sqlite3.c.o
-clinic: CMakeFiles/clinic.dir/main.cpp.o
 clinic: CMakeFiles/clinic.dir/features/Reschedule.cpp.o
 clinic: CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o
 clinic: CMakeFiles/clinic.dir/features/booking.cpp.o
@@ -363,6 +362,7 @@ clinic: CMakeFiles/clinic.dir/features/notification.cpp.o
 clinic: CMakeFiles/clinic.dir/features/payment.cpp.o
 clinic: CMakeFiles/clinic.dir/features/queue_managment.cpp.o
 clinic: CMakeFiles/clinic.dir/features/register.cpp.o
+clinic: CMakeFiles/clinic.dir/main.cpp.o
 clinic: CMakeFiles/clinic.dir/build.make
 clinic: CMakeFiles/clinic.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable clinic"

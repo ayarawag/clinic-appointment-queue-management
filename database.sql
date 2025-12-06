@@ -44,3 +44,6 @@ CREATE TABLE IF NOT EXISTS receipts(
     createdAt INTEGER,
     FOREIGN KEY(appointmentId) REFERENCES appointments(id)
 );
+CREATE TABLE IF NOT EXISTS notifications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    userId INTEGER, message TEXT, type TEXT, status TEXT, timestamp INTEGER);

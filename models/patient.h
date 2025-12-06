@@ -2,6 +2,7 @@
 #define PATIENT_H
 
 #include <string>
+#include <chrono>
 using namespace std;
 
 class Patient {
@@ -19,7 +20,7 @@ public:
     // -------------------------------
     // 1) Default constructor (مهم للاختبارات)
     // -------------------------------
-    Patient();
+    Patient(); // <--- التعريف موجود هنا
 
     // -------------------------------
     // 2) Main constructor

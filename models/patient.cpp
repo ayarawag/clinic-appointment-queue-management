@@ -5,6 +5,22 @@
 #include <chrono>
 using namespace std;
 
+// ---------------------------------
+//  الحل: إضافة دالة البناء الافتراضية (Default Constructor) 
+// هذا التطبيق هو الذي كان مفقوداً ويتسبب في خطأ الربط
+// ---------------------------------
+Patient::Patient() {
+    // تعيين قيم ابتدائية لضمان حالة نظيفة للكائن أثناء الاختبار
+    this->name = "";
+    this->phone = "";
+    this->email = "";
+    this->password = "";
+    this->failedAttempts = 0;
+    this->lockedUntil = 0;
+    this->preferredChannel = "app";
+}
+// ---------------------------------
+
 Patient::Patient(string n, string p, string e, string pw) {
     name = n;
     phone = p;
@@ -119,8 +135,7 @@ bool Patient::loginPatient(const string& user, const string& pw) {
         db.execute(sqlUpdate);
         cout << "Too many attempts. Account locked for 15 minutes.\n";
     } 
-    else {
-        string sqlUpdate = "UPDATE patients SET failedAttempts=" +
+    else {string sqlUpdate = "UPDATE patients SET failedAttempts=" +
                            to_string(row.failed) +
                            " WHERE id=" + to_string(row.id) + ";";
         db.execute(sqlUpdate);

@@ -20,7 +20,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/payment.cpp" "CMakeFiles/run_tests.dir/features/payment.cpp.o" "gcc" "CMakeFiles/run_tests.dir/features/payment.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/queue_managment.cpp" "CMakeFiles/run_tests.dir/features/queue_managment.cpp.o" "gcc" "CMakeFiles/run_tests.dir/features/queue_managment.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/register.cpp" "CMakeFiles/run_tests.dir/features/register.cpp.o" "gcc" "CMakeFiles/run_tests.dir/features/register.cpp.o.d"
-  "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp" "CMakeFiles/run_tests.dir/main.cpp.o" "gcc" "CMakeFiles/run_tests.dir/main.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/appointment.cpp" "CMakeFiles/run_tests.dir/models/appointment.cpp.o" "gcc" "CMakeFiles/run_tests.dir/models/appointment.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/doctor.cpp" "CMakeFiles/run_tests.dir/models/doctor.cpp.o" "gcc" "CMakeFiles/run_tests.dir/models/doctor.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/notification.cpp" "CMakeFiles/run_tests.dir/models/notification.cpp.o" "gcc" "CMakeFiles/run_tests.dir/models/notification.cpp.o.d"
