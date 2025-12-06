@@ -1,10 +1,16 @@
 #include "../database/db_connection.h"
+#include "../models/notification.h" // Including the model header for definitions
 #include <iostream>
+#include <string>
+
 using namespace std;
 
+// Function to send a notification to a patient via their preferred channel
 void sendNotification(int patientId, const string& message) {
     DBConnection db("clinic.db");
     string channel = "app";
+    
+    // Retrieve preferred channel from the patients table
     db.query("SELECT preferredChannel FROM patients WHERE id=" + to_string(patientId) + ";",
         [](void* ud, int cols, char** vals, char**) -> int {
             string* s = (string*)ud;
@@ -15,11 +21,16 @@ void sendNotification(int patientId, const string& message) {
     cout << "Notify (via " << channel << ") patient " << patientId << " : " << message << "\n";
 }
 
+// Function to run appointment reminders (simple demo listing appointments)
 void runReminders(int minutesBefore) {
     DBConnection db("clinic.db");
     cout << "Reminder: (simple demo) listing all appointments:\n";
-    db.query("SELECT id, patientId, dateTime FROM appointments;", [](void* ud, int cols, char** vals, char**) -> int {
+    
+    // Retrieve list of appointments
+    db.query("SELECT id, patientId, dateTime FROM appointments;", 
+        [](void* ud, int cols, char** vals, char**) -> int {
         if (vals[0] && vals[1] && vals[2]) {
+            // Display appointments
             cout << "Appointment " << vals[0] << " | patient " << vals[1] << " | at " << vals[2] << "\n";
         }
         return 0;
