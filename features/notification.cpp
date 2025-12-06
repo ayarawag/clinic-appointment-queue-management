@@ -1,5 +1,5 @@
 #include "../database/db_connection.h"
-#include "../models/notification.h" // Including the model header for definitions
+#include "../models/notification.h" // يحتوي الآن على تعريفات الدوال sendNotification و runReminders
 #include <iostream>
 #include <string>
 

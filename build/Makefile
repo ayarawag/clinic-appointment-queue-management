@@ -188,6 +188,32 @@ run_tests/fast:
 .PHONY : run_tests/fast
 
 #=============================================================================
+# Target rules for targets named coverage_clean
+
+# Build rule for target.
+coverage_clean: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 coverage_clean
+.PHONY : coverage_clean
+
+# fast build rule for target.
+coverage_clean/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/coverage_clean.dir/build.make CMakeFiles/coverage_clean.dir/build
+.PHONY : coverage_clean/fast
+
+#=============================================================================
+# Target rules for targets named coverage
+
+# Build rule for target.
+coverage: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 coverage
+.PHONY : coverage
+
+# fast build rule for target.
+coverage/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/coverage.dir/build.make CMakeFiles/coverage.dir/build
+.PHONY : coverage/fast
+
+#=============================================================================
 # Target rules for targets named gmock
 
 # Build rule for target.
@@ -293,6 +319,276 @@ database/sqlite3.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/database/sqlite3.c.s
 .PHONY : database/sqlite3.c.s
 
+features/Reschedule.o: features/Reschedule.cpp.o
+.PHONY : features/Reschedule.o
+
+# target to build an object file
+features/Reschedule.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/Reschedule.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/Reschedule.cpp.o
+.PHONY : features/Reschedule.cpp.o
+
+features/Reschedule.i: features/Reschedule.cpp.i
+.PHONY : features/Reschedule.i
+
+# target to preprocess a source file
+features/Reschedule.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/Reschedule.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/Reschedule.cpp.i
+.PHONY : features/Reschedule.cpp.i
+
+features/Reschedule.s: features/Reschedule.cpp.s
+.PHONY : features/Reschedule.s
+
+# target to generate assembly for a file
+features/Reschedule.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/Reschedule.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/Reschedule.cpp.s
+.PHONY : features/Reschedule.cpp.s
+
+features/ViewAppointments.o: features/ViewAppointments.cpp.o
+.PHONY : features/ViewAppointments.o
+
+# target to build an object file
+features/ViewAppointments.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/ViewAppointments.cpp.o
+.PHONY : features/ViewAppointments.cpp.o
+
+features/ViewAppointments.i: features/ViewAppointments.cpp.i
+.PHONY : features/ViewAppointments.i
+
+# target to preprocess a source file
+features/ViewAppointments.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/ViewAppointments.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/ViewAppointments.cpp.i
+.PHONY : features/ViewAppointments.cpp.i
+
+features/ViewAppointments.s: features/ViewAppointments.cpp.s
+.PHONY : features/ViewAppointments.s
+
+# target to generate assembly for a file
+features/ViewAppointments.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/ViewAppointments.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/ViewAppointments.cpp.s
+.PHONY : features/ViewAppointments.cpp.s
+
+features/booking.o: features/booking.cpp.o
+.PHONY : features/booking.o
+
+# target to build an object file
+features/booking.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/booking.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/booking.cpp.o
+.PHONY : features/booking.cpp.o
+
+features/booking.i: features/booking.cpp.i
+.PHONY : features/booking.i
+
+# target to preprocess a source file
+features/booking.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/booking.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/booking.cpp.i
+.PHONY : features/booking.cpp.i
+
+features/booking.s: features/booking.cpp.s
+.PHONY : features/booking.s
+
+# target to generate assembly for a file
+features/booking.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/booking.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/booking.cpp.s
+.PHONY : features/booking.cpp.s
+
+features/cancel_appointment.o: features/cancel_appointment.cpp.o
+.PHONY : features/cancel_appointment.o
+
+# target to build an object file
+features/cancel_appointment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/cancel_appointment.cpp.o
+.PHONY : features/cancel_appointment.cpp.o
+
+features/cancel_appointment.i: features/cancel_appointment.cpp.i
+.PHONY : features/cancel_appointment.i
+
+# target to preprocess a source file
+features/cancel_appointment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/cancel_appointment.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/cancel_appointment.cpp.i
+.PHONY : features/cancel_appointment.cpp.i
+
+features/cancel_appointment.s: features/cancel_appointment.cpp.s
+.PHONY : features/cancel_appointment.s
+
+# target to generate assembly for a file
+features/cancel_appointment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/cancel_appointment.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/cancel_appointment.cpp.s
+.PHONY : features/cancel_appointment.cpp.s
+
+features/doctor_schedule.o: features/doctor_schedule.cpp.o
+.PHONY : features/doctor_schedule.o
+
+# target to build an object file
+features/doctor_schedule.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/doctor_schedule.cpp.o
+.PHONY : features/doctor_schedule.cpp.o
+
+features/doctor_schedule.i: features/doctor_schedule.cpp.i
+.PHONY : features/doctor_schedule.i
+
+# target to preprocess a source file
+features/doctor_schedule.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/doctor_schedule.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/doctor_schedule.cpp.i
+.PHONY : features/doctor_schedule.cpp.i
+
+features/doctor_schedule.s: features/doctor_schedule.cpp.s
+.PHONY : features/doctor_schedule.s
+
+# target to generate assembly for a file
+features/doctor_schedule.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/doctor_schedule.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/doctor_schedule.cpp.s
+.PHONY : features/doctor_schedule.cpp.s
+
+features/login.o: features/login.cpp.o
+.PHONY : features/login.o
+
+# target to build an object file
+features/login.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/login.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/login.cpp.o
+.PHONY : features/login.cpp.o
+
+features/login.i: features/login.cpp.i
+.PHONY : features/login.i
+
+# target to preprocess a source file
+features/login.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/login.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/login.cpp.i
+.PHONY : features/login.cpp.i
+
+features/login.s: features/login.cpp.s
+.PHONY : features/login.s
+
+# target to generate assembly for a file
+features/login.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/login.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/login.cpp.s
+.PHONY : features/login.cpp.s
+
+features/notification.o: features/notification.cpp.o
+.PHONY : features/notification.o
+
+# target to build an object file
+features/notification.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/notification.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/notification.cpp.o
+.PHONY : features/notification.cpp.o
+
+features/notification.i: features/notification.cpp.i
+.PHONY : features/notification.i
+
+# target to preprocess a source file
+features/notification.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/notification.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/notification.cpp.i
+.PHONY : features/notification.cpp.i
+
+features/notification.s: features/notification.cpp.s
+.PHONY : features/notification.s
+
+# target to generate assembly for a file
+features/notification.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/notification.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/notification.cpp.s
+.PHONY : features/notification.cpp.s
+
+features/payment.o: features/payment.cpp.o
+.PHONY : features/payment.o
+
+# target to build an object file
+features/payment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/payment.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/payment.cpp.o
+.PHONY : features/payment.cpp.o
+
+features/payment.i: features/payment.cpp.i
+.PHONY : features/payment.i
+
+# target to preprocess a source file
+features/payment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/payment.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/payment.cpp.i
+.PHONY : features/payment.cpp.i
+
+features/payment.s: features/payment.cpp.s
+.PHONY : features/payment.s
+
+# target to generate assembly for a file
+features/payment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/payment.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/payment.cpp.s
+.PHONY : features/payment.cpp.s
+
+features/queue_managment.o: features/queue_managment.cpp.o
+.PHONY : features/queue_managment.o
+
+# target to build an object file
+features/queue_managment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/queue_managment.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/queue_managment.cpp.o
+.PHONY : features/queue_managment.cpp.o
+
+features/queue_managment.i: features/queue_managment.cpp.i
+.PHONY : features/queue_managment.i
+
+# target to preprocess a source file
+features/queue_managment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/queue_managment.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/queue_managment.cpp.i
+.PHONY : features/queue_managment.cpp.i
+
+features/queue_managment.s: features/queue_managment.cpp.s
+.PHONY : features/queue_managment.s
+
+# target to generate assembly for a file
+features/queue_managment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/queue_managment.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/queue_managment.cpp.s
+.PHONY : features/queue_managment.cpp.s
+
+features/register.o: features/register.cpp.o
+.PHONY : features/register.o
+
+# target to build an object file
+features/register.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/register.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/register.cpp.o
+.PHONY : features/register.cpp.o
+
+features/register.i: features/register.cpp.i
+.PHONY : features/register.i
+
+# target to preprocess a source file
+features/register.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/register.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/register.cpp.i
+.PHONY : features/register.cpp.i
+
+features/register.s: features/register.cpp.s
+.PHONY : features/register.s
+
+# target to generate assembly for a file
+features/register.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/register.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/features/register.cpp.s
+.PHONY : features/register.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -373,6 +669,33 @@ models/doctor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/models/doctor.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/models/doctor.cpp.s
 .PHONY : models/doctor.cpp.s
+
+models/notification.o: models/notification.cpp.o
+.PHONY : models/notification.o
+
+# target to build an object file
+models/notification.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/models/notification.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/models/notification.cpp.o
+.PHONY : models/notification.cpp.o
+
+models/notification.i: models/notification.cpp.i
+.PHONY : models/notification.i
+
+# target to preprocess a source file
+models/notification.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/models/notification.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/models/notification.cpp.i
+.PHONY : models/notification.cpp.i
+
+models/notification.s: models/notification.cpp.s
+.PHONY : models/notification.s
+
+# target to generate assembly for a file
+models/notification.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/models/notification.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/models/notification.cpp.s
+.PHONY : models/notification.cpp.s
 
 models/patient.o: models/patient.cpp.o
 .PHONY : models/patient.o
@@ -476,6 +799,30 @@ tests/test_basic.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_basic.cpp.s
 .PHONY : tests/test_basic.cpp.s
 
+tests/test_notification.o: tests/test_notification.cpp.o
+.PHONY : tests/test_notification.o
+
+# target to build an object file
+tests/test_notification.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_notification.cpp.o
+.PHONY : tests/test_notification.cpp.o
+
+tests/test_notification.i: tests/test_notification.cpp.i
+.PHONY : tests/test_notification.i
+
+# target to preprocess a source file
+tests/test_notification.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_notification.cpp.i
+.PHONY : tests/test_notification.cpp.i
+
+tests/test_notification.s: tests/test_notification.cpp.s
+.PHONY : tests/test_notification.s
+
+# target to generate assembly for a file
+tests/test_notification.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_notification.cpp.s
+.PHONY : tests/test_notification.cpp.s
+
 tests/test_patient.o: tests/test_patient.cpp.o
 .PHONY : tests/test_patient.o
 
@@ -512,6 +859,8 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... coverage"
+	@echo "... coverage_clean"
 	@echo "... clinic"
 	@echo "... gmock"
 	@echo "... gmock_main"
@@ -524,6 +873,36 @@ help:
 	@echo "... database/sqlite3.o"
 	@echo "... database/sqlite3.i"
 	@echo "... database/sqlite3.s"
+	@echo "... features/Reschedule.o"
+	@echo "... features/Reschedule.i"
+	@echo "... features/Reschedule.s"
+	@echo "... features/ViewAppointments.o"
+	@echo "... features/ViewAppointments.i"
+	@echo "... features/ViewAppointments.s"
+	@echo "... features/booking.o"
+	@echo "... features/booking.i"
+	@echo "... features/booking.s"
+	@echo "... features/cancel_appointment.o"
+	@echo "... features/cancel_appointment.i"
+	@echo "... features/cancel_appointment.s"
+	@echo "... features/doctor_schedule.o"
+	@echo "... features/doctor_schedule.i"
+	@echo "... features/doctor_schedule.s"
+	@echo "... features/login.o"
+	@echo "... features/login.i"
+	@echo "... features/login.s"
+	@echo "... features/notification.o"
+	@echo "... features/notification.i"
+	@echo "... features/notification.s"
+	@echo "... features/payment.o"
+	@echo "... features/payment.i"
+	@echo "... features/payment.s"
+	@echo "... features/queue_managment.o"
+	@echo "... features/queue_managment.i"
+	@echo "... features/queue_managment.s"
+	@echo "... features/register.o"
+	@echo "... features/register.i"
+	@echo "... features/register.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -533,6 +912,9 @@ help:
 	@echo "... models/doctor.o"
 	@echo "... models/doctor.i"
 	@echo "... models/doctor.s"
+	@echo "... models/notification.o"
+	@echo "... models/notification.i"
+	@echo "... models/notification.s"
 	@echo "... models/patient.o"
 	@echo "... models/patient.i"
 	@echo "... models/patient.s"
@@ -545,6 +927,9 @@ help:
 	@echo "... tests/test_basic.o"
 	@echo "... tests/test_basic.i"
 	@echo "... tests/test_basic.s"
+	@echo "... tests/test_notification.o"
+	@echo "... tests/test_notification.i"
+	@echo "... tests/test_notification.s"
 	@echo "... tests/test_patient.o"
 	@echo "... tests/test_patient.i"
 	@echo "... tests/test_patient.s"

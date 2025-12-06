@@ -158,6 +158,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/clinic.dir/DependInfo.cmake"
   "CMakeFiles/run_tests.dir/DependInfo.cmake"
+  "CMakeFiles/coverage_clean.dir/DependInfo.cmake"
+  "CMakeFiles/coverage.dir/DependInfo.cmake"
   "googletest-build/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
   "googletest-build/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake"
   "googletest-build/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"

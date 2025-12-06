@@ -1,91 +1,94 @@
 cmake_minimum_required(VERSION 3.10)
-project(ClinicApp CXX)
+project(ClinicApp)
 
 # لغة C++
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ----------------------------------------------------
-# اكتشاف المكتبات الضرورية (SQLite3 و Threads)
-# ----------------------------------------------------
-find_package(SQLite3 REQUIRED)
-find_package(Threads REQUIRED) 
+# 1. البحث عن مكتبة Threads
+find_package(Threads REQUIRED)
 
 # تعريف المسارات
 set(SRC_DIR "${CMAKE_SOURCE_DIR}/models")
+set(FEATURES_DIR "${CMAKE_SOURCE_DIR}/features") # مسار الـ features
 set(DB_DIR "${CMAKE_SOURCE_DIR}/database")
 set(TEST_DIR "${CMAKE_SOURCE_DIR}/tests")
 set(GTEST_DIR "${CMAKE_SOURCE_DIR}/libs/googletest-1.15.0")
-# مسار مجلد الدوال الجديدة
-set(FEATURES_DIR "${CMAKE_SOURCE_DIR}/features") 
 
-# ----------------------------------------------------
-# ملفات المشروع الرئيسية
-# ----------------------------------------------------
+#  تحديث هام: إضافة كل ملفات features/ 
+# مسح شامل لجميع ملفات .cpp في مجلد features
+file(GLOB FEATURE_FILES "${FEATURES_DIR}/*.cpp")
+
+# 2. ملفات المشروع الرئيسية (إضافة ملفات Features)
 set(SRC_FILES
     ${SRC_DIR}/patient.cpp
     ${SRC_DIR}/doctor.cpp
     ${SRC_DIR}/appointment.cpp
     ${SRC_DIR}/queue.cpp
-    # ملف النوتيفيكيشن (مفقود في القائمة السابقة)
-    ${SRC_DIR}/notification.cpp
-
-    # جميع الدوال الموجودة في مجلد features (بناءً على الصورة المرفوعة)
-    ${FEATURES_DIR}/booking.cpp
-    ${FEATURES_DIR}/cancel_appointment.cpp
-    ${FEATURES_DIR}/doctor_schedule.cpp
-    ${FEATURES_DIR}/login.cpp
-    ${FEATURES_DIR}/notification.cpp
-    ${FEATURES_DIR}/payment.cpp
-    ${FEATURES_DIR}/queue_managment.cpp
-    ${FEATURES_DIR}/register.cpp
-    ${FEATURES_DIR}/reschedule.cpp
-    ${FEATURES_DIR}/viewAppointments.cpp
-
+    ${SRC_DIR}/notification.cpp        # ملف تنفيذ models/notification.cpp
     ${DB_DIR}/db_connection.cpp
     ${DB_DIR}/sqlite3.c
     ${CMAKE_SOURCE_DIR}/main.cpp
+    ${FEATURE_FILES}                  # إضافة جميع ملفات features/
 )
 
-# ملفات الاختبارات (تم إضافة الملفات المفقودة)
+# 3. ملفات الاختبارات (إضافة ملف اختبار الإشعارات)
 set(TEST_FILES
     ${TEST_DIR}/gtest_main.cpp
     ${TEST_DIR}/test_basic.cpp
     ${TEST_DIR}/test_patient.cpp
-    ${TEST_DIR}/test_doctor.cpp
-    ${TEST_DIR}/test_appointment.cpp
-    ${TEST_DIR}/test_queue.cpp
-    ${TEST_DIR}/test_notification.cpp
+    ${TEST_DIR}/test_notification.cpp # ملف اختبار الإشعارات
 )
 
 # إضافة GTest
 add_subdirectory(${GTEST_DIR} ${CMAKE_BINARY_DIR}/googletest-build)
 
-# ----------------------------------------------------
-# هدف المشروع الرئيسي (clinic)
-# ----------------------------------------------------
+# هدف المشروع الرئيسي (التطبيق العادي)
 add_executable(clinic ${SRC_FILES})
-target_include_directories(clinic PRIVATE ${SRC_DIR} ${DB_DIR} ${FEATURES_DIR}) # تضمين مجلد features
-# ربط التطبيق بمكتبة SQLite3
-target_link_libraries(clinic PRIVATE SQLite3::SQLite3)
+target_include_directories(clinic PRIVATE ${SRC_DIR} ${DB_DIR} ${FEATURES_DIR}) # تضمين features
+target_link_libraries(clinic sqlite3)
 
-# ----------------------------------------------------
-# هدف اختبارات GoogleTest (run_tests)
-# ----------------------------------------------------
+
+# هدف اختبارات GoogleTest
 add_executable(run_tests ${SRC_FILES} ${TEST_FILES})
 target_include_directories(run_tests PRIVATE 
     ${SRC_DIR} 
     ${DB_DIR} 
-    ${FEATURES_DIR}
+    ${FEATURES_DIR} # تضمين features
     ${GTEST_DIR}/googletest/include
-    ${GTEST_DIR}/googlemock/include
 )
 
-# ربط هدف الاختبارات: GTest، SQLite3، و Threads
+# 4. الربط بالمكتبات المطلوبة 
 target_link_libraries(run_tests 
-    PRIVATE 
     gtest_main 
     gmock_main 
-    SQLite3::SQLite3
     Threads::Threads 
+    sqlite3
 )
+
+# تفعيل تغطية الكود
+if(ENABLE_COVERAGE)
+    message(STATUS "Code Coverage Enabled.")
+    target_compile_options(run_tests PRIVATE -ftest-coverage -fprofile-arcs)
+    target_link_options(run_tests PRIVATE -ftest-coverage -fprofile-arcs)
+
+    find_program(LCOV_EXECUTABLE lcov)
+    find_program(GENHTML_EXECUTABLE genhtml)
+
+    if(LCOV_EXECUTABLE AND GENHTML_EXECUTABLE)
+        add_custom_target(coverage_clean
+            COMMAND find ${CMAKE_BINARY_DIR} -name "*.gcda" -exec rm -f {} +
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
+
+        add_custom_target(coverage
+            COMMAND ${LCOV_EXECUTABLE} --capture --directory ${CMAKE_BINARY_DIR} --output-file coverage.info
+            COMMAND ${LCOV_EXECUTABLE} --remove coverage.info '*/googletest/*' '*/sqlite3.c' '*_autogen/*' --output-file coverage.info.cleaned
+            COMMAND ${GENHTML_EXECUTABLE} coverage.info.cleaned --output-directory ${CMAKE_BINARY_DIR}/coverage-html
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            DEPENDS run_tests
+        )
+    else()
+        message(WARNING "lcov or genhtml not found. Coverage targets disabled.")
+    endif()
+endif()

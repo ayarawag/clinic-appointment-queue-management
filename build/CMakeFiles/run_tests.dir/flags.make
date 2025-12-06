@@ -5,13 +5,13 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock
+C_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock
 
-C_FLAGS = -g
+C_FLAGS = -g -ftest-coverage -fprofile-arcs
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock
+CXX_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googlemock
 
-CXX_FLAGS = -g -std=gnu++17
+CXX_FLAGS = -g -std=gnu++17 -ftest-coverage -fprofile-arcs
 

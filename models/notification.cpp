@@ -66,8 +66,6 @@ int getNotificationCount(int userId) {
     
     string sql = "SELECT COUNT(*) FROM notifications WHERE patientId = " + to_string(userId) + " AND isRead = 0;";
     
-    // الملاحظة الهامة: لم يعد هناك التقاط للمتغيرات [&]
-    // نمرر عنوان count عبر الوسيط الأخير (&count)
     db.query(sql, 
         [](void* data, int argc, char** vals, char** cols) -> int {
             int* countPtr = static_cast<int*>(data); // تحويل المؤشر
@@ -87,8 +85,6 @@ vector<string> getNotificationsForUser(int userId) {
     
     string sql = "SELECT message FROM notifications WHERE patientId = " + to_string(userId) + " ORDER BY dateTime DESC;";
     
-    // الملاحظة الهامة: لم يعد هناك التقاط للمتغيرات [&]
-    // نمرر عنوان messages عبر الوسيط الأخير (&messages)
     db.query(sql, 
         [](void* data, int argc, char** vals, char** cols) -> int {
             vector<string>* messagesPtr = static_cast<vector<string>*>(data); // تحويل المؤشر

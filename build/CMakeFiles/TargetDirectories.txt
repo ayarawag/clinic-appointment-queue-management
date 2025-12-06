@@ -1,5 +1,7 @@
 /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/clinic.dir
 /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/run_tests.dir
+/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/coverage_clean.dir
+/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/coverage.dir
 /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/edit_cache.dir
 /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/rebuild_cache.dir
 /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles/list_install_components.dir

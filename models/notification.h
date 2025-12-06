@@ -25,7 +25,7 @@ public:
     void display() const;
 };
 
-// Free Functions (for DB interaction)
+// === الدوال المتعلقة بقاعدة البيانات (models/notification.cpp) ===
 // Function to log a new notification to the database table
 bool logNotification(int userId, const string& msg);
 
@@ -34,5 +34,12 @@ int getNotificationCount(int userId);
 
 // Function to retrieve all notifications for a user
 vector<string> getNotificationsForUser(int userId);
+
+// === الدوال المتعلقة بالمميزات (features/notification.cpp) ===
+// Function to send a notification to a patient
+void sendNotification(int patientId, const string& message);
+
+// Function to run appointment reminders
+void runReminders(int minutesBefore);
 
 #endif // NOTIFICATION_H
