@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/clinic.dir/models/patient.cpp.o CMakeFiles/clinic.dir/models/doctor.cpp.o CMakeFiles/clinic.dir/models/appointment.cpp.o CMakeFiles/clinic.dir/models/queue.cpp.o CMakeFiles/clinic.dir/database/db_connection.cpp.o CMakeFiles/clinic.dir/database/sqlite3.c.o CMakeFiles/clinic.dir/main.cpp.o -o clinic 
