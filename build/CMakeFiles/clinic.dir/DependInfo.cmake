@@ -10,7 +10,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/sqlite3.c" "CMakeFiles/clinic.dir/database/sqlite3.c.o" "gcc" "CMakeFiles/clinic.dir/database/sqlite3.c.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/db_connection.cpp" "CMakeFiles/clinic.dir/database/db_connection.cpp.o" "gcc" "CMakeFiles/clinic.dir/database/db_connection.cpp.o.d"
-  "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/Reschedule.cpp" "CMakeFiles/clinic.dir/features/Reschedule.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/Reschedule.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/ViewAppointments.cpp" "CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/ViewAppointments.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/booking.cpp" "CMakeFiles/clinic.dir/features/booking.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/booking.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/cancel_appointment.cpp" "CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/cancel_appointment.cpp.o.d"
@@ -20,6 +19,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/payment.cpp" "CMakeFiles/clinic.dir/features/payment.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/payment.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/queue_managment.cpp" "CMakeFiles/clinic.dir/features/queue_managment.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/queue_managment.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/register.cpp" "CMakeFiles/clinic.dir/features/register.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/register.cpp.o.d"
+  "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/reschedule.cpp" "CMakeFiles/clinic.dir/features/reschedule.cpp.o" "gcc" "CMakeFiles/clinic.dir/features/reschedule.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/main.cpp" "CMakeFiles/clinic.dir/main.cpp.o" "gcc" "CMakeFiles/clinic.dir/main.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/appointment.cpp" "CMakeFiles/clinic.dir/models/appointment.cpp.o" "gcc" "CMakeFiles/clinic.dir/models/appointment.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/doctor.cpp" "CMakeFiles/clinic.dir/models/doctor.cpp.o" "gcc" "CMakeFiles/clinic.dir/models/doctor.cpp.o.d"

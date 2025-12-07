@@ -2,51 +2,39 @@
 #define PATIENT_H
 
 #include <string>
-#include <chrono>
-using namespace std;
+#include <iostream>
 
 class Patient {
 private:
-    string name;
-    string phone;
-    string email;
-    string password;
-
-    int failedAttempts;
-    long long lockedUntil;
-    string preferredChannel;
+    int id;
+    std::string name;
+    std::string phone;
+    std::string email;
+    std::string password;
 
 public:
-    // -------------------------------
-    // 1) Default constructor (مهم للاختبارات)
-    // -------------------------------
-    Patient(); // <--- التعريف موجود هنا
+    // المنشئات (Constructors)
+    Patient();
+    Patient(int id, const std::string& name, const std::string& phone, const std::string& email, const std::string& password);
 
-    // -------------------------------
-    // 2) Main constructor
-    // -------------------------------
-    Patient(string n, string p, string e, string pw);
+    // Getters
+    int getId() const;
+    std::string getName() const;
+    std::string getPhone() const;
+    std::string getEmail() const;
+    std::string getPassword() const;
 
-    // -------------------------------
-    // 3) Validation + Register
-    // -------------------------------
-    bool isValidEmail(const string& email);
-    bool registerPatient();
+    // Setters
+    void setName(const std::string& name);
+    void setPhone(const std::string& phone);
+    void setEmail(const std::string& email);
+    void setPassword(const std::string& password);
 
-    // -------------------------------
-    // 4) Login
-    // -------------------------------
-    bool loginPatient(const string& user, const string& pw);
+    // وظائف قاعدة البيانات
+    bool registerPatient(const std::string& name, const std::string& phone, const std::string& email, const std::string& password);
+    // دالة جديدة لتسجيل الدخول في قاعدة البيانات
+    bool login(const std::string& email, const std::string& password); 
 
-    // -------------------------------
-    // 5) Password hashing (بسيط)
-    // -------------------------------
-    string hashPassword(const string& input);
-
-    // -------------------------------
-    // 6) Get current time (seconds)
-    // -------------------------------
-    static long long nowEpoch();
 };
 
-#endif
+#endif // PATIENT_H

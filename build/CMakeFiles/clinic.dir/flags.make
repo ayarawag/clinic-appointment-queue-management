@@ -5,13 +5,13 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features
+C_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/. -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests
 
-C_FLAGS = -g
+C_FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features
+CXX_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/. -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests
 
-CXX_FLAGS = -g -std=gnu++17
+CXX_FLAGS = -std=gnu++14 -D_GLIBCXX_USE_CXX11_ABI=0
 

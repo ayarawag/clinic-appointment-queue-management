@@ -3,29 +3,32 @@
 #include <string>
 using namespace std;
 
+/**
+ * @brief تقوم بتسجيل دخول المستخدم.
+ * @return true في حالة نجاح تسجيل الدخول، false في حالة الفشل.
+ */
 bool loginUser() {
     string email, password;
+    
+    cout << "=========================\n";
+    cout << "      تسجيل الدخول\n";
+    cout << "=========================\n";
 
-    // طلب بيانات المستخدم
-    cout << "Enter your email: ";
+    cout << "البريد الإلكتروني: ";
     cin >> email;
 
-    cout << "Enter your password: ";
+    cout << "كلمة المرور: ";
     cin >> password;
 
-    // إنشاء object للـ Patient بالبيانات المدخلة
-    Patient p("", "", email, password);  
+    // إنشاء كائن Patient فارغ لاستخدام دالة العضو
+    Patient p;
 
-
-    bool loginSuccess = false;  // افتراضياً فشل
-    // مثال للتوضيح:
-    // loginSuccess = checkCredentialsInDB(p);
-
-    if(loginSuccess) {
-        cout << "Login successful!\n";
+    // استدعاء دالة login للتحقق من البيانات في قاعدة البيانات
+    if (p.login(email, password)) { 
+        cout << "تم تسجيل الدخول بنجاح!\n";
         return true;
     } else {
-        cout << "Invalid email or password.\n";
+        cout << "بريد إلكتروني أو كلمة مرور غير صحيحة.\n";
         return false;
     }
 }

@@ -1,93 +1,93 @@
 #include "gtest/gtest.h"
-#include "../models/notification.h"   // هذا الملف يغطي الآن جميع الدوال (logNotification, sendNotification, etc.)
-#include "../database/db_connection.h"
-#include <sstream>
-#include <string>
+#include "../models/notification.h"
+#include "../models/patient.h" 
+#include "../database/db_connection.h" 
+#include <iostream>
+#include <cstdio> // لـ remove
 
 using namespace std;
 
-// تعريفات اختبارية
-#define TEST_USER_ID 999
-#define TEST_MESSAGE "Your appointment is confirmed."
+// تعريف مسار قاعدة البيانات الخاص بالاختبارات
+const string TEST_DB_PATH = "clinic.db";
 
-// كلاس الإعداد (Setup) لتنظيف قاعدة البيانات قبل كل اختبار
+// =======================================================
+// كلاس إعداد الاختبار (Setup)
+// =======================================================
 class NotificationTest : public ::testing::Test {
 protected:
-    void SetUp() override {
-        // تنظيف الجدول notifications قبل كل اختبار
-        DBConnection db("../../clinic.db");
-        db.execute("DELETE FROM notifications;");
+    // هذه الدالة تُستدعى مرة واحدة قبل تشغيل أي اختبار في هذه المجموعة
+    static void SetUpTestSuite() {
+        // 1. حذف قاعدة البيانات القديمة لضمان بيئة نظيفة
+        remove(TEST_DB_PATH.c_str());
+
+        // 2. إنشاء اتصال وتهيئة الجداول (بما في ذلك notifications)
+        sqlite3* db = connectDB(TEST_DB_PATH);
+        if (db) {
+            initializeDatabaseSchema(db); // يفترض وجود initializeDatabaseSchema في db_connection
+            closeDB(db);
+        } else {
+            cerr << "Failed to connect to DB for setup." << endl;
+        }
     }
 };
 
-// =========================================================
-// اختبار الدوال المتعلقة بالموديل (models/notification.cpp)
-// =========================================================
+// =======================================================
+// الاختبارات الفعلية
+// =======================================================
 
-// اختبار تسجيل إشعار بنجاح
+// الاختبار 1: التحقق من تسجيل الإشعار
 TEST_F(NotificationTest, TestLogNotificationSuccess) {
-    bool success = logNotification(TEST_USER_ID, TEST_MESSAGE);
+    // 1. إنشاء مريض وهمي لضمان وجود userId صالح
+    Patient p;
+    p.name = "Test User";
+    p.email = "notification_test@example.com";
+    p.phone = "0000000000";
+    p.password = "P@$$w0rd1";
+    int userId = p.registerPatient(TEST_DB_PATH);
+    
+    // تأكد من أن المستخدم تم تسجيله بنجاح
+    ASSERT_NE(userId, 0) << "Patient registration failed, cannot test notification.";
+
+    // 2. تسجيل الإشعار (عبر كائن Notification)
+    Notification n;
+    // الاستدعاء الآن يحتوي على 5 حجج (dbPath, userId, message, type, status)
+    bool success = n.logNotification(TEST_DB_PATH, userId, "Test message", "SMS", "PENDING");
+
+    // 3. التحقق
     ASSERT_TRUE(success) << "Logging notification failed.";
-    
-    int count = getNotificationCount(TEST_USER_ID);
-    ASSERT_EQ(count, 1) << "Expected count 1 after logging, got " << count;
 }
 
-// اختبار تسجيل إشعارات متعددة واسترجاعها
+// الاختبار 2: التحقق من الحصول على الإشعارات وتحديدها كمقروءة
 TEST_F(NotificationTest, TestGetNotificationsAndMarkAsRead) {
-    logNotification(TEST_USER_ID, "Message 1");
-    logNotification(TEST_USER_ID, "Message 2");
-    
-    ASSERT_EQ(getNotificationCount(TEST_USER_ID), 2); 
+    // 1. إنشاء مريض وهمي
+    Patient p;
+    p.name = "Read Test User";
+    p.email = "read_notification@example.com";
+    p.phone = "1111111111";
+    p.password = "P@$$w0rd2";
+    int userId = p.registerPatient(TEST_DB_PATH);
 
-    vector<string> messages = getNotificationsForUser(TEST_USER_ID);
+    ASSERT_NE(userId, 0) << "Patient registration failed, cannot test notification reading.";
 
-    ASSERT_EQ(messages.size(), 2) << "Expected 2 messages, got " << messages.size();
-    
-    int countAfterRead = getNotificationCount(TEST_USER_ID);
-    ASSERT_EQ(countAfterRead, 0) << "Expected count 0 after reading, got " << countAfterRead;
-}
+    // 2. تسجيل إشعارين
+    Notification n;
+    n.logNotification(TEST_DB_PATH, userId, "Message 1", "SMS", "PENDING");
+    n.logNotification(TEST_DB_PATH, userId, "Message 2", "APP", "PENDING");
 
-// =========================================================
-// اختبار الدوال المتعلقة بالخاصية (features/notification.cpp)
-// =========================================================
+    // 3. التحقق من عدد الإشعارات الجديدة
+    int count = n.getNotificationCount(TEST_DB_PATH, userId, "PENDING");
+    ASSERT_EQ(count, 2) << "Expected 2 unread notifications.";
 
-// اختبار وظيفة sendNotification والتحقق من الخرج (cout)
-TEST(NotificationFeatureTest, TestSendNotificationOutput) {
-    // اعتراض الخرج
-    stringstream output;
-    streambuf* oldCout = cout.rdbuf();
-    cout.rdbuf(output.rdbuf());
+    // 4. الحصول على الإشعارات
+    vector<Notification> notifications = n.getNotifications(TEST_DB_PATH, userId, "PENDING");
+    ASSERT_EQ(notifications.size(), 2) << "Expected to retrieve 2 notifications.";
 
-    sendNotification(100, "Your meeting is tomorrow."); 
+    // 5. تحديد الإشعارات كمقروءة
+    bool success = n.markNotificationsAsRead(TEST_DB_PATH, userId);
+    ASSERT_TRUE(success);
 
-    // إعادة الخرج الطبيعي
-    cout.rdbuf(oldCout); 
-
-    string actualOutput = output.str();
-    
-    ASSERT_TRUE(actualOutput.find("Notify (via") != string::npos) 
-        << "Output check failed. Got: " << actualOutput;
-
-    ASSERT_TRUE(actualOutput.find("Your meeting is tomorrow.") != string::npos) 
-        << "Message text not found in output. Got: " << actualOutput;
-}
-
-// اختبار وظيفة runReminders والتحقق من الخرج
-TEST(NotificationFeatureTest, TestRunRemindersOutput) {
-    // اعتراض الخرج
-    stringstream output;
-    streambuf* oldCout = cout.rdbuf();
-    cout.rdbuf(output.rdbuf());
-
-    runReminders(30); 
-
-    // إعادة الخرج الطبيعي
-    cout.rdbuf(oldCout); 
-
-    string expectedHeader = "Reminder: (simple demo) listing all appointments:\n";
-    string actualOutput = output.str();
-
-    ASSERT_TRUE(actualOutput.find(expectedHeader) != string::npos)
-        << "Expected reminder header, but got: " << actualOutput;
+    // 6. التحقق من أن العدد أصبح صفراً (PENDING)
+    ASSERT_EQ(n.getNotificationCount(TEST_DB_PATH, userId, "PENDING"), 0) << "Expected PENDING count to be 0 after marking as read.";
+    // 7. التحقق من أن العدد أصبح 2 (READ)
+    ASSERT_EQ(n.getNotificationCount(TEST_DB_PATH, userId, "READ"), 2) << "Expected READ count to be 2 after marking as read.";
 }

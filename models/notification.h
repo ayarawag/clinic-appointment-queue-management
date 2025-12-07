@@ -1,45 +1,22 @@
-#ifndef NOTIFICATION_H
-#define NOTIFICATION_H
-
 #include <string>
 #include <vector>
+#include <iostream>
 
-using namespace std;
-
-// Class Definition (Model)
 class Notification {
+private:
+    // Private members for notification data (optional)
+
 public:
-    int id;
-    int patientId;
-    string message;
-    string dateTime;
-    int isRead; // 0 for unread, 1 for read
+    Notification();
 
-    // Constructor
-    Notification(int id = 0, int patientId = 0, const string& message = "", 
-                 const string& dateTime = "", int isRead = 0)
-        : id(id), patientId(patientId), message(message), 
-          dateTime(dateTime), isRead(isRead) {}
+    // Core Database Logging and Retrieval Functions (Fixes "logNotification/getNotificationCount is undefined" errors)
+    bool logNotification(int patientId, const std::string& message, const std::string& dateTime);
+    int getNotificationCount(int patientId, const std::string& status);
+    std::vector<std::string> getNotificationsForUser(int patientId);
+    bool markNotificationsAsRead(int patientId);
 
-    // Simple display function
-    void display() const;
+    // Reminder and Sending Utility Functions (Inferred from test_notification.cpp image)
+    // Assuming these are instance methods for flexibility, though they could be static.
+    bool sendNotification(int patientId, const std::string& message);
+    bool runReminders();
 };
-
-// === الدوال المتعلقة بقاعدة البيانات (models/notification.cpp) ===
-// Function to log a new notification to the database table
-bool logNotification(int userId, const string& msg);
-
-// Function to retrieve the count of unread notifications
-int getNotificationCount(int userId);
-
-// Function to retrieve all notifications for a user
-vector<string> getNotificationsForUser(int userId);
-
-// === الدوال المتعلقة بالمميزات (features/notification.cpp) ===
-// Function to send a notification to a patient
-void sendNotification(int patientId, const string& message);
-
-// Function to run appointment reminders
-void runReminders(int minutesBefore);
-
-#endif // NOTIFICATION_H

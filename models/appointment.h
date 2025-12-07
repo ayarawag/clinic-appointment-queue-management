@@ -14,6 +14,8 @@ public:
     bool cancel();
     bool reschedule(const string& newTime);
     bool setPaid();
+    // دالة لاسترجاع موعد بواسطة الـ ID
+    bool getAppointmentById(int appointmentId); 
 };
 
 #endif

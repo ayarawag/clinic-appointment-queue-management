@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+// تصريحات الدوال الخاصة بالـ Features (يتم تعريفها في مجلد features)
 void registerUser();
 bool loginUser();
 void bookAppointment();
@@ -36,6 +37,8 @@ int main() {
                 runReminders(m);
                 break;
             }
+            case 0: cout << "Exiting...\n"; break;
+            default: cout << "Invalid choice. Please try again.\n";
         }
     } while(choice != 0);
     return 0;

@@ -1,147 +1,89 @@
 #include "patient.h"
-#include "../database/db_connection.h"
-#include <iostream>
-#include <regex>
-#include <chrono>
-using namespace std;
+#include "../database/db_connection.h" 
 
-// ---------------------------------
-//  الحل: إضافة دالة البناء الافتراضية (Default Constructor) 
-// هذا التطبيق هو الذي كان مفقوداً ويتسبب في خطأ الربط
-// ---------------------------------
-Patient::Patient() {
-    // تعيين قيم ابتدائية لضمان حالة نظيفة للكائن أثناء الاختبار
-    this->name = "";
-    this->phone = "";
-    this->email = "";
-    this->password = "";
-    this->failedAttempts = 0;
-    this->lockedUntil = 0;
-    this->preferredChannel = "app";
-}
-// ---------------------------------
+#include <string> 
+#include <iostream> 
+#include <sstream> 
 
-Patient::Patient(string n, string p, string e, string pw) {
-    name = n;
-    phone = p;
-    email = e;
-    password = pw;
-    failedAttempts = 0;
-    lockedUntil = 0;
-    preferredChannel = "app";
-}
+using namespace std; 
 
-long long Patient::nowEpoch() {
-    return chrono::duration_cast<chrono::seconds>(
-        chrono::system_clock::now().time_since_epoch()
-    ).count();
-}
+// ----------------------------------------------------
+// تطبيق المنشئات و Getters/Setters
+// ----------------------------------------------------
 
-bool Patient::isValidEmail(const string& email) {
-    const regex pattern(R"((^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$))");
-    return regex_match(email, pattern);
-}
+Patient::Patient() : id(0), name(""), phone(""), email(""), password("") {}
 
-// simple student-style hash (+3)
-string Patient::hashPassword(const string& input) {
-    string hashed = "";
-    for (char c : input) hashed += char(c + 3);
-    return hashed;
-}
+Patient::Patient(int id, const std::string& name, const std::string& phone, const std::string& email, const std::string& password)
+    : id(id), name(name), phone(phone), email(email), password(password) {}
 
-bool Patient::registerPatient() {
-    if (!isValidEmail(email)) {
-        cout << "Invalid email format.\n";
-        return false;
-    }
-    if (password.length() < 8) {
-        cout << "Password must be at least 8 characters.\n";
-        return false;
+int Patient::getId() const { return id; }
+std::string Patient::getName() const { return name; }
+std::string Patient::getPhone() const { return phone; }
+std::string Patient::getEmail() const { return email; }
+std::string Patient::getPassword() const { return password; }
+
+void Patient::setName(const std::string& name) { this->name = name; }
+void Patient::setPhone(const std::string& phone) { this->phone = phone; }
+void Patient::setEmail(const std::string& email) { this->email = email; }
+void Patient::setPassword(const std::string& password) { this->password = password; }
+
+
+// ----------------------------------------------------
+// تطبيق دوال قاعدة البيانات (Database Functions)
+// ----------------------------------------------------
+
+/**
+ * @brief دالة تسجيل مريض جديد.
+ */
+bool Patient::registerPatient(const std::string& name, const std::string& phone, const std::string& email, const std::string& password) {
+    // 1. فتح الاتصال
+    sqlite3 *db = DBConnection::openDB(); 
+    if (!db) {
+        return false; // فشل فتح القاعدة تم الإبلاغ عنه داخل openDB
     }
 
-    DBConnection db("clinic.db");
-    string hp = hashPassword(password);
+    // 2. بناء استعلام SQL
+    std::string sql = "INSERT INTO patients (name, phone, email, password) VALUES ('" + name + "', '" + phone + "', '" + email + "', '" + password + "');";
 
-    string sql = "INSERT INTO patients(name,phone,email,password,failedAttempts,lockedUntil,preferredChannel) "
-                 "VALUES('" + name + "','" + phone + "','" + email + "','" + hp + "',0,0,'app');";
+    // 3. تنفيذ الاستعلام وإغلاق الاتصال
+    bool success = DBConnection::execute(db, sql);
+    DBConnection::closeDB(db); 
 
-    return db.execute(sql);
+    if (success) {
+        cout << "Patient " << name << " registered successfully." << endl;
+    }
+    return success;
 }
 
-bool Patient::loginPatient(const string& user, const string& pw) {
-
-    DBConnection db("clinic.db");
-
-    // ================================
-    // 1) Fetch patient by email/phone
-    // ================================
-    struct Row {
-        int id = 0;
-        string storedPw = "";
-        int failed = 0;
-        long long locked = 0;
-    } row;
-
-    string sql = "SELECT id, password, failedAttempts, lockedUntil "
-                 "FROM patients WHERE email='" + user + "' OR phone='" + user + "';";
-
-    db.query(sql,
-        [](void* data, int cols, char** vals, char**) -> int {
-            Row* r = (Row*)data;
-            if (vals[0]) r->id = stoi(vals[0]);
-            if (vals[1]) r->storedPw = vals[1];
-            if (vals[2]) r->failed = stoi(vals[2]);
-            if (vals[3]) r->locked = stoll(vals[3]);
-            return 0;
-        }, &row
-    );
-
-    if (row.id == 0) {
-        cout << "User not found.\n";
+/**
+ * @brief دالة تسجيل دخول المريض.
+ */
+bool Patient::login(const std::string& email, const std::string& password) {
+    // 1. فتح الاتصال
+    sqlite3 *db = DBConnection::openDB();
+    if (!db) {
         return false;
     }
 
-    // ================================
-    // 2) Check if locked
-    // ================================
-    long long now = nowEpoch();
-    if (row.locked > now) {
-        cout << "Account is locked. Try again later.\n";
-        return false;
-    }
+    // 2. بناء استعلام SQL
+    std::string sql = "SELECT id FROM patients WHERE email = '" + email + "' AND password = '" + password + "';";
+    
+    int rowCount = 0;
+    
+    // دالة Callback لمعالجة نتائج استعلام SELECT
+    auto callback = [](void* countPtr, int argc, char** argv, char** azColName) -> int {
+        int* count = static_cast<int*>(countPtr);
+        if (argc > 0) {
+            // يمكننا الحصول على الـ ID هنا لو احتجنا، لكن نكتفي بالعد
+            (*count)++;
+        }
+        return 0; 
+    };
 
-    // ================================
-    // 3) Compare passwords
-    // ================================
-    string hpw = hashPassword(pw);
+    // 3. تنفيذ الاستعلام وإغلاق الاتصال
+    DBConnection::query(db, sql, callback, &rowCount);
+    DBConnection::closeDB(db);
 
-    if (hpw == row.storedPw) {
-        // reset failed attempts
-        db.execute("UPDATE patients SET failedAttempts=0, lockedUntil=0 WHERE id=" + to_string(row.id) + ";");
-        cout << "Login successful.\n";
-        return true;
-    }
-
-    // ================================
-    // 4) Wrong password
-    // ================================
-    row.failed++;
-
-    if (row.failed >= 5) {
-        long long lockTime = now + (15 * 60); // 15 min
-        string sqlUpdate = "UPDATE patients SET failedAttempts=" + to_string(row.failed) +
-                           ", lockedUntil=" + to_string(lockTime) +
-                           " WHERE id=" + to_string(row.id) + ";";
-        db.execute(sqlUpdate);
-        cout << "Too many attempts. Account locked for 15 minutes.\n";
-    } 
-    else {string sqlUpdate = "UPDATE patients SET failedAttempts=" +
-                           to_string(row.failed) +
-                           " WHERE id=" + to_string(row.id) + ";";
-        db.execute(sqlUpdate);
-
-        cout << "Invalid password. Attempts = " << row.failed << "/5\n";
-    }
-
-    return false;
+    // إذا كان rowCount > 0، فذلك يعني أن بيانات الدخول صحيحة
+    return rowCount > 0;
 }
