@@ -1,21 +1,23 @@
 #ifndef APPOINTMENT_H
 #define APPOINTMENT_H
-
 #include <string>
-using namespace std;
+#include <vector>
 
 class Appointment {
 public:
-    int id, patientId, doctorId;
-    string dateTime;
-    bool paid;
+    int id, patientId, doctorId, paid;
+    std::string dateTime, status;
 
-    bool book();
-    bool cancel();
-    bool reschedule(const string& newTime);
-    bool setPaid();
-    // دالة لاسترجاع موعد بواسطة الـ ID
-    bool getAppointmentById(int appointmentId); 
+    Appointment();
+
+    bool book(const std::string& db="clinic.db");
+    bool cancel(const std::string& db="clinic.db");
+    bool reschedule(std::string newDate,const std::string& db="clinic.db");
+    bool setPaid(const std::string& db="clinic.db");
+
+    static Appointment loadById(int id,const std::string& db="clinic.db");
+    static std::vector<Appointment> getByPatient(int pid,const std::string& db="clinic.db");
+    static std::vector<Appointment> getByDoctor(int did,const std::string& db="clinic.db");
 };
 
 #endif

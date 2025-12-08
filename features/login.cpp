@@ -1,34 +1,31 @@
-#include "../models/patient.h"
+#include "../database/db_connection.h"
+#include "../utils/password_utils.h"
 #include <iostream>
 #include <string>
-using namespace std;
+#include <limits>     // ← هذا هو المهم
+#include <vector>
 
-/**
- * @brief تقوم بتسجيل دخول المستخدم.
- * @return true في حالة نجاح تسجيل الدخول، false في حالة الفشل.
- */
 bool loginUser() {
-    string email, password;
-    
-    cout << "=========================\n";
-    cout << "      تسجيل الدخول\n";
-    cout << "=========================\n";
+    std::string email, password;
+    std::cout << "Enter your email: ";
+    std::cin >> email;
+    std::cout << "Enter your password: ";
+    std::cin >> password;
 
-    cout << "البريد الإلكتروني: ";
-    cin >> email;
+    DBConnection db("clinic.db");
+    std::string storedHash;
+    std::string q = "SELECT password_hash FROM patients WHERE email='" + email + "' LIMIT 1;";
+    db.query(q, [](void* ud, int cols, char** vals, char**) -> int {
+        std::string* s = (std::string*)ud;
+        if (vals[0]) *s = vals[0];
+        return 0;
+    }, &storedHash);
 
-    cout << "كلمة المرور: ";
-    cin >> password;
-
-    // إنشاء كائن Patient فارغ لاستخدام دالة العضو
-    Patient p;
-
-    // استدعاء دالة login للتحقق من البيانات في قاعدة البيانات
-    if (p.login(email, password)) { 
-        cout << "تم تسجيل الدخول بنجاح!\n";
+    if (!storedHash.empty() && verifyPassword(password, storedHash)) {
+        std::cout << "Login successful.\n";
         return true;
     } else {
-        cout << "بريد إلكتروني أو كلمة مرور غير صحيحة.\n";
+        std::cout << "Invalid credentials.\n";
         return false;
     }
 }

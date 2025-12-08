@@ -2,40 +2,16 @@
 #define QUEUE_H
 
 #include <vector>
-#include <string>
-#include <iostream> 
-
-// تعريف هيكل بيانات Item لتخزين معلومات المريض في قائمة الانتظار
-struct QueueItem {
-    int patientId;
-    int position; 
-};
+#include <utility>
 
 class Queue {
 private:
-    // أعضاء الكلاس لتخزين قائمة الانتظار في الذاكرة
-    std::vector<QueueItem> queueItems; 
-
+    std::vector<std::pair<int,int>> queueList; // appointment_id, position
 public:
-    Queue();
-    
-    // 1. الدالة الصحيحة لإضافة مريض (تطابق مع addPatient في features/queue_managment.cpp)
-    void addPatient(int patientId);
-    
-    // 2. دالة إزالة مريض
-    void removePatient(int patientId); // تم توحيدها من removeFromQueue
-    
-    // 3. دالة الحصول على الموقع الحالي
-    int getCurrentPosition(int patientId) const;
-    
-    // 4. دالة إعادة الترتيب
-    void reorder(int patientId, int newPosition);
-    
-    // 5. دالة تحديث المواقع في قاعدة البيانات
-    bool refreshPositionsDB();
-    
-    // دالة إظهار قائمة الانتظار
-    void viewQueue(); 
+    void addPatient(int appointmentId);
+    void reorder(int appointmentId, int newPos);
+    void refreshPositionsDB(const std::string& db="clinic.db");
+    std::vector<std::pair<int,int>> getCurrentQueue() const;
 };
 
-#endif // QUEUE_H
+#endif

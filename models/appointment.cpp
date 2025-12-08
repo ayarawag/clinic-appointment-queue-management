@@ -1,138 +1,79 @@
 #include "appointment.h"
 #include "../database/db_connection.h"
-#include <iostream>
+#include <sstream>
 #include <string>
-using namespace std;
+#include <cstdlib>
+using std::stoi;
 
-bool Appointment::book() {
-    DBConnection db("../clinic.db"); 
-    if (!db.execute("BEGIN TRANSACTION;")) return false;
+Appointment::Appointment(){ id=0; paid=0; status="Scheduled"; }
 
-    // 1. التحقق من التوفر
-    string check = "SELECT COUNT(*) FROM appointments WHERE doctorId=" + to_string(doctorId) + " AND dateTime='" + dateTime + "';";
-    int cnt = 0;
-    
-    db.query(check, [](void* ud, int cols, char** vals, char**) -> int {
-        int* p = (int*)ud;
-        if (vals[0]) *p = stoi(vals[0]);
-        return 0;
-    }, &cnt);
-
-    if (cnt > 0) {
-        cout << "Slot already taken.\n";
-        db.execute("ROLLBACK;");
-        return false;
-    }
-
-    // 2. إدراج الموعد
-    string insert = "INSERT INTO appointments(patientId,doctorId,dateTime,paid) VALUES(" + to_string(patientId) + "," + to_string(doctorId) + ",'" + dateTime + "',0);";
-    if (!db.execute(insert)) { 
-        db.execute("ROLLBACK;"); 
-        return false; 
-    }
-    
-    // 3. جلب الـ ID
-    db.query("SELECT last_insert_rowid();", [](void* ud, int cols, char** vals, char**) -> int {
-        int* p = (int*)ud;
-        if (vals[0]) *p = stoi(vals[0]);
-        return 0;
-    }, &id);
-    
-    paid = false;
-
-    db.execute("COMMIT;");
-    cout << "Appointment booked successfully with ID: " << id << endl;
-    return true;
+Appointment Appointment::loadById(int aid,const std::string& db){
+    Appointment a;
+    DBConnection x(db);
+    x.query("SELECT id,patient_id,doctor_id,date_time,status,paid FROM appointments WHERE id="+std::to_string(aid),
+        [](void* u,int,char** v,char**){
+            Appointment* a=(Appointment*)u;
+            a->id=stoi(v[0]); a->patientId=stoi(v[1]); a->doctorId=stoi(v[2]);
+            a->dateTime=v[3]; a->status=v[4]; a->paid=stoi(v[5]);
+            return 0; }, &a);
+    return a;
 }
 
-bool Appointment::cancel() {
-    DBConnection db("../clinic.db"); 
-    
-    // جلب patientId
-    int pid = 0;
-    db.query("SELECT patientId FROM appointments WHERE id=" + to_string(id) + ";", [](void* ud, int cols, char** vals, char**) -> int {
-        int* p = (int*)ud;
-        if (vals[0]) *p = stoi(vals[0]);
-        return 0;
-    }, &pid);
+bool Appointment::book(const std::string& db){
+    DBConnection x(db);
+    bool exists=false;
+    x.query("SELECT id FROM appointments WHERE doctor_id="+std::to_string(doctorId)+
+            " AND date_time='"+dateTime+"' LIMIT 1;",
+        [](void* u,int,char** v,char**){ if(v[0]) *(bool*)u=true; return 0; }, &exists);
 
-    if (!db.execute("DELETE FROM appointments WHERE id=" + to_string(id) + ";")) return false;
+    if(exists) return false;
 
-    // الإزالة من جدول الانتظار (queue) إذا كان موجوداً
-    if (pid > 0) db.execute("DELETE FROM queue WHERE patientId=" + to_string(pid) + ";");
-    
-    cout << "Appointment ID " << id << " cancelled.\n";
-    return true;
+    std::ostringstream q;
+    q<<"INSERT INTO appointments(patient_id,doctor_id,date_time,status,paid) VALUES("
+      <<patientId<<","<<doctorId<<",'"
+      <<dateTime<<"','Scheduled',0);";
+    return x.execute(q.str());
 }
 
-bool Appointment::reschedule(const string& newTime) {
-    DBConnection db("../clinic.db"); 
-    if (!db.execute("BEGIN TRANSACTION;")) return false;
-
-    // جلب doctorId
-    int did = 0;
-    db.query("SELECT doctorId FROM appointments WHERE id=" + to_string(id) + ";", [](void* ud, int cols, char** vals, char**) -> int {
-        int* p = (int*)ud;
-        if (vals[0]) *p = stoi(vals[0]);
-        return 0;
-    }, &did);
-
-    // التحقق من توفر الفتحة
-    string check = "SELECT COUNT(*) FROM appointments WHERE doctorId=" + to_string(did) + " AND dateTime='" + newTime + "' AND id!=" + to_string(id) + ";";
-    int cnt = 0;
-    db.query(check, [](void* ud, int cols, char** vals, char**) -> int {
-        int* p = (int*)ud;
-        if (vals[0]) *p = stoi(vals[0]);
-        return 0;
-    }, &cnt);
-
-    if (cnt > 0) {
-        cout << "Target slot already taken.\n";
-        db.execute("ROLLBACK;");
-        return false;
-    }
-
-    // التحديث
-    if (!db.execute("UPDATE appointments SET dateTime='" + newTime + "' WHERE id=" + to_string(id) + ";")) { 
-        db.execute("ROLLBACK;"); 
-        return false; 
-    }
-    
-    dateTime = newTime;
-    db.execute("COMMIT;");
-    cout << "Appointment ID " << id << " rescheduled to " << newTime << ".\n";
-    return true;
+bool Appointment::cancel(const std::string& db){
+    DBConnection x(db);
+    return x.execute("UPDATE appointments SET status='Cancelled' WHERE id="+std::to_string(id));
 }
 
-bool Appointment::setPaid() {
-    DBConnection db("../clinic.db"); 
-    if (db.execute("UPDATE appointments SET paid=1 WHERE id=" + to_string(id) + ";")) {
-        paid = true;
-        cout << "Appointment ID " << id << " marked as paid.\n";
-        return true;
-    }
-    return false;
+bool Appointment::reschedule(std::string newDate,const std::string& db){
+    DBConnection x(db);
+    std::ostringstream q;
+    q<<"UPDATE appointments SET date_time='"<<newDate<<"', status='Rescheduled' WHERE id="<<id;
+    return x.execute(q.str());
 }
 
-bool Appointment::getAppointmentById(int appointmentId) {
-    DBConnection db("../clinic.db");
-    id = appointmentId;
+bool Appointment::setPaid(const std::string& db){
+    DBConnection x(db);
+    return x.execute("UPDATE appointments SET paid=1 WHERE id="+std::to_string(id));
+}
 
-    string sql = "SELECT patientId, doctorId, dateTime, paid FROM appointments WHERE id=" + to_string(id) + ";";
+std::vector<Appointment> Appointment::getByPatient(int pid,const std::string& db){
+    std::vector<Appointment> list;
+    DBConnection x(db);
+    x.query("SELECT id,patient_id,doctor_id,date_time,status,paid FROM appointments WHERE patient_id="+std::to_string(pid),
+        [](void* u,int,char** v,char**){
+            auto* l=(std::vector<Appointment>*)u;
+            Appointment a;
+            a.id=stoi(v[0]); a.patientId=stoi(v[1]); a.doctorId=stoi(v[2]);
+            a.dateTime=v[3]; a.status=v[4]; a.paid=stoi(v[5]);
+            l->push_back(a); return 0; }, &list);
+    return list;
+}
 
-    struct AppointmentData { Appointment* a; } data = {this};
-
-    db.query(sql,
-        [](void* data, int cols, char** vals, char**) -> int {
-            AppointmentData* d = (AppointmentData*)data;
-            if (vals[0]) d->a->patientId = stoi(vals[0]);
-            if (vals[1]) d->a->doctorId = stoi(vals[1]);
-            if (vals[2]) d->a->dateTime = vals[2];
-            if (vals[3]) d->a->paid = (stoi(vals[3]) == 1);
-            return 0;
-        }, &data
-    );
-    
-    // التحقق من وجود الموعد
-    return patientId != 0;
+std::vector<Appointment> Appointment::getByDoctor(int did,const std::string& db){
+    std::vector<Appointment> list;
+    DBConnection x(db);
+    x.query("SELECT id,patient_id,doctor_id,date_time,status,paid FROM appointments WHERE doctor_id="+std::to_string(did),
+        [](void* u,int,char** v,char**){
+            auto* l=(std::vector<Appointment>*)u;
+            Appointment a;
+            a.id=stoi(v[0]); a.patientId=stoi(v[1]); a.doctorId=stoi(v[2]);
+            a.dateTime=v[3]; a.status=v[4]; a.paid=stoi(v[5]);
+            l->push_back(a); return 0; }, &list);
+    return list;
 }

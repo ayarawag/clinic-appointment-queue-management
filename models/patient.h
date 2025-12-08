@@ -1,40 +1,21 @@
 #ifndef PATIENT_H
 #define PATIENT_H
-
 #include <string>
-#include <iostream>
 
 class Patient {
-private:
-    int id;
-    std::string name;
-    std::string phone;
-    std::string email;
-    std::string password;
-
 public:
-    // المنشئات (Constructors)
+    int id;
+    std::string name, phone, email, passwordHash;
+
     Patient();
-    Patient(int id, const std::string& name, const std::string& phone, const std::string& email, const std::string& password);
+    Patient(std::string n, std::string p, std::string e, std::string pass);
 
-    // Getters
-    int getId() const;
-    std::string getName() const;
-    std::string getPhone() const;
-    std::string getEmail() const;
-    std::string getPassword() const;
+    bool registerPatient(const std::string& db="clinic.db");
+    bool update(const std::string& db="clinic.db");
+    bool remove(const std::string& db="clinic.db");
 
-    // Setters
-    void setName(const std::string& name);
-    void setPhone(const std::string& phone);
-    void setEmail(const std::string& email);
-    void setPassword(const std::string& password);
-
-    // وظائف قاعدة البيانات
-    bool registerPatient(const std::string& name, const std::string& phone, const std::string& email, const std::string& password);
-    // دالة جديدة لتسجيل الدخول في قاعدة البيانات
-    bool login(const std::string& email, const std::string& password); 
-
+    static bool emailExists(std::string email, const std::string& db="clinic.db");
+    static Patient loadById(int id, const std::string& db="clinic.db");
 };
 
-#endif // PATIENT_H
+#endif

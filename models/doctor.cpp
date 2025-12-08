@@ -1,77 +1,57 @@
 #include "doctor.h"
 #include "../database/db_connection.h"
-#include <iostream>
 #include <sstream>
+#include <string>
+#include <cstdlib>
+using std::stoi;
 
-using namespace std;
+Doctor::Doctor(): id(0) {}
+Doctor::Doctor(std::string n,std::string s){ id=0; name=n; specialization=s; }
 
-// ----------------------------------------------------
-// تطبيق دوال Doctor
-// ----------------------------------------------------
-
-// ... (باقي تطبيقات المنشئات و Getters/Setters هنا) ...
-// إذا كان لديك Doctor::Doctor() و Doctor::getId() الخ، احتفظي بها.
-
-// دالة تحديث جدول الطبيب
-void Doctor::setSchedule(const std::string& newSchedule) {
-    this->schedule = newSchedule;
-    
-    // 1. فتح الاتصال (Static Call)
-    sqlite3 *db = DBConnection::openDB();
-    if (!db) return;
-
-    // 2. بناء استعلام SQL
-    std::string sql = "UPDATE doctors SET schedule = '" + newSchedule + "' WHERE id = " + std::to_string(this->id) + ";";
-
-    // 3. تنفيذ الاستعلام (Static Call) وإغلاق الاتصال
-    bool success = DBConnection::execute(db, sql);
-    DBConnection::closeDB(db);
-
-    if (success) {
-        cout << "Doctor " << this->name << " schedule updated successfully." << endl;
-    } else {
-        cerr << "Failed to update doctor schedule." << endl;
-    }
+Doctor Doctor::loadById(int did,const std::string& db){
+    Doctor d;
+    DBConnection x(db);
+    x.query("SELECT id,name,specialization,schedule FROM doctors WHERE id="+std::to_string(did),
+    [](void* u,int, char** v,char**){
+        Doctor* d=(Doctor*)u;
+        d->id=stoi(v[0]); d->name=v[1]; d->specialization=v[2]; d->schedule=v[3];
+        return 0; }, &d);
+    return d;
 }
 
-// دالة جلب بيانات الطبيب بواسطة المعرف
-bool Doctor::getDoctorById(int doctorId) {
-    // 1. تعريف الهيكل المساعد وفتح الاتصال
-    struct DoctorData {
-        Doctor* d;
-        bool found = false;
-    };
-    DoctorData data = {this, false};
+std::vector<Doctor> Doctor::getAll(const std::string& db){
+    std::vector<Doctor> list;
+    DBConnection x(db);
+    x.query("SELECT id,name,specialization,schedule FROM doctors;",
+        [](void* u,int,char** v,char**){
+            auto* l=(std::vector<Doctor>*)u;
+            Doctor d; d.id=stoi(v[0]); d.name=v[1]; d.specialization=v[2]; d.schedule=v[3];
+            l->push_back(d); return 0; }, &list);
+    return list;
+}
 
-    sqlite3 *db = DBConnection::openDB();
-    if (!db) return false;
+bool Doctor::create(const std::string& db){
+    DBConnection x(db);
+    std::ostringstream q;
+    q<<"INSERT INTO doctors(name,specialization,schedule) VALUES('"
+      <<name<<"','"<<specialization<<"','"<<schedule<<"');";
+    return x.execute(q.str());
+}
 
-    // 2. بناء استعلام SQL
-    std::string sql = "SELECT name, specialization, schedule FROM doctors WHERE id = " + std::to_string(doctorId) + ";";
+bool Doctor::update(const std::string& db){
+    DBConnection x(db);
+    std::ostringstream q;
+    q<<"UPDATE doctors SET name='"<<name<<"', specialization='"<<specialization
+      <<"', schedule='"<<schedule<<"' WHERE id="<<id;
+    return x.execute(q.str());
+}
 
-    // دالة Callback لمعالجة النتائج
-    auto callback = [](void* dataPtr, int cols, char** vals, char** azColName) -> int {
-        DoctorData* d = (DoctorData*)dataPtr;
-        if (cols >= 3) {
-            d->found = true;
-            // يجب تعيين id هنا أيضاً لو كان متاحاً
-            // d->d->id = doctorId; // (سنقوم بتعيينه في الخارج)
+bool Doctor::remove(const std::string& db){
+    DBConnection x(db);
+    return x.execute("DELETE FROM doctors WHERE id="+std::to_string(id));
+}
 
-            if (vals[0]) d->d->name = vals[0];
-            if (vals[1]) d->d->specialization = vals[1];
-            if (vals[2]) d->d->schedule = vals[2];
-        }
-        return 0;
-    };
-
-    // 3. تنفيذ الاستعلام (Static Call) وإغلاق الاتصال
-    DBConnection::query(db, sql, callback, &data);
-    DBConnection::closeDB(db);
-
-    // إذا تم العثور على الطبيب، قم بتعيين المعرف (ID)
-    if (data.found) {
-        this->id = doctorId;
-        return true;
-    }
-    return false;
+bool Doctor::setSchedule(std::string s,const std::string& db){
+    schedule=s;
+    return update(db);
 }

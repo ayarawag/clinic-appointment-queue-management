@@ -1,38 +1,22 @@
 #include "../models/patient.h"
 #include <iostream>
-#include <string> 
-using namespace std;
-
-/**
- * @brief تقوم بتسجيل مستخدم جديد (مريض).
- */
+#include <string>
+#include <limits>     // ← هذا هو المهم
+#include <vector>
 void registerUser() {
-    string name, phone, email, password;
-    
-    cout << "==========================\n";
-    cout << "    تسجيل مستخدم جديد\n";
-    cout << "==========================\n";
-    
-    cout << "الاسم بالكامل: "; 
-    cin.ignore(10000, '\n'); 
-    getline(cin, name);
-    
-    cout << "رقم الهاتف: ";
-    cin >> phone;
-    
-    cout << "البريد الإلكتروني: ";
-    cin >> email;
-    
-    cout << "كلمة المرور: ";
-    cin >> password;
+    std::string name, phone, email, password;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Name: "; std::getline(std::cin, name);
+    std::cout << "Phone: "; std::getline(std::cin, phone);
+    std::cout << "Email: "; std::getline(std::cin, email);
+    std::cout << "Password: "; std::getline(std::cin, password);
 
-    // 1. إنشاء كائن Patient فارغ
-    Patient p; 
-
-    // 2. استدعاء الدالة registerPatient مع تمرير 4 وسائط
-    if (p.registerPatient(name, phone, email, password)) {
-        cout << "تم التسجيل بنجاح.\n";
-    } else {
-        cout << "فشل التسجيل. ربما البريد الإلكتروني مستخدم بالفعل أو حدث خطأ في قاعدة البيانات.\n";
+    if (email.empty() || password.size() < 8) {
+        std::cout << "Invalid input: email required and password must be >= 8 chars\n";
+        return;
     }
+
+    Patient p(name, phone, email, password);
+    if (p.registerPatient()) std::cout << "Registered successfully.\n";
+    else std::cout << "Registration failed (email exists or DB error).\n";
 }
