@@ -2,68 +2,91 @@
 #include "../database/db_connection.h"
 #include <sstream>
 #include <string>
-#include <cstdlib>
 
-Appointment::Appointment() {
+Appointment::Appointment()
+    : id(0), patientId(0), doctorId(0), dateTime(""), paid(0) {}
+
+Appointment::Appointment(int pid, int did, std::string dt)
+{
     id = 0;
-    patientId = 0;
-    doctorId = 0;
-    status = "Scheduled";
+    patientId = pid;
+    doctorId = did;
+    dateTime = dt;
+    paid = 0;
 }
 
-bool Appointment::book(const std::string& db) {
-    DBConnection x(db);
+bool Appointment::book(const std::string& db)
+{
+    DBConnection conn(db);
     std::ostringstream q;
 
-    q << "INSERT INTO appointments(patient_id, doctor_id, date_time, status) VALUES("
+    q << "INSERT INTO appointments(patient_id, doctor_id, dateTime, paid) VALUES("
       << patientId << "," << doctorId << ",'"
-      << dateTime << "','" << status << "');";
+      << dateTime << "',0);";
 
-    return x.execute(q.str());
+    return conn.execute(q.str());
 }
 
-bool Appointment::cancel(const std::string& db) {
+bool Appointment::cancel(const std::string& db)
+{
     if (id == 0) return false;
 
-    DBConnection x(db);
+    DBConnection conn(db);
     std::ostringstream q;
 
-    q << "UPDATE appointments SET status='Cancelled' WHERE id=" << id;
-
-    return x.execute(q.str());
+    q << "DELETE FROM appointments WHERE id=" << id;
+    return conn.execute(q.str());
 }
 
-bool Appointment::reschedule(const std::string& newTime, const std::string& db) {
+bool Appointment::setPaid(bool paidValue, const std::string& db)
+{
     if (id == 0) return false;
 
-    DBConnection x(db);
+    DBConnection conn(db);
     std::ostringstream q;
 
-    q << "UPDATE appointments SET date_time='" << newTime
-      << "', status='Rescheduled' WHERE id=" << id;
+    q << "UPDATE appointments SET paid=" << (paidValue ? 1 : 0)
+      << " WHERE id=" << id;
 
-    return x.execute(q.str());
+    bool ok = conn.execute(q.str());
+    if (ok) paid = paidValue ? 1 : 0;
+    return ok;
 }
 
-Appointment Appointment::loadById(int aid, const std::string& db) {
+bool Appointment::reschedule(const std::string& newDateTime, const std::string& db)
+{
+    if (id == 0) return false;
+
+    DBConnection conn(db);
+    std::ostringstream q;
+
+    q << "UPDATE appointments SET dateTime='" << newDateTime
+      << "' WHERE id=" << id;
+
+    bool ok = conn.execute(q.str());
+    if (ok) dateTime = newDateTime;
+
+    return ok;
+}
+
+Appointment Appointment::loadById(int aid, const std::string& db)
+{
     Appointment a;
-    DBConnection x(db);
+    DBConnection conn(db);
 
     std::string q =
-        "SELECT id, patient_id, doctor_id, date_time, status FROM appointments WHERE id = "
-        + std::to_string(aid);
+        "SELECT id, patient_id, doctor_id, dateTime, paid "
+        "FROM appointments WHERE id=" + std::to_string(aid) + " LIMIT 1;";
 
-    x.query(
+    conn.query(
         q,
-        [](void* out, int cols, char** vals, char**) -> int {
+        [](void* out, int, char** vals, char**) -> int {
             Appointment* a = (Appointment*)out;
-
-            if (vals[0]) a->id = std::stoi(vals[0]);
+            if (vals[0]) a->id        = std::stoi(vals[0]);
             if (vals[1]) a->patientId = std::stoi(vals[1]);
-            if (vals[2]) a->doctorId = std::stoi(vals[2]);
-            if (vals[3]) a->dateTime = vals[3];
-            if (vals[4]) a->status = vals[4];
-
+            if (vals[2]) a->doctorId  = std::stoi(vals[2]);
+            if (vals[3]) a->dateTime  = vals[3];
+            if (vals[4]) a->paid      = std::stoi(vals[4]);
             return 0;
         },
         &a

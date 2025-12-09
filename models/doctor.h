@@ -8,15 +8,20 @@ public:
     int id;
     std::string name;
     std::string specialty;
+    std::string schedule;
 
     Doctor();
-    Doctor(int id, std::string name, std::string specialty);
+    Doctor(int id, std::string name, std::string spec);
 
-    bool registerDoctor(const std::string& db="clinic.db");
-    bool update(const std::string& db="clinic.db");
-    bool remove(const std::string& db="clinic.db");
+    // NEW:
+    Doctor(std::string name, std::string spec);
 
-    static Doctor loadById(int id, const std::string& db="clinic.db");
+    bool registerDoctor(const std::string& db = "clinic.db");
+    bool update(const std::string& db = "clinic.db");
+    bool remove(const std::string& db = "clinic.db");
+    bool setSchedule(const std::string& sched, const std::string& db = "clinic.db"); // NEW
+
+    static Doctor loadById(int id, const std::string& db = "clinic.db");
 };
 
 #endif
