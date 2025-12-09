@@ -3,26 +3,31 @@
 #include <sstream>
 #include <iostream>
 
-bool Notification::sendNotification(int pid, const std::string& msg, const std::string& dbfile) {
-    DBConnection db(dbfile);
+Notification::Notification() : id(0), appointmentId(0) {}
+
+Notification::Notification(int appId, std::string msg)
+    : id(0), appointmentId(appId), message(msg) {}
+
+bool Notification::sendNotification(const std::string& db) {
+    DBConnection conn(db);
     std::ostringstream q;
-    q << "INSERT INTO notifications(patient_id, message) VALUES("
-      << pid << ", '" << msg << "');";
-    return db.execute(q.str());
+    q << "INSERT INTO notifications(appointment_id, message) VALUES("
+      << appointmentId << ", '" << message << "');";
+    return conn.execute(q.str());
 }
 
-void Notification::runReminders(int minutesBefore, const std::string& dbfile) {
-    DBConnection db(dbfile);
-    std::string q =
-        "SELECT id, patient_id, date_time "
-        "FROM appointments WHERE status='Scheduled';";
+void Notification::runReminders(const std::string& db) {
+    DBConnection conn(db);
 
-    db.query(q,
-        [](void* ud, int c, char** v, char**) -> int {
-            int pid = std::stoi(v[1]);
-            std::string msg = "Reminder: Your appointment is coming soon.";
-            Notification::sendNotification(pid, msg);
+    std::string q =
+        "SELECT id, appointment_id, message FROM notifications "
+        "WHERE createdAt IS NULL;";
+
+    conn.query(q,
+        [](void*, int, char**, char**) {
+            // Normally: send SMS/email — here we just simulate.
             return 0;
         },
-        nullptr);
+        nullptr
+    );
 }

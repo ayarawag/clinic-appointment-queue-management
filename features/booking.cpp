@@ -12,7 +12,7 @@ void bookAppointmentCLI() {
     std::cout << "Date & Time (YYYY-MM-DD HH:MM): ";
     std::getline(std::cin, a.dateTime);
 
-    if (a.patientId <= 0  a.doctorId <= 0  a.dateTime.empty()) {
+    if (a.patientId <= 0 || a.doctorId <= 0||  a.dateTime.empty()) {
         std::cout << "Invalid input.\n";
         return;
     }

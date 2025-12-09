@@ -5,19 +5,20 @@
 namespace TimeUtils {
 
 std::string getCurrentDateTime() {
-    time_t now = time(0);
-    tm* local = localtime(&now);
-
-    char buffer[30];
-    strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", local);
-    return buffer;
+    std::time_t t = std::time(nullptr);
+    std::tm tm = *std::localtime(&t);
+    char buf[32];
+    std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tm);
+    return std::string(buf);
 }
 
 bool isValidDateTime(const std::string& dt) {
-    std::regex pattern(
-        R"(^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$)"
-    );
-    return std::regex_match(dt, pattern);
+    static const std::regex re(R"(^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$)");
+    return std::regex_match(dt, re);
 }
 
+long long nowEpochSeconds() {
+    return static_cast<long long>(std::time(nullptr));
 }
+
+} // namespace TimeUtils
