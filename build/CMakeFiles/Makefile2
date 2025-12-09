@@ -64,15 +64,70 @@ CMAKE_BINARY_DIR = /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-ma
 
 # The main recursive "all" target.
 all: CMakeFiles/clinic.dir/all
+all: CMakeFiles/run_tests.dir/all
+all: libs/googletest-1.15.0/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: libs/googletest-1.15.0/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/clinic.dir/clean
+clean: CMakeFiles/run_tests.dir/clean
+clean: libs/googletest-1.15.0/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory libs/googletest-1.15.0
+
+# Recursive "all" directory target.
+libs/googletest-1.15.0/all: libs/googletest-1.15.0/googlemock/all
+.PHONY : libs/googletest-1.15.0/all
+
+# Recursive "preinstall" directory target.
+libs/googletest-1.15.0/preinstall: libs/googletest-1.15.0/googlemock/preinstall
+.PHONY : libs/googletest-1.15.0/preinstall
+
+# Recursive "clean" directory target.
+libs/googletest-1.15.0/clean: libs/googletest-1.15.0/googlemock/clean
+.PHONY : libs/googletest-1.15.0/clean
+
+#=============================================================================
+# Directory level rules for directory libs/googletest-1.15.0/googlemock
+
+# Recursive "all" directory target.
+libs/googletest-1.15.0/googlemock/all: libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/all
+libs/googletest-1.15.0/googlemock/all: libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all
+libs/googletest-1.15.0/googlemock/all: libs/googletest-1.15.0/googletest/all
+.PHONY : libs/googletest-1.15.0/googlemock/all
+
+# Recursive "preinstall" directory target.
+libs/googletest-1.15.0/googlemock/preinstall: libs/googletest-1.15.0/googletest/preinstall
+.PHONY : libs/googletest-1.15.0/googlemock/preinstall
+
+# Recursive "clean" directory target.
+libs/googletest-1.15.0/googlemock/clean: libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/clean
+libs/googletest-1.15.0/googlemock/clean: libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/clean
+libs/googletest-1.15.0/googlemock/clean: libs/googletest-1.15.0/googletest/clean
+.PHONY : libs/googletest-1.15.0/googlemock/clean
+
+#=============================================================================
+# Directory level rules for directory libs/googletest-1.15.0/googletest
+
+# Recursive "all" directory target.
+libs/googletest-1.15.0/googletest/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
+libs/googletest-1.15.0/googletest/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all
+.PHONY : libs/googletest-1.15.0/googletest/all
+
+# Recursive "preinstall" directory target.
+libs/googletest-1.15.0/googletest/preinstall:
+.PHONY : libs/googletest-1.15.0/googletest/preinstall
+
+# Recursive "clean" directory target.
+libs/googletest-1.15.0/googletest/clean: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/clean
+libs/googletest-1.15.0/googletest/clean: libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/clean
+.PHONY : libs/googletest-1.15.0/googletest/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/clinic.dir
@@ -81,12 +136,12 @@ clean: CMakeFiles/clinic.dir/clean
 CMakeFiles/clinic.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target clinic"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Built target clinic"
 .PHONY : CMakeFiles/clinic.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/clinic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 19
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 20
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/clinic.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 0
 .PHONY : CMakeFiles/clinic.dir/rule
@@ -99,6 +154,138 @@ clinic: CMakeFiles/clinic.dir/rule
 CMakeFiles/clinic.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/clean
 .PHONY : CMakeFiles/clinic.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/run_tests.dir
+
+# All Build rule for target.
+CMakeFiles/run_tests.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
+CMakeFiles/run_tests.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=29,30,31,32,33,34,35,36,37 "Built target run_tests"
+.PHONY : CMakeFiles/run_tests.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/run_tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 13
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 0
+.PHONY : CMakeFiles/run_tests.dir/rule
+
+# Convenience name for target.
+run_tests: CMakeFiles/run_tests.dir/rule
+.PHONY : run_tests
+
+# clean rule for target.
+CMakeFiles/run_tests.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/clean
+.PHONY : CMakeFiles/run_tests.dir/clean
+
+#=============================================================================
+# Target rules for target libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir
+
+# All Build rule for target.
+libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/depend
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=21,22 "Built target gmock"
+.PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/all
+
+# Build rule for subdir invocation for target.
+libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 0
+.PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/rule
+
+# Convenience name for target.
+gmock: libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/rule
+.PHONY : gmock
+
+# clean rule for target.
+libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/clean
+.PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/clean
+
+#=============================================================================
+# Target rules for target libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir
+
+# All Build rule for target.
+libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all: libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/all
+libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/depend
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=23,24 "Built target gmock_main"
+.PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all
+
+# Build rule for subdir invocation for target.
+libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 0
+.PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/rule
+
+# Convenience name for target.
+gmock_main: libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/rule
+.PHONY : gmock_main
+
+# clean rule for target.
+libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/clean
+.PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/clean
+
+#=============================================================================
+# Target rules for target libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir
+
+# All Build rule for target.
+libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all:
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/depend
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=25,26 "Built target gtest"
+.PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
+
+# Build rule for subdir invocation for target.
+libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 0
+.PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/rule
+
+# Convenience name for target.
+gtest: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/rule
+.PHONY : gtest
+
+# clean rule for target.
+libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/clean
+.PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/clean
+
+#=============================================================================
+# Target rules for target libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir
+
+# All Build rule for target.
+libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/depend
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=27,28 "Built target gtest_main"
+.PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all
+
+# Build rule for subdir invocation for target.
+libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 0
+.PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/rule
+
+# Convenience name for target.
+gtest_main: libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/rule
+.PHONY : gtest_main
+
+# clean rule for target.
+libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/clean
+.PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

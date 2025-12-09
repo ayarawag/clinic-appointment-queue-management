@@ -1,50 +1,49 @@
--- Patients Table
-CREATE TABLE IF NOT EXISTS patients (
+DROP TABLE IF EXISTS patients;
+DROP TABLE IF EXISTS doctors;
+DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS notifications;
+DROP TABLE IF EXISTS receipts;
+
+CREATE TABLE patients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    phone TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
+    name TEXT,
+    phone TEXT,
+    email TEXT UNIQUE,
+    password_hash TEXT,
     createdAt INTEGER
 );
 
--- Doctors Table
-CREATE TABLE IF NOT EXISTS doctors (
+CREATE TABLE doctors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    specialization TEXT NOT NULL,
-    schedule TEXT
+    name TEXT,
+    specialization TEXT,
+    schedule TEXT,
+    createdAt INTEGER
 );
 
--- Appointments Table
-CREATE TABLE IF NOT EXISTS appointments (
+CREATE TABLE appointments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    patient_id INTEGER,
-    doctor_id INTEGER,
-    date_time TEXT NOT NULL,
-    status TEXT DEFAULT 'Scheduled',
+    patientId INTEGER,
+    doctorId INTEGER,
+    dateTime TEXT,
+    status TEXT DEFAULT 'booked',
     paid INTEGER DEFAULT 0,
-    queue_position INTEGER DEFAULT NULL,
-    FOREIGN KEY(patient_id) REFERENCES patients(id),
-    FOREIGN KEY(doctor_id) REFERENCES doctors(id)
+    queue_position INTEGER DEFAULT 0,
+    createdAt INTEGER
 );
 
--- Notification Table
-CREATE TABLE IF NOT EXISTS notifications (
+CREATE TABLE notifications (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    patient_id INTEGER,
+    patientId INTEGER,
     message TEXT,
-    createdAt INTEGER DEFAULT (strftime('%s', 'now')),
-    FOREIGN KEY(patient_id) REFERENCES patients(id)
+    sentAt INTEGER
 );
 
--- Payment Receipts Table
-CREATE TABLE IF NOT EXISTS receipts (
+CREATE TABLE receipts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     appointmentId INTEGER,
     method TEXT,
     status TEXT,
     message TEXT,
-    createdAt INTEGER,
-    FOREIGN KEY(appointmentId) REFERENCES appointments(id)
+    createdAt INTEGER
 );

@@ -1,7 +1,7 @@
 CMakeFiles/clinic.dir/features/login.cpp.o: \
  /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/login.cpp \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/../models/patient.h \
+ /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/../database/db_connection.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -127,9 +127,12 @@ CMakeFiles/clinic.dir/features/login.cpp.o: \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/functional_hash.h \
  /usr/include/c++/13/bits/hash_bytes.h \
- /usr/include/c++/13/bits/basic_string.tcc /usr/include/c++/13/iostream \
- /usr/include/c++/13/ostream /usr/include/c++/13/ios \
- /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
+ /usr/include/c++/13/bits/basic_string.tcc \
+ /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/../database/sqlite3.h \
+ /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features/../utils/password_utils.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
+ /usr/include/c++/13/ios /usr/include/c++/13/exception \
+ /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/cxxabi_init_exception.h \
  /usr/include/c++/13/typeinfo /usr/include/c++/13/bits/nested_exception.h \
  /usr/include/c++/13/bits/ios_base.h \
