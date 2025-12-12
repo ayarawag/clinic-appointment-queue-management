@@ -1,6 +1,18 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o"
-  "CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o.d"
+  "CMakeFiles/run_tests.dir/database/db_connection.cpp.o"
+  "CMakeFiles/run_tests.dir/database/db_connection.cpp.o.d"
+  "CMakeFiles/run_tests.dir/database/sqlite3.c.o"
+  "CMakeFiles/run_tests.dir/database/sqlite3.c.o.d"
+  "CMakeFiles/run_tests.dir/models/appointment.cpp.o"
+  "CMakeFiles/run_tests.dir/models/appointment.cpp.o.d"
+  "CMakeFiles/run_tests.dir/models/doctor.cpp.o"
+  "CMakeFiles/run_tests.dir/models/doctor.cpp.o.d"
+  "CMakeFiles/run_tests.dir/models/notification.cpp.o"
+  "CMakeFiles/run_tests.dir/models/notification.cpp.o.d"
+  "CMakeFiles/run_tests.dir/models/patient.cpp.o"
+  "CMakeFiles/run_tests.dir/models/patient.cpp.o.d"
+  "CMakeFiles/run_tests.dir/models/queue.cpp.o"
+  "CMakeFiles/run_tests.dir/models/queue.cpp.o.d"
   "CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o"
   "CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o.d"
   "CMakeFiles/run_tests.dir/tests/test_basic.cpp.o"
@@ -15,11 +27,15 @@ file(REMOVE_RECURSE
   "CMakeFiles/run_tests.dir/tests/test_queue.cpp.o.d"
   "CMakeFiles/run_tests.dir/tests/test_register.cpp.o"
   "CMakeFiles/run_tests.dir/tests/test_register.cpp.o.d"
+  "CMakeFiles/run_tests.dir/utils/password_utils.cpp.o"
+  "CMakeFiles/run_tests.dir/utils/password_utils.cpp.o.d"
+  "CMakeFiles/run_tests.dir/utils/time_utils.cpp.o"
+  "CMakeFiles/run_tests.dir/utils/time_utils.cpp.o.d"
   "run_tests"
   "run_tests.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang C CXX)
   include(CMakeFiles/run_tests.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

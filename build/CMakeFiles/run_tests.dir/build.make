@@ -69,19 +69,19 @@ include CMakeFiles/run_tests.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/run_tests.dir/flags.make
 
-CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o: CMakeFiles/run_tests.dir/flags.make
-CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/gtest_main.cpp
-CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o -MF CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o.d -o CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/gtest_main.cpp
+CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp
+CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o -MF CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o.d -o CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp
 
-CMakeFiles/run_tests.dir/tests/gtest_main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/tests/gtest_main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/gtest_main.cpp > CMakeFiles/run_tests.dir/tests/gtest_main.cpp.i
+CMakeFiles/run_tests.dir/tests/test_appointment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/tests/test_appointment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp > CMakeFiles/run_tests.dir/tests/test_appointment.cpp.i
 
-CMakeFiles/run_tests.dir/tests/gtest_main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/gtest_main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/gtest_main.cpp -o CMakeFiles/run_tests.dir/tests/gtest_main.cpp.s
+CMakeFiles/run_tests.dir/tests/test_appointment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_appointment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp -o CMakeFiles/run_tests.dir/tests/test_appointment.cpp.s
 
 CMakeFiles/run_tests.dir/tests/test_basic.cpp.o: CMakeFiles/run_tests.dir/flags.make
 CMakeFiles/run_tests.dir/tests/test_basic.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_basic.cpp
@@ -97,24 +97,10 @@ CMakeFiles/run_tests.dir/tests/test_basic.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_basic.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_basic.cpp -o CMakeFiles/run_tests.dir/tests/test_basic.cpp.s
 
-CMakeFiles/run_tests.dir/tests/test_patient.cpp.o: CMakeFiles/run_tests.dir/flags.make
-CMakeFiles/run_tests.dir/tests/test_patient.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp
-CMakeFiles/run_tests.dir/tests/test_patient.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/run_tests.dir/tests/test_patient.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/test_patient.cpp.o -MF CMakeFiles/run_tests.dir/tests/test_patient.cpp.o.d -o CMakeFiles/run_tests.dir/tests/test_patient.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp
-
-CMakeFiles/run_tests.dir/tests/test_patient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/tests/test_patient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp > CMakeFiles/run_tests.dir/tests/test_patient.cpp.i
-
-CMakeFiles/run_tests.dir/tests/test_patient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_patient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp -o CMakeFiles/run_tests.dir/tests/test_patient.cpp.s
-
 CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o: CMakeFiles/run_tests.dir/flags.make
 CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_doctor.cpp
 CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o -MF CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o.d -o CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_doctor.cpp
 
 CMakeFiles/run_tests.dir/tests/test_doctor.cpp.i: cmake_force
@@ -125,19 +111,33 @@ CMakeFiles/run_tests.dir/tests/test_doctor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_doctor.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_doctor.cpp -o CMakeFiles/run_tests.dir/tests/test_doctor.cpp.s
 
-CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o: CMakeFiles/run_tests.dir/flags.make
-CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp
-CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o -MF CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o.d -o CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp
+CMakeFiles/run_tests.dir/tests/test_notification.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/tests/test_notification.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp
+CMakeFiles/run_tests.dir/tests/test_notification.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/run_tests.dir/tests/test_notification.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/test_notification.cpp.o -MF CMakeFiles/run_tests.dir/tests/test_notification.cpp.o.d -o CMakeFiles/run_tests.dir/tests/test_notification.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp
 
-CMakeFiles/run_tests.dir/tests/test_appointment.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/tests/test_appointment.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp > CMakeFiles/run_tests.dir/tests/test_appointment.cpp.i
+CMakeFiles/run_tests.dir/tests/test_notification.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/tests/test_notification.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp > CMakeFiles/run_tests.dir/tests/test_notification.cpp.i
 
-CMakeFiles/run_tests.dir/tests/test_appointment.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_appointment.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp -o CMakeFiles/run_tests.dir/tests/test_appointment.cpp.s
+CMakeFiles/run_tests.dir/tests/test_notification.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_notification.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp -o CMakeFiles/run_tests.dir/tests/test_notification.cpp.s
+
+CMakeFiles/run_tests.dir/tests/test_patient.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/tests/test_patient.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp
+CMakeFiles/run_tests.dir/tests/test_patient.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/run_tests.dir/tests/test_patient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/test_patient.cpp.o -MF CMakeFiles/run_tests.dir/tests/test_patient.cpp.o.d -o CMakeFiles/run_tests.dir/tests/test_patient.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp
+
+CMakeFiles/run_tests.dir/tests/test_patient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/tests/test_patient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp > CMakeFiles/run_tests.dir/tests/test_patient.cpp.i
+
+CMakeFiles/run_tests.dir/tests/test_patient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_patient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp -o CMakeFiles/run_tests.dir/tests/test_patient.cpp.s
 
 CMakeFiles/run_tests.dir/tests/test_queue.cpp.o: CMakeFiles/run_tests.dir/flags.make
 CMakeFiles/run_tests.dir/tests/test_queue.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_queue.cpp
@@ -167,48 +167,176 @@ CMakeFiles/run_tests.dir/tests/test_register.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_register.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_register.cpp -o CMakeFiles/run_tests.dir/tests/test_register.cpp.s
 
-CMakeFiles/run_tests.dir/tests/test_notification.cpp.o: CMakeFiles/run_tests.dir/flags.make
-CMakeFiles/run_tests.dir/tests/test_notification.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp
-CMakeFiles/run_tests.dir/tests/test_notification.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/run_tests.dir/tests/test_notification.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/tests/test_notification.cpp.o -MF CMakeFiles/run_tests.dir/tests/test_notification.cpp.o.d -o CMakeFiles/run_tests.dir/tests/test_notification.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp
+CMakeFiles/run_tests.dir/models/patient.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/models/patient.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/patient.cpp
+CMakeFiles/run_tests.dir/models/patient.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/run_tests.dir/models/patient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/models/patient.cpp.o -MF CMakeFiles/run_tests.dir/models/patient.cpp.o.d -o CMakeFiles/run_tests.dir/models/patient.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/patient.cpp
 
-CMakeFiles/run_tests.dir/tests/test_notification.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/tests/test_notification.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp > CMakeFiles/run_tests.dir/tests/test_notification.cpp.i
+CMakeFiles/run_tests.dir/models/patient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/models/patient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/patient.cpp > CMakeFiles/run_tests.dir/models/patient.cpp.i
 
-CMakeFiles/run_tests.dir/tests/test_notification.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/tests/test_notification.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp -o CMakeFiles/run_tests.dir/tests/test_notification.cpp.s
+CMakeFiles/run_tests.dir/models/patient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/models/patient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/patient.cpp -o CMakeFiles/run_tests.dir/models/patient.cpp.s
+
+CMakeFiles/run_tests.dir/models/doctor.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/models/doctor.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/doctor.cpp
+CMakeFiles/run_tests.dir/models/doctor.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/run_tests.dir/models/doctor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/models/doctor.cpp.o -MF CMakeFiles/run_tests.dir/models/doctor.cpp.o.d -o CMakeFiles/run_tests.dir/models/doctor.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/doctor.cpp
+
+CMakeFiles/run_tests.dir/models/doctor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/models/doctor.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/doctor.cpp > CMakeFiles/run_tests.dir/models/doctor.cpp.i
+
+CMakeFiles/run_tests.dir/models/doctor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/models/doctor.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/doctor.cpp -o CMakeFiles/run_tests.dir/models/doctor.cpp.s
+
+CMakeFiles/run_tests.dir/models/appointment.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/models/appointment.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/appointment.cpp
+CMakeFiles/run_tests.dir/models/appointment.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/run_tests.dir/models/appointment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/models/appointment.cpp.o -MF CMakeFiles/run_tests.dir/models/appointment.cpp.o.d -o CMakeFiles/run_tests.dir/models/appointment.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/appointment.cpp
+
+CMakeFiles/run_tests.dir/models/appointment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/models/appointment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/appointment.cpp > CMakeFiles/run_tests.dir/models/appointment.cpp.i
+
+CMakeFiles/run_tests.dir/models/appointment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/models/appointment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/appointment.cpp -o CMakeFiles/run_tests.dir/models/appointment.cpp.s
+
+CMakeFiles/run_tests.dir/models/queue.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/models/queue.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/queue.cpp
+CMakeFiles/run_tests.dir/models/queue.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/run_tests.dir/models/queue.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/models/queue.cpp.o -MF CMakeFiles/run_tests.dir/models/queue.cpp.o.d -o CMakeFiles/run_tests.dir/models/queue.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/queue.cpp
+
+CMakeFiles/run_tests.dir/models/queue.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/models/queue.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/queue.cpp > CMakeFiles/run_tests.dir/models/queue.cpp.i
+
+CMakeFiles/run_tests.dir/models/queue.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/models/queue.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/queue.cpp -o CMakeFiles/run_tests.dir/models/queue.cpp.s
+
+CMakeFiles/run_tests.dir/models/notification.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/models/notification.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/notification.cpp
+CMakeFiles/run_tests.dir/models/notification.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/run_tests.dir/models/notification.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/models/notification.cpp.o -MF CMakeFiles/run_tests.dir/models/notification.cpp.o.d -o CMakeFiles/run_tests.dir/models/notification.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/notification.cpp
+
+CMakeFiles/run_tests.dir/models/notification.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/models/notification.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/notification.cpp > CMakeFiles/run_tests.dir/models/notification.cpp.i
+
+CMakeFiles/run_tests.dir/models/notification.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/models/notification.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models/notification.cpp -o CMakeFiles/run_tests.dir/models/notification.cpp.s
+
+CMakeFiles/run_tests.dir/database/db_connection.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/database/db_connection.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/db_connection.cpp
+CMakeFiles/run_tests.dir/database/db_connection.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/run_tests.dir/database/db_connection.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/database/db_connection.cpp.o -MF CMakeFiles/run_tests.dir/database/db_connection.cpp.o.d -o CMakeFiles/run_tests.dir/database/db_connection.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/db_connection.cpp
+
+CMakeFiles/run_tests.dir/database/db_connection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/database/db_connection.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/db_connection.cpp > CMakeFiles/run_tests.dir/database/db_connection.cpp.i
+
+CMakeFiles/run_tests.dir/database/db_connection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/database/db_connection.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/db_connection.cpp -o CMakeFiles/run_tests.dir/database/db_connection.cpp.s
+
+CMakeFiles/run_tests.dir/database/sqlite3.c.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/database/sqlite3.c.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/sqlite3.c
+CMakeFiles/run_tests.dir/database/sqlite3.c.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/run_tests.dir/database/sqlite3.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/run_tests.dir/database/sqlite3.c.o -MF CMakeFiles/run_tests.dir/database/sqlite3.c.o.d -o CMakeFiles/run_tests.dir/database/sqlite3.c.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/sqlite3.c
+
+CMakeFiles/run_tests.dir/database/sqlite3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/run_tests.dir/database/sqlite3.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/sqlite3.c > CMakeFiles/run_tests.dir/database/sqlite3.c.i
+
+CMakeFiles/run_tests.dir/database/sqlite3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/run_tests.dir/database/sqlite3.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database/sqlite3.c -o CMakeFiles/run_tests.dir/database/sqlite3.c.s
+
+CMakeFiles/run_tests.dir/utils/password_utils.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/utils/password_utils.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/password_utils.cpp
+CMakeFiles/run_tests.dir/utils/password_utils.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/run_tests.dir/utils/password_utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/utils/password_utils.cpp.o -MF CMakeFiles/run_tests.dir/utils/password_utils.cpp.o.d -o CMakeFiles/run_tests.dir/utils/password_utils.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/password_utils.cpp
+
+CMakeFiles/run_tests.dir/utils/password_utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/utils/password_utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/password_utils.cpp > CMakeFiles/run_tests.dir/utils/password_utils.cpp.i
+
+CMakeFiles/run_tests.dir/utils/password_utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/utils/password_utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/password_utils.cpp -o CMakeFiles/run_tests.dir/utils/password_utils.cpp.s
+
+CMakeFiles/run_tests.dir/utils/time_utils.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/utils/time_utils.cpp.o: /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/time_utils.cpp
+CMakeFiles/run_tests.dir/utils/time_utils.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/run_tests.dir/utils/time_utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/utils/time_utils.cpp.o -MF CMakeFiles/run_tests.dir/utils/time_utils.cpp.o.d -o CMakeFiles/run_tests.dir/utils/time_utils.cpp.o -c /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/time_utils.cpp
+
+CMakeFiles/run_tests.dir/utils/time_utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/utils/time_utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/time_utils.cpp > CMakeFiles/run_tests.dir/utils/time_utils.cpp.i
+
+CMakeFiles/run_tests.dir/utils/time_utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/utils/time_utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils/time_utils.cpp -o CMakeFiles/run_tests.dir/utils/time_utils.cpp.s
 
 # Object files for target run_tests
 run_tests_OBJECTS = \
-"CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o" \
-"CMakeFiles/run_tests.dir/tests/test_basic.cpp.o" \
-"CMakeFiles/run_tests.dir/tests/test_patient.cpp.o" \
-"CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o" \
 "CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o" \
+"CMakeFiles/run_tests.dir/tests/test_basic.cpp.o" \
+"CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o" \
+"CMakeFiles/run_tests.dir/tests/test_notification.cpp.o" \
+"CMakeFiles/run_tests.dir/tests/test_patient.cpp.o" \
 "CMakeFiles/run_tests.dir/tests/test_queue.cpp.o" \
 "CMakeFiles/run_tests.dir/tests/test_register.cpp.o" \
-"CMakeFiles/run_tests.dir/tests/test_notification.cpp.o"
+"CMakeFiles/run_tests.dir/models/patient.cpp.o" \
+"CMakeFiles/run_tests.dir/models/doctor.cpp.o" \
+"CMakeFiles/run_tests.dir/models/appointment.cpp.o" \
+"CMakeFiles/run_tests.dir/models/queue.cpp.o" \
+"CMakeFiles/run_tests.dir/models/notification.cpp.o" \
+"CMakeFiles/run_tests.dir/database/db_connection.cpp.o" \
+"CMakeFiles/run_tests.dir/database/sqlite3.c.o" \
+"CMakeFiles/run_tests.dir/utils/password_utils.cpp.o" \
+"CMakeFiles/run_tests.dir/utils/time_utils.cpp.o"
 
 # External object files for target run_tests
 run_tests_EXTERNAL_OBJECTS =
 
-run_tests: CMakeFiles/run_tests.dir/tests/gtest_main.cpp.o
-run_tests: CMakeFiles/run_tests.dir/tests/test_basic.cpp.o
-run_tests: CMakeFiles/run_tests.dir/tests/test_patient.cpp.o
-run_tests: CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o
 run_tests: CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o
+run_tests: CMakeFiles/run_tests.dir/tests/test_basic.cpp.o
+run_tests: CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o
+run_tests: CMakeFiles/run_tests.dir/tests/test_notification.cpp.o
+run_tests: CMakeFiles/run_tests.dir/tests/test_patient.cpp.o
 run_tests: CMakeFiles/run_tests.dir/tests/test_queue.cpp.o
 run_tests: CMakeFiles/run_tests.dir/tests/test_register.cpp.o
-run_tests: CMakeFiles/run_tests.dir/tests/test_notification.cpp.o
+run_tests: CMakeFiles/run_tests.dir/models/patient.cpp.o
+run_tests: CMakeFiles/run_tests.dir/models/doctor.cpp.o
+run_tests: CMakeFiles/run_tests.dir/models/appointment.cpp.o
+run_tests: CMakeFiles/run_tests.dir/models/queue.cpp.o
+run_tests: CMakeFiles/run_tests.dir/models/notification.cpp.o
+run_tests: CMakeFiles/run_tests.dir/database/db_connection.cpp.o
+run_tests: CMakeFiles/run_tests.dir/database/sqlite3.c.o
+run_tests: CMakeFiles/run_tests.dir/utils/password_utils.cpp.o
+run_tests: CMakeFiles/run_tests.dir/utils/time_utils.cpp.o
 run_tests: CMakeFiles/run_tests.dir/build.make
 run_tests: lib/libgtest.a
 run_tests: lib/libgtest_main.a
 run_tests: lib/libgtest.a
 run_tests: CMakeFiles/run_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable run_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable run_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/run_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
