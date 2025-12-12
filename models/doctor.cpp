@@ -11,7 +11,6 @@ Doctor::Doctor(int i, std::string n, std::string s) {
     schedule = "";
 }
 
-// NEW CONSTRUCTOR
 Doctor::Doctor(std::string n, std::string s) {
     id = 0;
     name = n;
@@ -60,6 +59,32 @@ bool Doctor::setSchedule(const std::string& sched, const std::string& db) {
     std::ostringstream q;
 
     q << "UPDATE doctors SET schedule='" << sched << "' WHERE id=" << id;
+
+    return conn.execute(q.str());
+}
+
+// NEW — REQUIRED BY TESTS
+bool Doctor::update(const std::string& db) {
+    if (id == 0) return false;
+
+    DBConnection conn(db);
+    std::ostringstream q;
+
+    q << "UPDATE doctors SET name='" << name
+      << "', specialty='" << specialty
+      << "' WHERE id=" << id;
+
+    return conn.execute(q.str());
+}
+
+// NEW — REQUIRED BY TESTS
+bool Doctor::remove(const std::string& db) {
+    if (id == 0) return false;
+
+    DBConnection conn(db);
+    std::ostringstream q;
+
+    q << "DELETE FROM doctors WHERE id=" << id;
 
     return conn.execute(q.str());
 }

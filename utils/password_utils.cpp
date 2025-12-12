@@ -2,7 +2,7 @@
 #include <string>
 #include <sstream>
 
-// * ملاحظة: مش تشفير قوي، لكن يكفي لمشروع الجامعة (Hash بسيط) *
+// Hash بسيط يكفي لمشروع الجامعة
 static std::string simpleHash(const std::string& input) {
     unsigned int h = 0;
     for (char c : input)
@@ -20,4 +20,4 @@ bool verifyPassword(const std::string& pass, const std::string& hashed) {
     return simpleHash(pass) == hashed;
 }
 
-}
+} // namespace PasswordUtils

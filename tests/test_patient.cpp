@@ -1,68 +1,29 @@
-#include <iostream>
+#include <gtest/gtest.h>
 #include "../models/patient.h"
 #include "../database/db_connection.h"
 #include "../utils/password_utils.h"
 #include "../utils/time_utils.h"
 
-void test_patient_registration() {
-    std::cout << "[TEST] Patient Registration...\n";
-
-    // إضافة مريض جديد
-    Patient p("TestName", "0912345678", "test_coverage@example.com", "mypassword");
-
+TEST(PatientTests, Registration) {
+    Patient p("TestName", "0912345678", "coverage_test@example.com", "mypassword");
     bool ok = p.registerPatient("clinic.db");
-    if (ok)
-        std::cout << "PASS: Patient registered.\n";
-    else
-        std::cout << "FAIL: Registration failed (email exists?)\n";
+    EXPECT_TRUE(ok);
 }
 
-void test_patient_load() {
-    std::cout << "[TEST] Load Patient...\n";
-
-    Patient p = Patient::loadById(1);
-
-    if (p.id == 1)
-        std::cout << "PASS: Loaded patient.\n";
-    else
-        std::cout << "FAIL: Could not load patient.\n";
+TEST(PatientTests, Load) {
+    Patient p = Patient::loadById(1, "clinic.db");
+    EXPECT_EQ(p.id, 1);
 }
 
-void test_patient_update() {
-    std::cout << "[TEST] Update Patient...\n";
-
-    Patient p = Patient::loadById(1);
-    p.name = "NewName";
-
+TEST(PatientTests, Update) {
+    Patient p = Patient::loadById(1, "clinic.db");
+    p.name = "UpdatedName";
     bool ok = p.update("clinic.db");
-
-    if (ok)
-        std::cout << "PASS: Updated.\n";
-    else
-        std::cout << "FAIL: Update failed.\n";
+    EXPECT_TRUE(ok);
 }
 
-void test_patient_delete() {
-    std::cout << "[TEST] Delete Patient...\n";
-
-    Patient p = Patient::loadById(1);
-
+TEST(PatientTests, Delete) {
+    Patient p = Patient::loadById(1, "clinic.db");
     bool ok = p.remove("clinic.db");
-
-    if (ok)
-        std::cout << "PASS: Deleted.\n";
-    else
-        std::cout << "FAIL: Delete failed.\n";
-}
-
-int main() {
-    std::cout << "===== Running Patient Tests =====\n";
-
-    test_patient_registration();
-    test_patient_load();
-    test_patient_update();
-    test_patient_delete();
-
-    std::cout << "===== Patient Tests Completed =====\n";
-    return 0;
+    EXPECT_TRUE(ok);
 }
