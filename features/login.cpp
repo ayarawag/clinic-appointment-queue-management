@@ -18,7 +18,7 @@ bool loginUser() {
 
     // الاستعلام الصحيح
     std::string q = 
-        "SELECT password FROM patients WHERE email='" + email + "' LIMIT 1;";
+        "SELECT password_hash FROM patients WHERE email='" + email + "' LIMIT 1;";
 
     // قراءة نتيجة الاستعلام
     db.query(q,

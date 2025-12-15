@@ -6,10 +6,10 @@ DROP TABLE IF EXISTS receipts;
 
 CREATE TABLE patients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    phone TEXT,
-    email TEXT UNIQUE,
-    password_hash TEXT,
+    name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
     createdAt INTEGER
 );
 
