@@ -272,10 +272,7 @@ CMakeFiles/run_tests.dir/tests/test_payment.cpp.o: \
  /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../models/doctor.h \
  /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../database/db_connection.h \
  /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../database/sqlite3.h \
- /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../features/payment.cpp \
- /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../features/../models/appointment.h \
- /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../features/../database/db_connection.h \
- /usr/include/c++/13/chrono /usr/include/c++/13/fstream \
+ /usr/include/c++/13/fstream \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc

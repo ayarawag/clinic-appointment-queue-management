@@ -24,13 +24,13 @@ public:
     DBConnection(const DBConnection&) = delete;
     DBConnection& operator=(const DBConnection&) = delete;
 
-    // الدوال العامة تبقى كما هي، لكنها الآن تُستدعى عبر المؤشر
+    // الدوال العامة
     bool execute(const std::string& query);
     bool query(const std::string& query,
                int (*callback)(void*, int, char**, char**),
                void* data);
     
-    // [إضافة اختيارية] دالة لحذف النسخة عند نهاية البرنامج (للتنظيف)
+    // [إضافة 1] دالة ثابتة لحذف وإغلاق الاتصال يدوياً (الحل لمشاكل الاختبارات)
     static void destroyInstance();
 };
 

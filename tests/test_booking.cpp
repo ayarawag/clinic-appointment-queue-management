@@ -32,7 +32,7 @@ inline void initialize_test_db(const std::string& db_name) {
 }
 
 // دالة مساعدة لحساب عدد المواعيد في قاعدة البيانات (تحديث Singleton و Try/Catch)
-int getAppointmentCount(const std::string& db_name) {
+inline int getAppointmentCount(const std::string& db_name) {
     int count = 0;
     
     try {

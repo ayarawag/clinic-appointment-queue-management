@@ -1,67 +1,108 @@
 #include "db_connection.h"
 #include <iostream>
+#include <stdexcept> // لإضافة معالجة الاستثناءات
 
-// [إضافة 1] تهيئة المؤشر الثابت (يجب أن يكون nullptr خارج الكلاس)
+// [تعديل Singleton] تهيئة المؤشر الثابت (يجب أن يكون nullptr خارج الكلاس)
 DBConnection* DBConnection::instance = nullptr; 
 
 
-// [تعديل] أصبح المُنشئ الآن خاصاً (private)
+// [تعديل Singleton] أصبح المُنشئ الآن خاصاً (private)
 DBConnection::DBConnection(const std::string& filename) {
     if (sqlite3_open(filename.c_str(), &db) != SQLITE_OK) {
-        std::cerr << "Failed to open DB: " << sqlite3_errmsg(db) << std::endl;
+        std::cerr << "CRITICAL ERROR: Failed to open DB: " << sqlite3_errmsg(db) << std::endl;
         db = nullptr;
+        // هنا يجب رمي استثناء إذا فشل الاتصال بشكل حرج
+        throw std::runtime_error("Database connection failed.");
     }
 }
 
-// [تعديل] أصبح الهادم الآن خاصاً (private)
+// [تعديل Singleton] أصبح الهادم الآن خاصاً (private)
 DBConnection::~DBConnection() {
-    if (db) sqlite3_close(db);
+    if (db) {
+        sqlite3_close(db);
+        std::cout << "Database connection closed.\n"; // رسالة اختيارية
+    }
 }
 
-// [إضافة 2] تنفيذ دالة الوصول (getInstance)
+// [تعديل Singleton] تنفيذ دالة الوصول (getInstance)
 DBConnection* DBConnection::getInstance(const std::string& filename) {
     // التحقق مما إذا كانت النسخة موجودة بالفعل
     if (instance == nullptr) {
-        // إذا لم تكن موجودة، قم بإنشاء نسخة جديدة
-        // يتم استخدام المُنشئ الخاص هنا
-        instance = new DBConnection(filename);
+        // [Try/Catch] يجب تغليف الإنشاء لاحتمالية فشل فتح الملف
+        try {
+            // إذا لم تكن موجودة، قم بإنشاء نسخة جديدة
+            instance = new DBConnection(filename);
+        } catch (const std::exception& e) {
+            std::cerr << "Failed to create DB Singleton: " << e.what() << std::endl;
+            // يجب أن نضمن أن المؤشر يبقى nullptr إذا فشل الإنشاء
+            instance = nullptr;
+        }
     }
-    // إرجاع النسخة الموجودة (أو التي تم إنشاؤها للتو)
+    // إرجاع النسخة الموجودة
     return instance;
 }
 
-// [إضافة 3 اختيارية] تنفيذ دالة تدمير النسخة للتنظيف
+// [تعديل Singleton] تنفيذ دالة تدمير النسخة (الحل لمشكلة الاختبارات)
 void DBConnection::destroyInstance() {
     if (instance != nullptr) {
-        delete instance; // استدعاء الهادم الخاص (~DBConnection)
-        instance = nullptr;
+        // Note: الهادم (~DBConnection) سيقوم بإغلاق sqlite3_close(db)
+        delete instance; 
+        instance = nullptr; // إعادة تعيين المؤشر إلى nullptr
+        std::cout << "Singleton DB instance destroyed.\n"; // رسالة اختيارية
     }
 }
 
 
-// تبقى الدالتان execute و query كما هما:
+// [تعديل Try/Catch] تنفيذ دالة execute
 bool DBConnection::execute(const std::string& query) {
-    char* errMsg = nullptr;
-    int rc = sqlite3_exec(db, query.c_str(), nullptr, nullptr, &errMsg);
-    // ... باقي الكود ...
-    if (rc != SQLITE_OK) {
-        std::cerr << "DB Error: " << (errMsg ? errMsg : "Unknown") << std::endl;
-        sqlite3_free(errMsg);
+    // [الحماية] تحقق من أن الاتصال مفتوح
+    if (!db) {
+        std::cerr << "DB Error: Cannot execute query. Connection is closed or failed to open.\n";
         return false;
     }
-    return true;
+    
+    try {
+        char* errMsg = nullptr;
+        int rc = sqlite3_exec(db, query.c_str(), nullptr, nullptr, &errMsg);
+        
+        if (rc != SQLITE_OK) {
+            std::cerr << "DB Error: " << (errMsg ? errMsg : "Unknown") << std::endl;
+            sqlite3_free(errMsg);
+            return false;
+        }
+        return true;
+        
+    } catch (const std::exception& e) {
+        // التقاط أي استثناء غير متوقع
+        std::cerr << "EXCEPTION CAUGHT (DB Execute): " << e.what() << std::endl;
+        return false;
+    }
 }
 
+// [تعديل Try/Catch] تنفيذ دالة query
 bool DBConnection::query(const std::string& query,
                          int (*callback)(void*, int, char**, char**),
                          void* data) {
-    char* errMsg = nullptr;
-    int rc = sqlite3_exec(db, query.c_str(), callback, data, &errMsg);
-    // ... باقي الكود ...
-    if (rc != SQLITE_OK) {
-        std::cerr << "DB Query Error: " << (errMsg ? errMsg : "Unknown") << std::endl;
-        sqlite3_free(errMsg);
+    // [الحماية] تحقق من أن الاتصال مفتوح
+    if (!db) {
+        std::cerr << "DB Query Error: Cannot execute query. Connection is closed or failed to open.\n";
         return false;
     }
-    return true;
+                         
+    try {
+        char* errMsg = nullptr;
+        int rc = sqlite3_exec(db, query.c_str(), callback, data, &errMsg);
+        
+        if (rc != SQLITE_OK) {
+            std::cerr << "DB Query Error: " << (errMsg ? errMsg : "Unknown") << std::endl;
+            sqlite3_free(errMsg);
+            return false;
+        }
+        return true;
+        
+    } catch (const std::exception& e) {
+        // التقاط أي استثناء غير متوقع
+        std::cerr << "EXCEPTION CAUGHT (DB Query): " << e.what() << std::endl;
+        return false;
+    }
 }

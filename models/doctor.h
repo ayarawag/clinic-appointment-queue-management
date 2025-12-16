@@ -12,14 +12,13 @@ public:
 
     Doctor();
     Doctor(int id, std::string name, std::string spec);
-
-    // NEW:
     Doctor(std::string name, std::string spec);
 
+    // الدوال الأساسية
     bool registerDoctor(const std::string& db = "clinic.db");
     bool update(const std::string& db = "clinic.db");
     bool remove(const std::string& db = "clinic.db");
-    bool setSchedule(const std::string& sched, const std::string& db = "clinic.db"); // NEW
+    bool setSchedule(const std::string& sched, const std::string& db = "clinic.db");
 
     static Doctor loadById(int id, const std::string& db = "clinic.db");
 };

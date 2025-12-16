@@ -1,15 +1,18 @@
 #include <gtest/gtest.h>
 #include "../models/doctor.h"
-#include "../database/db_connection.h" // كلاس DBConnection أصبح Singleton
+#include "../database/db_connection.h" 
 #include <fstream>
 #include <sstream>
-#include <iostream> // للتأكد من وجود رسائل الخطأ
+#include <iostream> 
 
 // اسم قاعدة البيانات التي سيتم استخدامها في الاختبارات فقط
 const std::string TEST_DB = "test_clinic.db";
 
 // دالة مساعدة لتهيئة قاعدة البيانات (مع تحديث Singleton)
 inline void initialize_test_db(const std::string& db_name) {
+    // [الحل]: تدمير النسخة قبل محاولة حذف الملف
+    DBConnection::destroyInstance(); 
+    
     // 1. حذف الملف القديم لضمان بداية نظيفة
     std::remove(db_name.c_str()); 
     
@@ -21,15 +24,9 @@ inline void initialize_test_db(const std::string& db_name) {
         std::string sql_script = buffer.str();
 
         // 2. استخدام Singleton للحصول على اتصال وتنفيذ السكريبت
-        // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
         DBConnection* db = DBConnection::getInstance(db_name); 
-        
-        // [تعديل Singleton] استخدام المؤشر -> لتنفيذ الدالة
         db->execute(sql_script);
 
-        // [تعديل هام] هنا يجب أن نفكر في إعادة ضبط Singleton بين الاختبارات
-        // إذا كان لديك دالة destroyInstance()، استدعيها هنا:
-        // DBConnection::destroyInstance(); 
     } else {
         std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
     }
@@ -44,16 +41,14 @@ protected:
         initialize_test_db(TEST_DB); 
     }
     
-    // [إضافة] هذا الجزء مهم جداً عند استخدام Singleton
     void TearDown() override {
-        // إذا كان لديك دالة لتدمير نسخة Singleton في DBConnection، يجب استدعاؤها هنا
-        // DBConnection::destroyInstance();
-        // هذا يضمن أن كل اختبار يبدأ بنسخة اتصال جديدة (إذا كانت destroyInstance تنظف الاتصال)
+        // [الحل]: تدمير نسخة Singleton بعد كل اختبار
+        DBConnection::destroyInstance();
     }
 };
 
 // --------------------------------------------------------
-// الاختبارات (تبقى كما هي، لأن التعديل كان في الكلاسات الأساسية)
+// الاختبارات 
 // --------------------------------------------------------
 
 TEST_F(DoctorTests, RegistrationAndLoad) {

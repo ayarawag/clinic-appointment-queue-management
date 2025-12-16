@@ -1,5 +1,5 @@
 #include "patient.h"
-#include "../database/db_connection.h" // كلاس DBConnection أصبح Singleton
+#include "../database/db_connection.h" 
 #include "../utils/password_utils.h"
 #include "../utils/time_utils.h"
 #include <sstream>
@@ -9,7 +9,7 @@
 #include <stdexcept> 
 
 using std::stoi;
-using std::string; // تسهيل استخدام std::string
+using std::string; 
 
 Patient::Patient() : id(0) {}
 
@@ -28,10 +28,8 @@ bool Patient::emailExists(string email, const string& dbfile) {
     bool found = false;
 
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(dbfile);
 
-        // [Singleton] استخدام المؤشر ->
         conn->query(
             "SELECT id FROM patients WHERE email='" + email + "' LIMIT 1;",
             [](void* u, int c, char** v, char**) {
@@ -43,7 +41,6 @@ bool Patient::emailExists(string email, const string& dbfile) {
         return found;
         
     } catch (const std::exception& e) {
-        // [Try/Catch] معالجة أي استثناء (نعتبر أنه لم يتم العثور عليه في حالة فشل الاتصال)
         std::cerr << "EXCEPTION CAUGHT (EmailExists): DB query failed: " << e.what() << std::endl;
         return false; 
     }
@@ -56,16 +53,13 @@ Patient Patient::loadById(int pid, const string& db) {
     Patient p;
     
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
 
-        // [Singleton] استخدام المؤشر ->
         conn->query(
             "SELECT id,name,phone,email,password_hash FROM patients WHERE id=" + std::to_string(pid),
             [](void* u, int c, char** v, char**) {
                 Patient* p = (Patient*)u;
 
-                // يجب أن تكون هذه العمليات محمية بـ try/catch في كود إنتاج (تم نقلها من register)
                 if (v[0]) p->id = stoi(v[0]);
                 if (v[1]) p->name = v[1];
                 if (v[2]) p->phone = v[2];
@@ -79,7 +73,6 @@ Patient Patient::loadById(int pid, const string& db) {
         return p;
 
     } catch (const std::exception& e) {
-        // [Try/Catch] في حالة فشل التحميل، يتم إرجاع كائن Patient فارغ (id=0)
         std::cerr << "EXCEPTION CAUGHT (LoadById): DB query failed: " << e.what() << std::endl;
         return Patient();
     }
@@ -90,7 +83,7 @@ Patient Patient::loadById(int pid, const string& db) {
 // ==========================================================
 bool Patient::registerPatient(const string& db) {
     // 1. التحقق من البيانات (Validation)
-    if (name.empty() || phone.empty() || email.empty() || passwordHash.empty()) {
+    if (name.empty() || phone.empty()||  email.empty() || passwordHash.empty()) {
         std::cerr << "ERROR: Registration failed due to missing required data (Validation).\n";
         return false;
     }
@@ -99,7 +92,6 @@ bool Patient::registerPatient(const string& db) {
     if (emailExists(email, db)) return false;
 
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
         std::ostringstream q;
 
@@ -110,12 +102,10 @@ bool Patient::registerPatient(const string& db) {
           << passwordHash << "',"
           << TimeUtils::nowEpochSeconds() << ");";
 
-        // [Singleton] استخدام المؤشر ->
         bool success = conn->execute(q.str());
         
         // 3. استرجاع الـ ID الذي تم إنشاؤه حديثاً
         if (success) {
-            // [Singleton] استخدام المؤشر ->
             conn->query(
                 "SELECT last_insert_rowid();",
                 [](void* data, int argc, char** argv, char** col_names) -> int {
@@ -135,7 +125,6 @@ bool Patient::registerPatient(const string& db) {
         return success;
 
     } catch (const std::exception& e) {
-        // [Try/Catch] معالجة أي استثناء
         std::cerr << "EXCEPTION CAUGHT (Register): DB operation failed: " << e.what() << std::endl;
         return false;
     }
@@ -148,7 +137,6 @@ bool Patient::update(const string& db) {
     if (id == 0) return false;
 
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
         std::ostringstream q;
 
@@ -157,11 +145,9 @@ bool Patient::update(const string& db) {
           << "', email='" << email
           << "' WHERE id=" << id;
 
-        // [Singleton] استخدام المؤشر ->
         return conn->execute(q.str());
         
     } catch (const std::exception& e) {
-        // [Try/Catch]
         std::cerr << "EXCEPTION CAUGHT (Update): DB operation failed: " << e.what() << std::endl;
         return false;
     }
@@ -174,14 +160,11 @@ bool Patient::remove(const string& db) {
     if (id == 0) return false;
 
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
         
-        // [Singleton] استخدام المؤشر ->
         return conn->execute("DELETE FROM patients WHERE id=" + std::to_string(id));
         
     } catch (const std::exception& e) {
-        // [Try/Catch]
         std::cerr << "EXCEPTION CAUGHT (Remove): DB operation failed: " << e.what() << std::endl;
         return false;
     }

@@ -7,14 +7,17 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-#include <stdexcept> // لإضافة معالجة الاستثناءات
-#include <iostream>  // لـ std::cerr
+#include <stdexcept> 
+#include <iostream>  
 
 // اسم قاعدة البيانات التي سيتم استخدامها في الاختبارات فقط
 const std::string TEST_DB = "test_clinic.db";
 
 // دالة مساعدة لتهيئة قاعدة البيانات (مع تحديث Singleton)
 inline void initialize_test_db(const std::string& db_name) {
+    // [الحل]: تدمير النسخة قبل محاولة حذف الملف
+    DBConnection::destroyInstance(); 
+    
     std::remove(db_name.c_str()); 
     
     std::ifstream sql_file("../database/database.sql");
@@ -24,13 +27,9 @@ inline void initialize_test_db(const std::string& db_name) {
         buffer << sql_file.rdbuf();
         std::string sql_script = buffer.str();
 
-        // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
         DBConnection* db = DBConnection::getInstance(db_name); 
-        
-        // [تعديل Singleton] استخدام المؤشر -> لتنفيذ الدالة
         db->execute(sql_script);
         
-        // يمكننا تدمير النسخة هنا إذا أردنا (DBConnection::destroyInstance();)
     } else {
         std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
     }
@@ -38,29 +37,30 @@ inline void initialize_test_db(const std::string& db_name) {
 
 // دالة مساعدة لتحميل عدد الإشعارات من قاعدة البيانات (مع تحديث Singleton)
 int getNotificationCount(const std::string& db_name) {
+    // [الحل]: تدمير النسخة القديمة قبل فتح اتصال جديد للقراءة
+    DBConnection::destroyInstance(); 
     
-    // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
     DBConnection* conn = DBConnection::getInstance(db_name); 
     int count = 0;
     
-    // [تعديل Singleton] استخدام المؤشر -> للاستعلام
     conn->query(
         "SELECT COUNT(*) FROM notifications;",
         [](void* data, int argc, char** argv, char** col_names) -> int {
             int* count_ptr = static_cast<int*>(data);
             if (argv[0]) {
-                // يجب أن تكون هذه العملية محمية بـ try/catch في كود الإنتاج
                 try {
                     *count_ptr = std::stoi(argv[0]);
                 } catch (const std::exception& e) {
-                    // إذا فشل التحويل
+                    std::cerr << "Error in getNotificationCount callback: " << e.what() << std::endl;
                 }
             }
             return 0;
         },
         &count
     );
-    // [تعديل Singleton] قد تحتاج هنا إلى DBConnection::destroyInstance();
+    // [الحل]: يجب تدمير النسخة بعد القراءة أيضاً
+    DBConnection::destroyInstance();
+    
     return count;
 }
 
@@ -69,33 +69,28 @@ int getNotificationCount(const std::string& db_name) {
 class NotificationTests : public ::testing::Test {
 protected:
     void SetUp() override {
+        // يتم استدعاء initialize_test_db التي تحتوي على destroyInstance
         initialize_test_db(TEST_DB); 
         
-        // 1. تسجيل مريض 
-        // يجب التأكد أن registerPatient تستخدم Singleton
+        // تسجيل المستخدمين والموعد
         Patient("NotifyPat", "100", "p@notify.com", "pass").registerPatient(TEST_DB); // ID 1
-        
-        // 2. تسجيل طبيب 
-        // يجب التأكد أن registerDoctor تستخدم Singleton
         Doctor("Dr. Notify", "Generalist").registerDoctor(TEST_DB); // ID 1
         
-        // 3. موعد للاختبار 
         Appointment a_future;
         a_future.patientId = 1;
         a_future.doctorId = 1;
         a_future.dateTime = "2025-12-17 10:00:00"; 
-        // يجب التأكد أن book تستخدم Singleton
         a_future.book(TEST_DB); 
     }
     
     void TearDown() override {
-        // إذا كان لديك دالة لتدمير نسخة Singleton في DBConnection، يجب استدعاؤها هنا
-        // DBConnection::destroyInstance();
+        // [الحل]: تدمير نسخة Singleton بعد كل اختبار لضمان بداية نظيفة للاختبار التالي
+        DBConnection::destroyInstance();
     }
 };
 
 // --------------------------------------------------------
-// الاختبارات (تبقى كما هي)
+// الاختبارات 
 // --------------------------------------------------------
 
 TEST_F(NotificationTests, ConstructorAndInitialState) {

@@ -1,5 +1,5 @@
 #include "appointment.h"
-#include "../database/db_connection.h" // يجب أن يكون هذا الكلاس الآن Singleton
+#include "../database/db_connection.h" 
 #include <sstream>
 #include <string>
 #include <stdexcept> 
@@ -7,7 +7,7 @@
 
 // المُنشئات والهادمات
 Appointment::Appointment()
-    : id(0), patientId(0), doctorId(0), dateTime(""), paid(0) {}
+    : id(0), patientId(0), doctorId(0), dateTime(""), status(""), paid(0) {}
 
 Appointment::Appointment(int pid, int did, std::string dt)
 {
@@ -15,6 +15,7 @@ Appointment::Appointment(int pid, int did, std::string dt)
     patientId = pid;
     doctorId = did;
     dateTime = dt;
+    status = "Booked"; // تعيين الحالة الافتراضية عند الإنشاء
     paid = 0;
 }
 
@@ -30,20 +31,17 @@ bool Appointment::book(const std::string& db)
     }
 
     try {
-        // [Singleton] استخدام getInstance للحصول على نسخة الاتصال الوحيدة
         DBConnection* conn = DBConnection::getInstance(db);
         std::ostringstream q;
 
-        q << "INSERT INTO appointments(patientId, doctorId, dateTime, paid) VALUES("
+        q << "INSERT INTO appointments(patientId, doctorId, dateTime, status, paid) VALUES("
           << patientId << "," << doctorId << ",'"
-          << dateTime << "',0);";
+          << dateTime << "', 'Booked', 0);"; // [تعديل]: إضافة status
 
-        // [Singleton] استخدام المؤشر -> لتنفيذ الاستعلام
         bool success = conn->execute(q.str()); 
 
         if (success) {
-            // استرجاع الـ ID الأخير الذي تم إدخاله
-            conn->query( // [Singleton] استخدام المؤشر ->
+            conn->query( 
                 "SELECT last_insert_rowid();",
                 [](void* data, int argc, char** argv, char** col_names) -> int {
                     if (argv[0]) {
@@ -62,31 +60,32 @@ bool Appointment::book(const std::string& db)
         return success;
 
     } catch (const std::exception& e) {
-        // [Try/Catch] معالجة أي استثناء (مثل فشل الاتصال)
         std::cerr << "EXCEPTION CAUGHT (Book): DB operation failed: " << e.what() << std::endl;
         return false;
     }
 }
 
 // ==========================================================
-// 2. الدالة cancel: تطبيق Singleton و Try/Catch
+// 2. الدالة cancel: تحديث status بدلاً من الحذف (الحل للاختبارات)
 // ==========================================================
 bool Appointment::cancel(const std::string& db)
 {
     if (id == 0) return false;
 
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
         std::ostringstream q;
 
-        q << "DELETE FROM appointments WHERE id=" << id;
+        q << "UPDATE appointments SET status='Cancelled' WHERE id=" << id;
         
-        // [Singleton] استخدام المؤشر ->
-        return conn->execute(q.str()); 
+        bool ok = conn->execute(q.str()); 
+        
+        if (ok) {
+            this->status = "Cancelled"; // تحديث الكائن محلياً
+        }
+        return ok; 
 
     } catch (const std::exception& e) {
-        // [Try/Catch]
         std::cerr << "EXCEPTION CAUGHT (Cancel): DB operation failed: " << e.what() << std::endl;
         return false;
     }
@@ -100,20 +99,17 @@ bool Appointment::setPaid(bool paidValue, const std::string& db)
     if (id == 0) return false;
 
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
         std::ostringstream q;
 
         q << "UPDATE appointments SET paid=" << (paidValue ? 1 : 0)
           << " WHERE id=" << id;
 
-        // [Singleton] استخدام المؤشر ->
         bool ok = conn->execute(q.str());
         if (ok) paid = paidValue ? 1 : 0;
         return ok;
 
     } catch (const std::exception& e) {
-        // [Try/Catch]
         std::cerr << "EXCEPTION CAUGHT (SetPaid): DB operation failed: " << e.what() << std::endl;
         return false;
     }
@@ -127,21 +123,17 @@ bool Appointment::reschedule(const std::string& newDateTime, const std::string& 
     if (id == 0) return false;
 
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
         std::ostringstream q;
-
         q << "UPDATE appointments SET dateTime='" << newDateTime
           << "' WHERE id=" << id;
 
-        // [Singleton] استخدام المؤشر ->
         bool ok = conn->execute(q.str());
         if (ok) dateTime = newDateTime;
 
         return ok;
 
     } catch (const std::exception& e) {
-        // [Try/Catch]
         std::cerr << "EXCEPTION CAUGHT (Reschedule): DB operation failed: " << e.what() << std::endl;
         return false;
     }
@@ -155,14 +147,13 @@ Appointment Appointment::loadById(int aid, const std::string& db)
     Appointment a;
     
     try {
-        // [Singleton] استخدام getInstance
         DBConnection* conn = DBConnection::getInstance(db);
 
+        // [تعديل الاستعلام]: إضافة status
         std::string q =
-            "SELECT id, patientId, doctorId, dateTime, paid "
+            "SELECT id, patientId, doctorId, dateTime, status, paid " 
             "FROM appointments WHERE id=" + std::to_string(aid) + " LIMIT 1;";
 
-        // [Singleton] استخدام المؤشر ->
         conn->query(
            q,
             [](void* out, int, char** vals, char**) -> int {
@@ -171,7 +162,8 @@ Appointment Appointment::loadById(int aid, const std::string& db)
                 if (vals[1]) a->patientId = std::stoi(vals[1]);
                 if (vals[2]) a->doctorId  = std::stoi(vals[2]);
                 if (vals[3]) a->dateTime  = vals[3];
-                if (vals[4]) a->paid      = std::stoi(vals[4]);
+                if (vals[4]) a->status    = vals[4]; // <-- تعبئة status
+                if (vals[5]) a->paid      = std::stoi(vals[5]);
                 return 0;
             },
             &a
@@ -180,7 +172,6 @@ Appointment Appointment::loadById(int aid, const std::string& db)
         return a;
 
     } catch (const std::exception& e) {
-        // [Try/Catch] في حالة فشل التحميل، يتم إرجاع كائن Appointment فارغ (id=0)
         std::cerr << "EXCEPTION CAUGHT (LoadById): DB query failed: " << e.what() << std::endl;
         return Appointment(); 
     }
