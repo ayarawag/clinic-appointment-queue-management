@@ -740,6 +740,30 @@ tests/test_doctor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_doctor.cpp.s
 .PHONY : tests/test_doctor.cpp.s
 
+tests/test_login.o: tests/test_login.cpp.o
+.PHONY : tests/test_login.o
+
+# target to build an object file
+tests/test_login.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_login.cpp.o
+.PHONY : tests/test_login.cpp.o
+
+tests/test_login.i: tests/test_login.cpp.i
+.PHONY : tests/test_login.i
+
+# target to preprocess a source file
+tests/test_login.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_login.cpp.i
+.PHONY : tests/test_login.cpp.i
+
+tests/test_login.s: tests/test_login.cpp.s
+.PHONY : tests/test_login.s
+
+# target to generate assembly for a file
+tests/test_login.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_login.cpp.s
+.PHONY : tests/test_login.cpp.s
+
 tests/test_notification.o: tests/test_notification.cpp.o
 .PHONY : tests/test_notification.o
 
@@ -968,6 +992,9 @@ help:
 	@echo "... tests/test_doctor.o"
 	@echo "... tests/test_doctor.i"
 	@echo "... tests/test_doctor.s"
+	@echo "... tests/test_login.o"
+	@echo "... tests/test_login.i"
+	@echo "... tests/test_login.s"
 	@echo "... tests/test_notification.o"
 	@echo "... tests/test_notification.i"
 	@echo "... tests/test_notification.s"

@@ -5,11 +5,11 @@
 
 class Notification {
 public:
-    int appointmentId;
+    int patientId;
     std::string message;
 
     Notification();
-    Notification(int aid, std::string msg);
+    Notification(int pid, std::string msg);
 
     bool sendNotification(const std::string& db = "clinic.db");
     static void runReminders(const std::string& db = "clinic.db");

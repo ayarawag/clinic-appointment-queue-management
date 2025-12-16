@@ -3,10 +3,10 @@
 #include <iostream>
 #include <sstream>
 
-Notification::Notification() : appointmentId(0), message("") {}
+Notification::Notification() : patientId(0), message("") {}
 
 Notification::Notification(int aid, std::string msg) {
-    appointmentId = aid;
+    patientId = aid;
     message = msg;
 }
 
@@ -14,8 +14,8 @@ bool Notification::sendNotification(const std::string& db) {
     DBConnection conn(db);
 
     std::ostringstream q;
-    q << "INSERT INTO notifications(appointmentId, message) VALUES("
-      << appointmentId << ",'" << message << "');";
+    q << "INSERT INTO notifications(patientId, message) VALUES("
+      << patientId << ",'" << message << "');";
 
     return conn.execute(q.str());
 }

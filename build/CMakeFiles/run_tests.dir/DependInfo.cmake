@@ -18,6 +18,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_appointment.cpp" "CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_appointment.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_basic.cpp" "CMakeFiles/run_tests.dir/tests/test_basic.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_basic.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_doctor.cpp" "CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o.d"
+  "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_login.cpp" "CMakeFiles/run_tests.dir/tests/test_login.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_login.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_notification.cpp" "CMakeFiles/run_tests.dir/tests/test_notification.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_notification.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_patient.cpp" "CMakeFiles/run_tests.dir/tests/test_patient.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_patient.cpp.o.d"
   "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/test_queue.cpp" "CMakeFiles/run_tests.dir/tests/test_queue.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_queue.cpp.o.d"

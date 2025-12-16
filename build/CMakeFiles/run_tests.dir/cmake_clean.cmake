@@ -19,6 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/run_tests.dir/tests/test_basic.cpp.o.d"
   "CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o"
   "CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o.d"
+  "CMakeFiles/run_tests.dir/tests/test_login.cpp.o"
+  "CMakeFiles/run_tests.dir/tests/test_login.cpp.o.d"
   "CMakeFiles/run_tests.dir/tests/test_notification.cpp.o"
   "CMakeFiles/run_tests.dir/tests/test_notification.cpp.o.d"
   "CMakeFiles/run_tests.dir/tests/test_patient.cpp.o"

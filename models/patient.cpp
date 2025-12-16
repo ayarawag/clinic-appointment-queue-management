@@ -5,6 +5,8 @@
 #include <sstream>
 #include <string>
 #include <cstdlib>
+#include <iostream> 
+#include <stdexcept> // لإضافة std::stoi
 
 using std::stoi;
 
@@ -58,6 +60,13 @@ Patient Patient::loadById(int pid, const std::string& db) {
 }
 
 bool Patient::registerPatient(const std::string& db) {
+    // 1. التحقق من البيانات (Validation)
+    if (name.empty() || phone.empty() || email.empty() || passwordHash.empty()) {
+        std::cerr << "ERROR: Registration failed due to missing required data (Validation).\n";
+        return false;
+    }
+    
+    // 2. التحقق من التكرار
     if (emailExists(email, db)) return false;
 
     DBConnection x(db);
@@ -70,7 +79,31 @@ bool Patient::registerPatient(const std::string& db) {
       << passwordHash << "',"
       << TimeUtils::nowEpochSeconds() << ");";
 
-    return x.execute(q.str());
+    bool success = x.execute(q.str());
+    
+    // 3. التعديل الجديد: استرجاع الـ ID الذي تم إنشاؤه حديثاً
+    if (success) {
+        // استرجاع الـ ID الأخير الذي تم إدخاله (SQLite-specific)
+        x.query(
+            "SELECT last_insert_rowid();",
+            [](void* data, int argc, char** argv, char** col_names) -> int {
+                if (argv[0]) {
+                    // تعيين الـ ID للكائن الحالي (this->id)
+                    // يجب استخدام try-catch إذا كان هناك خوف من فشل stoi، ولكن نفترض النجاح هنا.
+                    try {
+                        *((int*)data) = std::stoi(argv[0]); 
+                    } catch (const std::exception& e) {
+                        // طباعة خطأ بسيط إذا فشل التحويل (اختياري)
+                        std::cerr << "ERROR: Failed to convert last row ID to integer: " << e.what() << std::endl;
+                    }
+                }
+                return 0;
+            },
+            &this->id // تمرير عنوان الخاصية id للكائن الحالي
+        );
+    }
+    
+    return success;
 }
 
 bool Patient::update(const std::string& db) {

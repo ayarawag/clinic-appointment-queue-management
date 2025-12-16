@@ -7,11 +7,11 @@ C_DEFINES =
 
 C_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/. -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest
 
-C_FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0
+C_FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -fprofile-arcs -ftest-coverage -g
 
 CXX_DEFINES = 
 
 CXX_INCLUDES = -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/. -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/models -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/features -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/database -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/utils -I/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/include -isystem /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest
 
-CXX_FLAGS = -std=gnu++14 -D_GLIBCXX_USE_CXX11_ABI=0
+CXX_FLAGS = -std=gnu++14 -D_GLIBCXX_USE_CXX11_ABI=0 -fprofile-arcs -ftest-coverage -g
 

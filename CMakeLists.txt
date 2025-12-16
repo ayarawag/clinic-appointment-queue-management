@@ -4,6 +4,14 @@ project(clinic)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# ==========================================================
+# إضافة علامات التغطية (COVERAGE FLAGS) لـ LCOV
+# ==========================================================
+# تعريف علامات التجميع والربط بشكل منفصل لتجنب خطأ "unrecognized option"
+SET(COVERAGE_COMPILE_FLAGS "-fprofile-arcs" "-ftest-coverage" "-g")
+SET(COVERAGE_LINKER_FLAG "-lgcov")
+# ==========================================================
+
 add_compile_options(-D_GLIBCXX_USE_CXX11_ABI=0)
 
 include_directories(
@@ -62,9 +70,18 @@ add_executable(run_tests
     ${PROJECT_SOURCES}     # <<<<<< MUST ADD ALL PROJECT FILES
 )
 
+# ==========================================================
+# تطبيق علامات التغطية على run_tests
+# ==========================================================
+target_compile_options(run_tests PRIVATE 
+    ${COVERAGE_COMPILE_FLAGS}
+)
+
 target_link_libraries(run_tests
     gtest
     gtest_main
     pthread
     sqlite3
+    ${COVERAGE_LINKER_FLAG} # إضافة ربط مكتبة lgcov
 )
+# ==========================================================

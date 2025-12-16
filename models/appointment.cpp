@@ -20,7 +20,7 @@ bool Appointment::book(const std::string& db)
     DBConnection conn(db);
     std::ostringstream q;
 
-    q << "INSERT INTO appointments(patient_id, doctor_id, dateTime, paid) VALUES("
+    q << "INSERT INTO appointments(patientId, doctorId, dateTime, paid) VALUES("
       << patientId << "," << doctorId << ",'"
       << dateTime << "',0);";
 
@@ -75,7 +75,7 @@ Appointment Appointment::loadById(int aid, const std::string& db)
     DBConnection conn(db);
 
     std::string q =
-        "SELECT id, patient_id, doctor_id, dateTime, paid "
+        "SELECT id, patientId, doctorId, dateTime, paid "
         "FROM appointments WHERE id=" + std::to_string(aid) + " LIMIT 1;";
 
     conn.query(

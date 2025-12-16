@@ -7,7 +7,7 @@ class Doctor {
 public:
     int id;
     std::string name;
-    std::string specialty;
+    std::string specialization;
     std::string schedule;
 
     Doctor();
