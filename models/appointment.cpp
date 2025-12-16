@@ -2,6 +2,8 @@
 #include "../database/db_connection.h"
 #include <sstream>
 #include <string>
+#include <stdexcept> 
+#include <iostream> // تم تضمينه لإظهار رسالة الخطأ (اختياري)
 
 Appointment::Appointment()
     : id(0), patientId(0), doctorId(0), dateTime(""), paid(0) {}
@@ -17,6 +19,16 @@ Appointment::Appointment(int pid, int did, std::string dt)
 
 bool Appointment::book(const std::string& db)
 {
+    // ==========================================================
+    // التعديل الرئيسي: إضافة التحقق من البيانات (Validation)
+    // هذا يحل مشكلة فشل BookingFailsWithInvalidIDs و BookingFailsWithEmptyDateTime
+    // ==========================================================
+    if (patientId <= 0 || doctorId <= 0 || dateTime.empty()) {
+        std::cerr << "ERROR: Booking failed due to invalid patient/doctor ID or empty date/time (Validation).\n";
+        return false; // نرجع false عندما تكون البيانات غير صالحة
+    }
+    // ملاحظة: بدون isSlotTaken، سيظل التكرار ممكناً.
+
     DBConnection conn(db);
     std::ostringstream q;
 
@@ -24,7 +36,31 @@ bool Appointment::book(const std::string& db)
       << patientId << "," << doctorId << ",'"
       << dateTime << "',0);";
 
-    return conn.execute(q.str());
+    bool success = conn.execute(q.str()); // تخزين نتيجة التنفيذ
+
+    // ==========================================================
+    // منطق استرجاع الـ ID (الذي كان موجوداً)
+    // ==========================================================
+    if (success) {
+        // استرجاع الـ ID الأخير الذي تم إدخاله (SQLite-specific: last_insert_rowid)
+        conn.query(
+            "SELECT last_insert_rowid();",
+            [](void* data, int argc, char** argv, char** col_names) -> int {
+                if (argv[0]) {
+                    // تعيين الـ ID للكائن الحالي (this->id)
+                    try {
+                        *((int*)data) = std::stoi(argv[0]); 
+                    } catch (const std::exception& e) {
+                        // التعامل مع خطأ التحويل إذا حدث (اختياري)
+                    }
+                }
+                return 0;
+            },
+            &this->id // تمرير عنوان الخاصية id للكائن الحالي
+        );
+    }
+    
+    return success;
 }
 
 bool Appointment::cancel(const std::string& db)

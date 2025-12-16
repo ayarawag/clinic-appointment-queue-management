@@ -1,6 +1,7 @@
 #include "doctor.h"
 #include "../database/db_connection.h"
 #include <sstream>
+#include <stdexcept> // لإضافة std::stoi
 
 Doctor::Doctor() : id(0), name(""), specialization(""), schedule("") {}
 
@@ -25,7 +26,33 @@ bool Doctor::registerDoctor(const std::string& db) {
     q << "INSERT INTO doctors(name, specialization) VALUES('"
       << name << "','" << specialization<< "');";
 
-    return conn.execute(q.str());
+    bool success = conn.execute(q.str()); // تخزين نتيجة التنفيذ
+
+    // ==========================================================
+    // التعديل الجديد: استرجاع الـ ID الذي تم إنشاؤه حديثاً
+    // هذا يحل مشكلة فشل ASSERT_TRUE(doctorId != 0) في اختبارات BookingTests
+    // ==========================================================
+    if (success) {
+        // استرجاع الـ ID الأخير الذي تم إدخاله (SQLite-specific)
+        conn.query(
+            "SELECT last_insert_rowid();",
+            [](void* data, int argc, char** argv, char** col_names) -> int {
+                if (argv[0]) {
+                    // تعيين الـ ID للكائن الحالي (this->id)
+                    try {
+                        *((int*)data) = std::stoi(argv[0]); 
+                    } catch (const std::exception& e) {
+                        // التعامل مع خطأ التحويل إذا حدث (اختياري)
+                    }
+                }
+                return 0;
+            },
+            &this->id // تمرير عنوان الخاصية id للكائن الحالي
+        );
+    }
+    
+    return success;
+    // ==========================================================
 }
 
 Doctor Doctor::loadById(int did, const std::string& db) {

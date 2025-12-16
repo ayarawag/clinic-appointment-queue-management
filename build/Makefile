@@ -716,6 +716,30 @@ tests/test_basic.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_basic.cpp.s
 .PHONY : tests/test_basic.cpp.s
 
+tests/test_booking.o: tests/test_booking.cpp.o
+.PHONY : tests/test_booking.o
+
+# target to build an object file
+tests/test_booking.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_booking.cpp.o
+.PHONY : tests/test_booking.cpp.o
+
+tests/test_booking.i: tests/test_booking.cpp.i
+.PHONY : tests/test_booking.i
+
+# target to preprocess a source file
+tests/test_booking.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_booking.cpp.i
+.PHONY : tests/test_booking.cpp.i
+
+tests/test_booking.s: tests/test_booking.cpp.s
+.PHONY : tests/test_booking.s
+
+# target to generate assembly for a file
+tests/test_booking.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_booking.cpp.s
+.PHONY : tests/test_booking.cpp.s
+
 tests/test_doctor.o: tests/test_doctor.cpp.o
 .PHONY : tests/test_doctor.o
 
@@ -811,6 +835,30 @@ tests/test_patient.s: tests/test_patient.cpp.s
 tests/test_patient.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_patient.cpp.s
 .PHONY : tests/test_patient.cpp.s
+
+tests/test_payment.o: tests/test_payment.cpp.o
+.PHONY : tests/test_payment.o
+
+# target to build an object file
+tests/test_payment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_payment.cpp.o
+.PHONY : tests/test_payment.cpp.o
+
+tests/test_payment.i: tests/test_payment.cpp.i
+.PHONY : tests/test_payment.i
+
+# target to preprocess a source file
+tests/test_payment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_payment.cpp.i
+.PHONY : tests/test_payment.cpp.i
+
+tests/test_payment.s: tests/test_payment.cpp.s
+.PHONY : tests/test_payment.s
+
+# target to generate assembly for a file
+tests/test_payment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_payment.cpp.s
+.PHONY : tests/test_payment.cpp.s
 
 tests/test_queue.o: tests/test_queue.cpp.o
 .PHONY : tests/test_queue.o
@@ -989,6 +1037,9 @@ help:
 	@echo "... tests/test_basic.o"
 	@echo "... tests/test_basic.i"
 	@echo "... tests/test_basic.s"
+	@echo "... tests/test_booking.o"
+	@echo "... tests/test_booking.i"
+	@echo "... tests/test_booking.s"
 	@echo "... tests/test_doctor.o"
 	@echo "... tests/test_doctor.i"
 	@echo "... tests/test_doctor.s"
@@ -1001,6 +1052,9 @@ help:
 	@echo "... tests/test_patient.o"
 	@echo "... tests/test_patient.i"
 	@echo "... tests/test_patient.s"
+	@echo "... tests/test_payment.o"
+	@echo "... tests/test_payment.i"
+	@echo "... tests/test_payment.s"
 	@echo "... tests/test_queue.o"
 	@echo "... tests/test_queue.i"
 	@echo "... tests/test_queue.s"
