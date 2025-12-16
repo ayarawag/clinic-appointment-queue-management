@@ -5,6 +5,7 @@
 
 class Appointment {
 public:
+    // خصائص الكلاس
     int id;
     int patientId;
     int doctorId;
@@ -14,6 +15,7 @@ public:
     Appointment();
     Appointment(int pid, int did, std::string datetime);
 
+    // الدوال الأساسية (مع بقاء القيمة الافتراضية لملف DB)
     bool book(const std::string& db = "clinic.db");
     bool cancel(const std::string& db = "clinic.db");
     bool reschedule(const std::string& newDateTime, const std::string& db = "clinic.db");

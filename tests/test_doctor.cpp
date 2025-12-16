@@ -1,14 +1,16 @@
 #include <gtest/gtest.h>
 #include "../models/doctor.h"
-#include "../database/db_connection.h"
+#include "../database/db_connection.h" // كلاس DBConnection أصبح Singleton
 #include <fstream>
 #include <sstream>
+#include <iostream> // للتأكد من وجود رسائل الخطأ
 
 // اسم قاعدة البيانات التي سيتم استخدامها في الاختبارات فقط
 const std::string TEST_DB = "test_clinic.db";
 
-// دالة مساعدة لتهيئة قاعدة البيانات (نفس الدالة التي استخدمناها لـ Patient)
+// دالة مساعدة لتهيئة قاعدة البيانات (مع تحديث Singleton)
 inline void initialize_test_db(const std::string& db_name) {
+    // 1. حذف الملف القديم لضمان بداية نظيفة
     std::remove(db_name.c_str()); 
     
     std::ifstream sql_file("../database/database.sql");
@@ -18,8 +20,16 @@ inline void initialize_test_db(const std::string& db_name) {
         buffer << sql_file.rdbuf();
         std::string sql_script = buffer.str();
 
-        DBConnection db(db_name);
-        db.execute(sql_script);
+        // 2. استخدام Singleton للحصول على اتصال وتنفيذ السكريبت
+        // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
+        DBConnection* db = DBConnection::getInstance(db_name); 
+        
+        // [تعديل Singleton] استخدام المؤشر -> لتنفيذ الدالة
+        db->execute(sql_script);
+
+        // [تعديل هام] هنا يجب أن نفكر في إعادة ضبط Singleton بين الاختبارات
+        // إذا كان لديك دالة destroyInstance()، استدعيها هنا:
+        // DBConnection::destroyInstance(); 
     } else {
         std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
     }
@@ -33,10 +43,17 @@ protected:
         // تهيئة قاعدة البيانات قبل كل اختبار
         initialize_test_db(TEST_DB); 
     }
+    
+    // [إضافة] هذا الجزء مهم جداً عند استخدام Singleton
+    void TearDown() override {
+        // إذا كان لديك دالة لتدمير نسخة Singleton في DBConnection، يجب استدعاؤها هنا
+        // DBConnection::destroyInstance();
+        // هذا يضمن أن كل اختبار يبدأ بنسخة اتصال جديدة (إذا كانت destroyInstance تنظف الاتصال)
+    }
 };
 
 // --------------------------------------------------------
-// الاختبارات
+// الاختبارات (تبقى كما هي، لأن التعديل كان في الكلاسات الأساسية)
 // --------------------------------------------------------
 
 TEST_F(DoctorTests, RegistrationAndLoad) {

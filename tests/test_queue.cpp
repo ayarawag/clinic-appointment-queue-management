@@ -1,14 +1,16 @@
 #include <gtest/gtest.h>
 #include "../models/queue.h"
-#include "../database/db_connection.h"
+#include "../database/db_connection.h" // كلاس DBConnection أصبح Singleton
 #include <fstream>
 #include <sstream>
-#include <algorithm> // مطلوب لعملية الإزالة (حتى لو لم نستخدمها الآن)
+#include <algorithm> 
+#include <iostream> 
+#include <stdexcept> 
 
 // اسم قاعدة البيانات التي سيتم استخدامها في الاختبارات فقط
 const std::string TEST_DB = "test_clinic.db";
 
-// دالة مساعدة لتهيئة قاعدة البيانات (مع استخدام inline لمنع خطأ التعريفات المتعددة)
+// دالة مساعدة لتهيئة قاعدة البيانات (مع تحديث Singleton)
 inline void initialize_test_db(const std::string& db_name) {
     // 1. حذف الملف القديم لضمان بداية نظيفة
     std::remove(db_name.c_str()); 
@@ -22,8 +24,13 @@ inline void initialize_test_db(const std::string& db_name) {
         std::string sql_script = buffer.str();
 
         // 3. فتح قاعدة البيانات وتنفيذ السكريبت
-        DBConnection db(db_name);
-        db.execute(sql_script);
+        // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
+        DBConnection* db = DBConnection::getInstance(db_name); 
+        
+        // [تعديل Singleton] استخدام المؤشر -> لتنفيذ الدالة
+        db->execute(sql_script);
+        
+        // [ملاحظة Singleton] هنا يجب أن نفكر في استدعاء DBConnection::destroyInstance();
     } else {
         std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
     }
@@ -39,7 +46,12 @@ protected:
         initialize_test_db(TEST_DB); 
     }
     
-    // دالة مساعدة للتحقق من موقع مريض معين
+    void TearDown() override {
+        // [ملاحظة Singleton] يجب استدعاء دالة التدمير هنا إذا كانت موجودة لضمان عزل الاختبارات
+        // DBConnection::destroyInstance();
+    }
+    
+    // دالة مساعدة للتحقق من موقع مريض معين (لا تحتاج لتعديل Singleton)
     int getPatientPosition(int patient_id, const std::vector<std::pair<int, int>>& queue_list) {
         for (const auto& p : queue_list) {
             if (p.first == patient_id) {
@@ -51,7 +63,7 @@ protected:
 };
 
 // --------------------------------------------------------
-// الاختبارات (تم إزالة اختبار RemovePatient)
+// الاختبارات
 // --------------------------------------------------------
 
 TEST_F(QueueTests, AddAndOrder) {
@@ -83,11 +95,8 @@ TEST_F(QueueTests, Reorder) {
     auto list = q.getCurrentQueue();
 
     // 3. التحقق من الترتيب الجديد
-    // المريض 20 أصبح أولاً
     EXPECT_EQ(getPatientPosition(20, list), 1);
-    // المريض 10 أصبح ثانياً
     EXPECT_EQ(getPatientPosition(10, list), 2);
-    // المريض 30 ظل ثالثاً
     EXPECT_EQ(getPatientPosition(30, list), 3);
 }
 
@@ -99,6 +108,7 @@ TEST_F(QueueTests, RefreshDB) {
     // 2. تحديث قاعدة البيانات (يجب أن تنجح دون طرح استثناءات)
     bool ok = true;
     try {
+        // هذه الدالة (refreshPositionsDB) تستخدم Singleton و Try/Catch الآن
         q.refreshPositionsDB(TEST_DB); 
     } catch (...) {
         ok = false;
@@ -106,4 +116,3 @@ TEST_F(QueueTests, RefreshDB) {
 
     EXPECT_TRUE(ok);
 }
-

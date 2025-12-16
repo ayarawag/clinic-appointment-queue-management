@@ -12,7 +12,10 @@ public:
 
     void addPatient(int appointmentId);
     void reorder(int appointmentId, int newPos);
-    void refreshPositionsDB(const std::string& db = "clinic.db");
+    
+    // هذه الدالة ستستخدم Singleton
+    void refreshPositionsDB(const std::string& db = "clinic.db"); 
+    
     std::vector<std::pair<int,int>> getCurrentQueue() const;
 
 private:
