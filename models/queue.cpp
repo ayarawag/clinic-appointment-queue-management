@@ -1,7 +1,8 @@
 #include "queue.h"
-#include "../database/db_connection.h"
+#include "../database/db_connection.h" // كلاس DBConnection أصبح Singleton
 #include <sstream>
 #include <iostream>
+#include <stdexcept> // لإضافة معالجة الاستثناءات
 
 // هل الـ appointment موجود في الصف مسبقاً؟
 bool Queue::exists(int appointmentId) const {
@@ -32,8 +33,10 @@ void Queue::addPatient(int appointmentId) {
 }
 
 void Queue::reorder(int appointmentId, int newPos) {
-    if (newPos <= 0 || newPos > queueList.size())
+    // التحقق من صلاحية الموقع الجديد
+    if (newPos <= 0 || newPos > queueList.size()) {
         newPos = queueList.size();
+    }
 
     // نلقى العنصر
     for (size_t i = 0; i < queueList.size(); i++) {
@@ -52,15 +55,27 @@ void Queue::reorder(int appointmentId, int newPos) {
     normalizePositions();
 }
 
+// ==========================================================
+// الدالة refreshPositionsDB: تطبيق Singleton و Try/Catch
+// ==========================================================
 void Queue::refreshPositionsDB(const std::string& dbfile) {
-    DBConnection db(dbfile);
+    try {
+        // [Singleton] استخدام getInstance للحصول على نسخة الاتصال الوحيدة
+        DBConnection* conn = DBConnection::getInstance(dbfile);
 
-    for (auto &p : queueList) {
-        std::ostringstream q;
-        q << "UPDATE appointments SET queue_position=" << p.second
-          << " WHERE id=" << p.first;
+        for (auto &p : queueList) {
+            std::ostringstream q;
+            q << "UPDATE appointments SET queue_position=" << p.second
+              << " WHERE id=" << p.first;
 
-        db.execute(q.str());
+            // [Singleton] استخدام المؤشر -> لتنفيذ الاستعلام
+            conn->execute(q.str());
+        }
+        
+    } catch (const std::exception& e) {
+        // [Try/Catch] معالجة أي استثناء (مثل فشل الاتصال)
+        std::cerr << "EXCEPTION CAUGHT (RefreshQueue): Failed to update DB: " << e.what() << std::endl;
+        // يمكننا هنا إضافة منطق لمعالجة الفشل (مثل محاولة إعادة الاتصال)
     }
 }
 

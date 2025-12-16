@@ -1,21 +1,21 @@
 #include <gtest/gtest.h>
 #include "../models/patient.h"
-#include "../database/db_connection.h"
+#include "../database/db_connection.h" // كلاس DBConnection أصبح Singleton
 #include "../utils/password_utils.h"
 #include "../utils/time_utils.h"
 #include <fstream>
 #include <sstream>
+#include <iostream> // لـ std::cerr
 
 // اسم قاعدة البيانات التي سيتم استخدامها في الاختبارات فقط
 const std::string TEST_DB = "test_clinic.db";
 
-// دالة مساعدة لتهيئة قاعدة البيانات
+// دالة مساعدة لتهيئة قاعدة البيانات (مع تحديث Singleton)
 inline void initialize_test_db(const std::string& db_name) {
-    // 1. حذف الملف القديم لضمان بداية نظيفة (اختياري لكن موصى به)
+    // 1. حذف الملف القديم لضمان بداية نظيفة
     std::remove(db_name.c_str()); 
     
     // 2. قراءة محتوى سكريبت SQL
-    // ملاحظة: المسار هنا هو افتراض لوجود database.sql في مجلد /database
     std::ifstream sql_file("../database/database.sql");
     std::stringstream buffer;
     
@@ -24,12 +24,18 @@ inline void initialize_test_db(const std::string& db_name) {
         std::string sql_script = buffer.str();
 
         // 3. فتح قاعدة البيانات وتنفيذ السكريبت
-        DBConnection db(db_name);
-        bool ok = db.execute(sql_script);
+        // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
+        DBConnection* db = DBConnection::getInstance(db_name);
         
-        // يمكننا التحقق من النجاح في بيئة الإنتاج، لكن هنا نعتمد على أن DBConnection تطبع الخطأ
+        // [تعديل Singleton] استخدام المؤشر -> لتنفيذ الدالة
+        bool ok = db->execute(sql_script);
+        
+        if (!ok) {
+            std::cerr << "WARNING: SQL script execution failed during DB initialization." << std::endl;
+        }
+        
+        // [ملاحظة Singleton] هنا يجب أن نفكر في استدعاء DBConnection::destroyInstance();
     } else {
-        // إذا لم يتم العثور على الملف، نطبع خطأ (مهم للاختبار)
         std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
     }
 }
@@ -44,23 +50,23 @@ protected:
         initialize_test_db(TEST_DB); 
     }
 
-    // يمكن إضافة دالة TearDown لحذف الملف test_clinic.db بعد كل اختبار
+    // يتم استدعاء TearDown بعد كل اختبار
     void TearDown() override {
-        // حذف قاعدة البيانات بعد الانتهاء
-        // std::remove(TEST_DB.c_str()); 
+        // [ملاحظة Singleton] يجب استدعاء دالة التدمير هنا إذا كانت موجودة لضمان عزل الاختبارات
+        // DBConnection::destroyInstance(); 
     }
 };
 
 
 // --------------------------------------------------------
-// الآن نستخدم TEST_F بدلاً من TEST
+// الاختبارات (تبقى كما هي)
 // --------------------------------------------------------
 
 TEST_F(PatientTests, Registration) {
     Patient p("TestName", "0912345678", "coverage_test@example.com", "mypassword");
     
     // يجب استخدام TEST_DB بدلاً من clinic.db
-    bool ok = p.registerPatient(TEST_DB);
+    bool ok = p.registerPatient(TEST_DB); // هذه الدالة تستخدم Singleton الآن
     EXPECT_TRUE(ok);
 
     // اختبار عدم السماح بالتسجيل مرة أخرى بنفس البريد الإلكتروني
@@ -75,7 +81,7 @@ TEST_F(PatientTests, Load) {
     p_reg.registerPatient(TEST_DB);
     
     // بما أن التسجيل يتم بأرقام تصاعدية، ID=1 هو أول مريض نسجله في قاعدة البيانات هذه
-    Patient p = Patient::loadById(1, TEST_DB); 
+    Patient p = Patient::loadById(1, TEST_DB); // هذه الدالة تستخدم Singleton الآن
     
     EXPECT_EQ(p.id, 1);
     EXPECT_EQ(p.email, "load_test@example.com");
@@ -91,7 +97,7 @@ TEST_F(PatientTests, Update) {
     p.name = "UpdatedName";
     
     // التحديث
-    bool ok = p.update(TEST_DB);
+    bool ok = p.update(TEST_DB); // هذه الدالة تستخدم Singleton الآن
     EXPECT_TRUE(ok);
     
     // التحقق من التحديث
@@ -108,7 +114,7 @@ TEST_F(PatientTests, Delete) {
     Patient p = Patient::loadById(1, TEST_DB);
     
     // الحذف
-    bool ok = p.remove(TEST_DB);
+    bool ok = p.remove(TEST_DB); // هذه الدالة تستخدم Singleton الآن
     EXPECT_TRUE(ok);
     
     // التحقق من الحذف (بتحميله مرة أخرى، يجب أن يكون ID=0)

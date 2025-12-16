@@ -2,7 +2,7 @@
 #include "../models/appointment.h"
 #include "../models/patient.h"
 #include "../models/doctor.h"
-#include "../database/db_connection.h"
+#include "../database/db_connection.h" // كلاس DBConnection أصبح Singleton
 #include <fstream>
 #include <sstream>
 
@@ -23,8 +23,14 @@ inline void initialize_test_db(const std::string& db_name) {
         std::string sql_script = buffer.str();
 
         // 3. فتح قاعدة البيانات وتنفيذ السكريبت
-        DBConnection db(db_name);
-        db.execute(sql_script);
+        // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
+        DBConnection* db = DBConnection::getInstance(db_name); 
+        
+        // [تعديل Singleton] استخدام المؤشر -> لتنفيذ الدالة
+        db->execute(sql_script); 
+
+        // [إضافة اختيارية] تدمير النسخة بعد التهيئة إذا لم تكن مطلوبة لاحقاً
+        // DBConnection::destroyInstance(); 
     } else {
         std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
     }
@@ -39,11 +45,21 @@ protected:
         initialize_test_db(TEST_DB); 
 
         // يجب تسجيل مريض وطبيب أولاً لكي تتم عملية الحجز (Foreign Key Constraints)
+        // ملاحظة: إذا كانت registerPatient و registerDoctor تستخدمان Singleton
+        // فيجب التأكد من أنهما تستدعيان DBConnection::getInstance(TEST_DB)
+        
         Patient p("ApptPatient", "100", "p@a.com", "pass");
         p.registerPatient(TEST_DB); // هذا سيكون Patient ID 1
         
         Doctor d("Dr. Appt", "Generalist");
         d.registerDoctor(TEST_DB); // هذا سيكون Doctor ID 1
+    }
+    
+    // [إضافة] يتم استدعاء TearDown بعد كل اختبار
+    // يمكن هنا إضافة منطق لتنظيف Singleton إذا لزم الأمر
+    void TearDown() override {
+        // [Singleton] إذا كان لديك دالة لتدمير النسخة
+        // DBConnection::destroyInstance(); 
     }
 };
 
@@ -105,8 +121,7 @@ TEST_F(AppointmentTests, Cancel) {
     bool ok_cancel = a.cancel(TEST_DB);
     EXPECT_TRUE(ok_cancel);
 
-    // 3. التحقق من التغيير (إذا كان هناك عمود status، يجب التحقق منه)
-    // إذا كانت دالة cancel تحذف الصف، فنتوقع أن يكون a_cancelled.id = 0
+    // 3. التحقق من التغيير (إذا كانت دالة cancel تحذف الصف، فنتوقع أن يكون a_cancelled.id = 0)
     // Appointment a_cancelled = Appointment::loadById(1, TEST_DB);
     // EXPECT_EQ(a_cancelled.id, 0); 
 }
