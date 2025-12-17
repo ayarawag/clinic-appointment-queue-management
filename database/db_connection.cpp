@@ -1,11 +1,7 @@
 #include "db_connection.h"
 #include <iostream>
 #include <stdexcept> // لإضافة معالجة الاستثناءات
-
-// [تعديل Singleton] تهيئة المؤشر الثابت (يجب أن يكون nullptr خارج الكلاس)
 DBConnection* DBConnection::instance = nullptr; 
-
-
 // [تعديل Singleton] أصبح المُنشئ الآن خاصاً (private)
 DBConnection::DBConnection(const std::string& filename) {
     if (sqlite3_open(filename.c_str(), &db) != SQLITE_OK) {
@@ -15,8 +11,6 @@ DBConnection::DBConnection(const std::string& filename) {
         throw std::runtime_error("Database connection failed.");
     }
 }
-
-// [تعديل Singleton] أصبح الهادم الآن خاصاً (private)
 DBConnection::~DBConnection() {
     if (db) {
         sqlite3_close(db);
@@ -33,7 +27,7 @@ DBConnection* DBConnection::getInstance(const std::string& filename) {
             // إذا لم تكن موجودة، قم بإنشاء نسخة جديدة
             instance = new DBConnection(filename);
         } catch (const std::exception& e) {
-            std::cerr << "Failed to create DB Singleton: " << e.what() << std::endl;
+            std::cerr << "Failed" << e.what() << std::endl;
             // يجب أن نضمن أن المؤشر يبقى nullptr إذا فشل الإنشاء
             instance = nullptr;
         }

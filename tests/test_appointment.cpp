@@ -10,8 +10,6 @@
 
 // اسم قاعدة البيانات التي سيتم استخدامها في الاختبارات فقط
 const std::string TEST_DB = "test_clinic.db";
-
-// دالة مساعدة لتهيئة قاعدة البيانات (مع استخدام inline لمنع خطأ التعريفات المتعددة)
 inline void initialize_test_db(const std::string& db_name) {
     DBConnection::destroyInstance(); 
     std::remove(db_name.c_str()); 
@@ -26,7 +24,7 @@ inline void initialize_test_db(const std::string& db_name) {
         std::cerr<<"failed"<< std::endl;
     }
 }
-// دالة مساعدة لحساب عدد المواعيد 
+// داله لحساب عدد المواعيد 
 inline int getAppointmentCount(const std::string& db_name) {
     int count = 0;
     DBConnection* conn = DBConnection::getInstance(db_name);
@@ -46,7 +44,6 @@ inline int getAppointmentCount(const std::string& db_name) {
     );
     return count;
 }
-
 
 // كلاس الاختبار AppointmentTests
 class AppointmentTests : public ::testing::Test {

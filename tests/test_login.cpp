@@ -10,42 +10,28 @@
 
 // اسم قاعدة البيانات المستخدمة في الاختبارات
 const std::string TEST_DB = "test_clinic.db";
-
-// دالة مساعدة لتهيئة قاعدة البيانات (تحديث Singleton)
 inline void initialize_test_db(const std::string& db_name) {
     std::remove(db_name.c_str()); 
-    
     std::ifstream sql_file("../database/database.sql");
     std::stringstream buffer;
-    
     if (sql_file.is_open()) {
         buffer << sql_file.rdbuf();
         std::string sql_script = buffer.str();
 
-        // [تعديل Singleton] استخدام getInstance بدلاً من المُنشئ
         DBConnection* db = DBConnection::getInstance(db_name); 
-        
-        // [تعديل Singleton] استخدام المؤشر -> لتنفيذ الدالة
-        db->execute(sql_script);
+                db->execute(sql_script);
         
     } else {
         std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
     }
 }
-
-// دالة محاكاة لتسجيل الدخول (تحديث Singleton و Try/Catch)
 bool attemptLogin(const std::string& email, const std::string& password, const std::string& db) {
     std::string storedHash = "";
 
     try {
-        // [Singleton] استخدام getInstance بدلاً من المُنشئ
         DBConnection* db_conn = DBConnection::getInstance(db); 
-        
-        // 1. استرجاع الهاش المخزن
-        std::string q = 
+                std::string q = 
             "SELECT password_hash FROM patients WHERE email='" + email + "' LIMIT 1;";
-
-        // [Singleton] استخدام المؤشر -> للاستعلام
         db_conn->query(q,
             [](void* out, int cols, char** vals, char**) -> int {
                 if (vals[0])
@@ -54,17 +40,11 @@ bool attemptLogin(const std::string& email, const std::string& password, const s
             },
             &storedHash
         );
-
-        // 2. التحقق من وجود الإيميل
         if (storedHash.empty()) {
             return false;
         }
-
-        // 3. مقارنة كلمة السر
-        return PasswordUtils::verifyPassword(password, storedHash);
-        
+        return PasswordUtils::verifyPassword(password, storedHash);   
     } catch (const std::exception& e) {
-        // معالجة خطأ DB في سياق الاختبار
         std::cerr << "EXCEPTION CAUGHT (AttemptLogin): DB operation failed: " << e.what() << std::endl;
         return false;
     }

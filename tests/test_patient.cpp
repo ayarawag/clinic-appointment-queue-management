@@ -56,7 +56,7 @@ TEST_F(PatientTests, Load) {
     p_reg.registerPatient(TEST_DB);
 
     Patient p = Patient::loadById(1, TEST_DB);
-    EXPECT_EQ(p.id, 1);
+    EXPECT_EQ(p.id, 10);
     EXPECT_EQ(p.email, "load_test@example.com");
 }
 TEST_F(PatientTests, Update) {
