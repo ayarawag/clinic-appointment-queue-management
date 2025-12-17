@@ -13,30 +13,19 @@ const std::string TEST_DB = "test_clinic.db";
 
 // دالة مساعدة لتهيئة قاعدة البيانات (مع استخدام inline لمنع خطأ التعريفات المتعددة)
 inline void initialize_test_db(const std::string& db_name) {
-    // [الحل]: يجب تدمير النسخة القديمة أولاً إذا كانت لا تزال مفتوحة
     DBConnection::destroyInstance(); 
-    
-    // 1. حذف الملف القديم لضمان بداية نظيفة
     std::remove(db_name.c_str()); 
-    
-    // 2. قراءة محتوى سكريبت SQL
     std::ifstream sql_file("../database/database.sql");
     std::stringstream buffer;
-    
     if (sql_file.is_open()) {
         buffer << sql_file.rdbuf();
         std::string sql_script = buffer.str();
-
-        // 3. فتح قاعدة البيانات وتنفيذ السكريبت
         DBConnection* db = DBConnection::getInstance(db_name); 
         db->execute(sql_script); 
-        
     } else {
-        std::cerr << "ERROR: database/database.sql not found! Cannot initialize DB." << std::endl;
+        std::cerr<<"failed"<< std::endl;
     }
 }
-
-
 // دالة مساعدة لحساب عدد المواعيد 
 inline int getAppointmentCount(const std::string& db_name) {
     int count = 0;
