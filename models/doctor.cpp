@@ -2,7 +2,9 @@
 #include "../database/db_connection.h" 
 #include <sstream>
 #include <stdexcept>
-#include <iostream> 
+#include <iostream>
+#include <vector>   //  جديد
+#include <algorithm>
 
 Doctor::Doctor() : id(0), name(""), specialization(""), schedule("") {}
 
@@ -123,13 +125,12 @@ bool Doctor::update(const std::string& db) {
         std::ostringstream q;
 
         q << "UPDATE doctors SET name='" << name
-         << "', specialization='" << specialization
+          << "', specialization='" << specialization
           << "' WHERE id=" << id;
 
         return conn->execute(q.str());
     
-    } catch (const std::exception& e) {
-        std::cerr << "EXCEPTION CAUGHT (Update): DB operation failed: " << e.what() << std::endl;
+    } catch (const std::exception& e) {std::cerr << "EXCEPTION CAUGHT (Update): DB operation failed: " << e.what() << std::endl;
         return false;
     }
 }
@@ -152,4 +153,55 @@ bool Doctor::remove(const std::string& db) {
         std::cerr << "EXCEPTION CAUGHT (Remove): DB operation failed: " << e.what() << std::endl;
         return false;
     }
+}
+
+// ==========================================================
+// ⭐⭐⭐ 6. Feature 11: View Available Appointment Slots
+// ==========================================================
+std::vector<std::string> Doctor::getAvailableSlots(
+    int doctorId,
+    const std::string& date,
+    const std::string& db
+) {
+    std::vector<std::string> slots;
+
+    try {
+        DBConnection* conn = DBConnection::getInstance(db);
+
+        // مثال بسيط: نعتبر كل ساعة من 09:00 إلى 13:00
+        std::vector<std::string> allSlots = {
+            "09:00", "10:00", "11:00", "12:00", "13:00"
+        };
+
+        std::vector<std::string> bookedSlots;
+
+        std::string q =
+            "SELECT substr(dateTime, 12, 5) FROM appointments "
+            "WHERE doctorId=" + std::to_string(doctorId) +
+            " AND dateTime LIKE '" + date + "%' "
+            "AND status='Booked';";
+
+        conn->query(
+            q,
+            [](void* out, int, char** vals, char**) -> int {
+                if (vals[0]) {
+                    ((std::vector<std::string>*)out)->push_back(vals[0]);
+                }
+                return 0;
+            },
+            &bookedSlots
+        );
+
+        // إرجاع الأوقات غير المحجوزة
+        for (const auto& s : allSlots) {
+            if (std::find(bookedSlots.begin(), bookedSlots.end(), s) == bookedSlots.end()) {
+                slots.push_back(s);
+            }
+        }
+
+    } catch (const std::exception& e) {
+        std::cerr << "EXCEPTION CAUGHT (AvailableSlots): " << e.what() << std::endl;
+    }
+
+    return slots;
 }

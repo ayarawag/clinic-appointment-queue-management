@@ -56,7 +56,6 @@ int main() {
 
         std::cin >> choice;
 
-        // حل مشكلة الـ invalid input
         if (!std::cin) {
             std::cin.clear();
             std::cin.ignore(5000, '\n');

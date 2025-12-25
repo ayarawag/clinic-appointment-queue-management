@@ -2,6 +2,7 @@
 #define APPOINTMENT_H
 
 #include <string>
+#include <vector>   // ⭐ جديد: للبحث وإرجاع أكثر من موعد
 
 class Appointment {
 public:
@@ -20,16 +21,24 @@ public:
     Appointment();
     Appointment(int pid, int did, std::string datetime);
 
-    // الدوال الأساسية (مع بقاء القيمة الافتراضية لملف DB)
+    // الدوال الأساسية (بدون أي تغيير)
     bool book(const std::string& db = "clinic.db");
     
-    // [تعديل]: دالة cancel ستحدث الحالة بدلاً من حذف الصف
+    // [تعديل سابق]: cancel تحدث الحالة بدلاً من الحذف
     bool cancel(const std::string& db = "clinic.db"); 
     
     bool reschedule(const std::string& newDateTime, const std::string& db = "clinic.db");
     bool setPaid(bool paidValue = true, const std::string& db = "clinic.db");
 
     static Appointment loadById(int id, const std::string& db = "clinic.db");
+
+    // Feature: Search Appointments
+    static std::vector<Appointment> search(
+        int patientId,
+        const std::string& date = "",   // optional
+        int doctorId = 0,               // optional
+        const std::string& db = "clinic.db"
+    );
 };
 
 #endif
