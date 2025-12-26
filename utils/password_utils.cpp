@@ -2,7 +2,6 @@
 #include <string>
 #include <sstream>
 
-// Hash بسيط يكفي لمشروع الجامعة
 static std::string simpleHash(const std::string& input) {
     unsigned int h = 0;
     for (char c : input)

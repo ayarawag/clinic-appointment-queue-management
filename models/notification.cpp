@@ -44,7 +44,6 @@ void Notification::runReminders(const std::string& db) {
 
         std::cout << "Starting reminder process...\n";
 
-        // Placeholder: just run a simple SELECT
         conn->query(
             "SELECT id FROM notifications;",
             [](void*, int, char**, char**) -> int { 

@@ -14,7 +14,8 @@ void sendNotificationCLI() {
     std::cout << "Message: ";
     std::getline(std::cin, msg);
 
-    Notification n(pid, msg);
+    // ===== Factory Pattern usage =====
+    Notification n = NotificationFactory::createNotification(pid, msg);
 
     if (n.sendNotification("clinic.db"))
         std::cout << "Notification sent.\n";
@@ -24,6 +25,5 @@ void sendNotificationCLI() {
 
 void runRemindersCLI() {
     std::cout << "Running reminders...\n";
-
     Notification::runReminders("clinic.db");
 }
