@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-26 17:57:12</td>
+            <td class="headerValue">2025-12-26 18:51:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">82.4&nbsp;%</td>
@@ -87,30 +87,30 @@
 <span id="L25"><span class="lineNum">      25</span> <span class="tlaUNC">           0 :         std::cerr &lt;&lt; &quot;ERROR: database/database.sql not found! Cannot initialize DB.&quot; &lt;&lt; std::endl;</span></span>
 <span id="L26"><span class="lineNum">      26</span>              :     }</span>
 <span id="L27"><span class="lineNum">      27</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">           3 : bool attemptLogin(const std::string&amp; email, const std::string&amp; password, const std::string&amp; db) {</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           3 :     std::string storedHash = &quot;&quot;;</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">           5 : bool attemptLogin(const std::string&amp; email, const std::string&amp; password, const std::string&amp; db) {</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           5 :     std::string storedHash = &quot;&quot;;</span></span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              :     try {</span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           3 :         DBConnection* db_conn = DBConnection::getInstance(db); </span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           5 :         DBConnection* db_conn = DBConnection::getInstance(db); </span></span>
 <span id="L33"><span class="lineNum">      33</span>              :                 std::string q = </span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           3 :             &quot;SELECT password_hash FROM patients WHERE email='&quot; + email + &quot;' LIMIT 1;&quot;;</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           3 :         db_conn-&gt;query(q,</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           5 :             &quot;SELECT password_hash FROM patients WHERE email='&quot; + email + &quot;' LIMIT 1;&quot;;</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           5 :         db_conn-&gt;query(q,</span></span>
 <span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC tlaBgUNC">           0 :             [](void* out, int cols, char** vals, char**) -&gt; int {</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">           3 :                 if (vals[0])</span></span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           3 :                     *((std::string*)out) = vals[0];</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           3 :                 return 0;</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">           5 :                 if (vals[0])</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           5 :                     *((std::string*)out) = vals[0];</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           5 :                 return 0;</span></span>
 <span id="L40"><span class="lineNum">      40</span>              :             },</span>
 <span id="L41"><span class="lineNum">      41</span>              :             &amp;storedHash</span>
 <span id="L42"><span class="lineNum">      42</span>              :         );</span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           3 :         if (storedHash.empty()) {</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           5 :         if (storedHash.empty()) {</span></span>
 <span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC tlaBgUNC">           0 :             return false;</span></span>
 <span id="L45"><span class="lineNum">      45</span>              :         }</span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">           3 :         return PasswordUtils::verifyPassword(password, storedHash);   </span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           3 :     } catch (const std::exception&amp; e) {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC tlaBgGNC">           5 :         return PasswordUtils::verifyPassword(password, storedHash);   </span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           5 :     } catch (const std::exception&amp; e) {</span></span>
 <span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC tlaBgUNC">           0 :         std::cerr &lt;&lt; &quot;EXCEPTION CAUGHT (AttemptLogin): DB operation failed: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;</span></span>
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :         return false;</span></span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC tlaBgGNC">           3 : }</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC tlaBgGNC">           5 : }</span></span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : </span>
 <span id="L54"><span class="lineNum">      54</span>              : // كلاس الاختبار LoginTests</span>
@@ -119,20 +119,20 @@
 <span id="L57"><span class="lineNum">      57</span>              :     const std::string VALID_EMAIL = &quot;login@test.com&quot;;</span>
 <span id="L58"><span class="lineNum">      58</span>              :     const std::string VALID_PASS  = &quot;SecurePass123&quot;;</span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           9 :     void SetUp() override {</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           9 :         initialize_test_db(TEST_DB); </span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">          15 :     void SetUp() override {</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">          15 :         initialize_test_db(TEST_DB); </span></span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
 <span id="L63"><span class="lineNum">      63</span>              :         // 1. تسجيل مستخدم لغرض الاختبار (يجب أن تستخدم registerPatient Singleton الآن)</span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          45 :         Patient p(&quot;Login User&quot;, &quot;0910000001&quot;, VALID_EMAIL, VALID_PASS);</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           9 :         p.registerPatient(TEST_DB);</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          75 :         Patient p(&quot;Login User&quot;, &quot;0910000001&quot;, VALID_EMAIL, VALID_PASS);</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          15 :         p.registerPatient(TEST_DB);</span></span>
 <span id="L66"><span class="lineNum">      66</span>              :         </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           9 :         ASSERT_TRUE(p.id != 0); </span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           9 :     }</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">          15 :         ASSERT_TRUE(p.id != 0); </span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">          15 :     }</span></span>
 <span id="L69"><span class="lineNum">      69</span>              :     </span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           9 :     void TearDown() override {</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          15 :     void TearDown() override {</span></span>
 <span id="L71"><span class="lineNum">      71</span>              :         // [ملاحظة Singleton] يجب استدعاء دالة التدمير هنا إذا كانت موجودة لضمان عزل الاختبارات</span>
 <span id="L72"><span class="lineNum">      72</span>              :         // DBConnection::destroyInstance();</span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           9 :     }</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">          15 :     }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : };</span>
 <span id="L75"><span class="lineNum">      75</span>              : </span>
 <span id="L76"><span class="lineNum">      76</span>              : // --------------------------------------------------------</span>
@@ -140,21 +140,21 @@
 <span id="L78"><span class="lineNum">      78</span>              : // --------------------------------------------------------</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
 <span id="L80"><span class="lineNum">      80</span>              : // 1. اختبار تسجيل الدخول الناجح</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">          12 : TEST_F(LoginTests, SuccessfulLogin) {</span></span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">           3 :     bool login_ok = attemptLogin(VALID_EMAIL, VALID_PASS, TEST_DB);</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">          20 : TEST_F(LoginTests, SuccessfulLogin) {</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">           5 :     bool login_ok = attemptLogin(VALID_EMAIL, VALID_PASS, TEST_DB);</span></span>
 <span id="L83"><span class="lineNum">      83</span>              :     </span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           3 :     EXPECT_TRUE(login_ok) &lt;&lt; &quot;Login should succeed with correct credentials.&quot;;</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           5 :     EXPECT_TRUE(login_ok) &lt;&lt; &quot;Login should succeed with correct credentials.&quot;;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           5 : }</span></span>
 <span id="L86"><span class="lineNum">      86</span>              : </span>
 <span id="L87"><span class="lineNum">      87</span>              : // 2. اختبار كلمة مرور خاطئة</span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">           9 : TEST_F(LoginTests, IncorrectPassword) {</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          15 : TEST_F(LoginTests, IncorrectPassword) {</span></span>
 <span id="L89"><span class="lineNum">      89</span> <span class="tlaUNC tlaBgUNC">           0 :     bool login_ok = attemptLogin(VALID_EMAIL, &quot;WrongPassword&quot;, TEST_DB);</span></span>
 <span id="L90"><span class="lineNum">      90</span>              :     </span>
 <span id="L91"><span class="lineNum">      91</span> <span class="tlaUNC">           0 :     EXPECT_FALSE(login_ok) &lt;&lt; &quot;Login should fail with an incorrect password.&quot;;</span></span>
 <span id="L92"><span class="lineNum">      92</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L93"><span class="lineNum">      93</span>              : </span>
 <span id="L94"><span class="lineNum">      94</span>              : // 3. اختبار بريد إلكتروني غير موجود</span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC tlaBgGNC">           9 : TEST_F(LoginTests, NonExistentEmail) {</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC tlaBgGNC">          15 : TEST_F(LoginTests, NonExistentEmail) {</span></span>
 <span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC tlaBgUNC">           0 :     bool login_ok = attemptLogin(&quot;nonexistent@test.com&quot;, VALID_PASS, TEST_DB);</span></span>
 <span id="L97"><span class="lineNum">      97</span>              :     </span>
 <span id="L98"><span class="lineNum">      98</span> <span class="tlaUNC">           0 :     EXPECT_FALSE(login_ok) &lt;&lt; &quot;Login should fail for a non-existent email.&quot;;</span></span>

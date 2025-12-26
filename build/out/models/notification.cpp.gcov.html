@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-26 17:57:12</td>
+            <td class="headerValue">2025-12-26 18:51:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">60.0&nbsp;%</td>
@@ -68,30 +68,30 @@
 <span id="L6"><span class="lineNum">       6</span>              : </span>
 <span id="L7"><span class="lineNum">       7</span> <span class="tlaUNC tlaBgUNC">           0 : Notification::Notification() : patientId(0), message(&quot;&quot;) {}</span></span>
 <span id="L8"><span class="lineNum">       8</span>              : </span>
-<span id="L9"><span class="lineNum">       9</span> <span class="tlaGNC tlaBgGNC">           6 : Notification::Notification(int aid, std::string msg) {</span></span>
-<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC">           6 :     patientId = aid;</span></span>
-<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">           6 :     message = msg;</span></span>
-<span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC">           6 : }</span></span>
+<span id="L9"><span class="lineNum">       9</span> <span class="tlaGNC tlaBgGNC">          10 : Notification::Notification(int aid, std::string msg) {</span></span>
+<span id="L10"><span class="lineNum">      10</span> <span class="tlaGNC">          10 :     patientId = aid;</span></span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC">          10 :     message = msg;</span></span>
+<span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC">          10 : }</span></span>
 <span id="L13"><span class="lineNum">      13</span>              : </span>
 <span id="L14"><span class="lineNum">      14</span>              : // ==========================================================</span>
 <span id="L15"><span class="lineNum">      15</span>              : // 1. الدالة sendNotification: تطبيق Singleton و Try/Catch</span>
 <span id="L16"><span class="lineNum">      16</span>              : // ==========================================================</span>
-<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           3 : bool Notification::sendNotification(const std::string&amp; db) {</span></span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           3 :     if (patientId &lt;= 0 || message.empty()) {</span></span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           5 : bool Notification::sendNotification(const std::string&amp; db) {</span></span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           5 :     if (patientId &lt;= 0 || message.empty()) {</span></span>
 <span id="L19"><span class="lineNum">      19</span> <span class="tlaUNC tlaBgUNC">           0 :         std::cerr &lt;&lt; &quot;ERROR (Validation): Cannot send notification with invalid patient ID or empty message.\n&quot;;</span></span>
 <span id="L20"><span class="lineNum">      20</span> <span class="tlaUNC">           0 :         return false;</span></span>
 <span id="L21"><span class="lineNum">      21</span>              :     }</span>
 <span id="L22"><span class="lineNum">      22</span>              :     </span>
 <span id="L23"><span class="lineNum">      23</span>              :     try {</span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC tlaBgGNC">           3 :         DBConnection* conn = DBConnection::getInstance(db);</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC tlaBgGNC">           5 :         DBConnection* conn = DBConnection::getInstance(db);</span></span>
 <span id="L25"><span class="lineNum">      25</span>              : </span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           3 :         std::ostringstream q;</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           3 :         q &lt;&lt; &quot;INSERT INTO notifications(patientId, message) VALUES(&quot;</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           3 :           &lt;&lt; patientId &lt;&lt; &quot;,'&quot; &lt;&lt; message &lt;&lt; &quot;');&quot;;</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           5 :         std::ostringstream q;</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           5 :         q &lt;&lt; &quot;INSERT INTO notifications(patientId, message) VALUES(&quot;</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           5 :           &lt;&lt; patientId &lt;&lt; &quot;,'&quot; &lt;&lt; message &lt;&lt; &quot;');&quot;;</span></span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           3 :         return conn-&gt;execute(q.str());</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           5 :         return conn-&gt;execute(q.str());</span></span>
 <span id="L31"><span class="lineNum">      31</span>              :         </span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           3 :     } catch (const std::exception&amp; e) {</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           5 :     } catch (const std::exception&amp; e) {</span></span>
 <span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC tlaBgUNC">           0 :         std::cerr &lt;&lt; &quot;EXCEPTION CAUGHT (SendNotification): DB operation failed: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;</span></span>
 <span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC">           0 :         return false;</span></span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :     }</span></span>
@@ -100,14 +100,14 @@
 <span id="L38"><span class="lineNum">      38</span>              : // ==========================================================</span>
 <span id="L39"><span class="lineNum">      39</span>              : // 2. الدالة runReminders: تطبيق Singleton و Try/Catch</span>
 <span id="L40"><span class="lineNum">      40</span>              : // ==========================================================</span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">           3 : void Notification::runReminders(const std::string&amp; db) {</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">           5 : void Notification::runReminders(const std::string&amp; db) {</span></span>
 <span id="L42"><span class="lineNum">      42</span>              :     try {</span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           3 :         DBConnection* conn = DBConnection::getInstance(db);</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           5 :         DBConnection* conn = DBConnection::getInstance(db);</span></span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           3 :         std::cout &lt;&lt; &quot;Starting reminder process...\n&quot;;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           5 :         std::cout &lt;&lt; &quot;Starting reminder process...\n&quot;;</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
 <span id="L47"><span class="lineNum">      47</span>              :         // Placeholder: just run a simple SELECT</span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           6 :         conn-&gt;query(</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">          10 :         conn-&gt;query(</span></span>
 <span id="L49"><span class="lineNum">      49</span>              :             &quot;SELECT id FROM notifications;&quot;,</span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC tlaBgUNC">           0 :             [](void*, int, char**, char**) -&gt; int { </span></span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC">           0 :                 return 0; </span></span>
@@ -115,12 +115,12 @@
 <span id="L53"><span class="lineNum">      53</span>              :             nullptr</span>
 <span id="L54"><span class="lineNum">      54</span>              :         );</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC tlaBgGNC">           3 :         std::cout &lt;&lt; &quot;Reminders processed successfully.\n&quot;;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC tlaBgGNC">           5 :         std::cout &lt;&lt; &quot;Reminders processed successfully.\n&quot;;</span></span>
 <span id="L57"><span class="lineNum">      57</span>              :         </span>
 <span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC tlaBgUNC">           0 :     } catch (const std::exception&amp; e) {</span></span>
 <span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC">           0 :         std::cerr &lt;&lt; &quot;CRITICAL EXCEPTION CAUGHT (RunReminders): DB process failed: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;</span></span>
 <span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :     }</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">           3 : }</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">           5 : }</span></span>
         </pre>
               </td>
             </tr>

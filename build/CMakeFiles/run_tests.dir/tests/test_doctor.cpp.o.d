@@ -269,8 +269,4 @@ CMakeFiles/run_tests.dir/tests/test_doctor.cpp.o: \
  /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/libs/googletest-1.15.0/googletest/include/gtest/gtest_prod.h \
  /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../models/doctor.h \
  /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../database/db_connection.h \
- /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../database/sqlite3.h \
- /usr/include/c++/13/fstream \
- /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
- /usr/include/c++/13/bits/fstream.tcc
+ /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/tests/../database/sqlite3.h
