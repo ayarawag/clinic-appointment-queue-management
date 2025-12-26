@@ -31,12 +31,11 @@ protected:
 // الهدف: التأكد من أن النظام يقرأ الموعد رقم 1 بشكل صحيح.
 // ---------------------------------------------------------
 TEST_F(AppointmentScenariosTests, Scenario_LoadExistingAppointment) {
-    std::cout << "[SCENARIO] تحميل بيانات الموعد رقم 1 من القاعدة..." << std::endl;
+    std::cout << "[SCENARIO] Loading data for appointment number 1 from the database" << std::endl;
     
     Appointment app = Appointment::loadById(1, REAL_DB);
     
-    ASSERT_NE(app.id, 0) << "فشل: الموعد رقم 1 غير موجود في القاعدة!";
-    // بناءً على صورك، الموعد الأول يخص المريض رقم 1
+    ASSERT_NE(app.id, 0) << "فشل: الموعد رقم 1    !";
     EXPECT_EQ(app.patientId, 1);
     std::cout << "[INFO] تم العثور على موعد المريض رقم: " << app.patientId << " بتاريخ: " << app.dateTime << std::endl;
 }
@@ -46,7 +45,7 @@ TEST_F(AppointmentScenariosTests, Scenario_LoadExistingAppointment) {
 // الهدف: التأكد من تحديث التاريخ والوقت في القاعدة.
 // ---------------------------------------------------------
 TEST_F(AppointmentScenariosTests, Scenario_RescheduleAppointment) {
-    std::cout << "[SCENARIO] اختبار تغيير وقت الموعد رقم 1..." << std::endl;
+    std::cout << "[SCENARIO] Test of changing appointment time number 1" << std::endl;
     
     Appointment app = Appointment::loadById(1, REAL_DB);
     string originalDate = app.dateTime;
@@ -68,7 +67,7 @@ TEST_F(AppointmentScenariosTests, Scenario_RescheduleAppointment) {
 // الهدف: التحقق من تحول حالة الدفع (Paid) من 0 إلى 1.
 // ---------------------------------------------------------
 TEST_F(AppointmentScenariosTests, Scenario_SetAppointmentPaid) {
-    std::cout << "[SCENARIO] اختبار عملية دفع قيمة الموعد..." << std::endl;
+    std::cout << "[SCENARIO] Test of the appointment payment process" << std::endl;
     
     Appointment app = Appointment::loadById(1, REAL_DB);
     bool originalStatus = app.paid;
@@ -88,7 +87,7 @@ TEST_F(AppointmentScenariosTests, Scenario_SetAppointmentPaid) {
 // الهدف: اختبار ميزة البحث عن مواعيد مريض معين في يوم محدد.
 // ---------------------------------------------------------
 TEST_F(AppointmentScenariosTests, Scenario_SearchAppointments) {
-    std::cout << "[SCENARIO] البحث عن مواعيد المريض رقم 1..." << std::endl;
+    std::cout << "[SCENARIO] Searching for appointments for patient number 1" << std::endl;
     
     // البحث عن مواعيد المريض 1 (بدون تحديد تاريخ أو طبيب لضمان ظهور نتائج)
     vector<Appointment> results = Appointment::search(1, "", 0, REAL_DB);
@@ -106,7 +105,7 @@ TEST_F(AppointmentScenariosTests, Scenario_SearchAppointments) {
 // الهدف: التأكد من تغير حالة الموعد إلى 'Cancelled'.
 // ---------------------------------------------------------
 TEST_F(AppointmentScenariosTests, Scenario_CancelAppointment) {
-    std::cout << "[SCENARIO] اختبار إلغاء الموعد..." << std::endl;
+    std::cout << "[SCENARIO] Appointment cancellation test" << std::endl;
     // سنقوم بحجز موعد مؤقت ثم إلغاؤه لتجنب تخريب المواعيد القديمة
     Appointment tempApp(1, 1, "2025-12-12 12:00:00");
     tempApp.book(REAL_DB);
@@ -125,7 +124,7 @@ TEST_F(AppointmentScenariosTests, Scenario_CancelAppointment) {
 // الهدف: منع الحجز إذا كانت البيانات ناقصة (مثل عدم وجود تاريخ).
 // ---------------------------------------------------------
 TEST_F(AppointmentScenariosTests, Scenario_BlockInvalidBooking) {
-    std::cout << "[SCENARIO] محاولة حجز موعد بدون تاريخ..." << std::endl;
+    std::cout << "[SCENARIO] Attempt to book an appointment without a date" << std::endl;
     
     Appointment badApp(1, 1, ""); // تاريخ فارغ
     bool result = badApp.book(REAL_DB);
