@@ -10,6 +10,10 @@ void rescheduleAppointmentCLI();
 void payAppointmentCLI();
 void viewAppointmentsCLI();
 
+// ===== NEW FEATURES =====
+void searchAppointmentsCLI();      // Feature: Search Appointments
+void viewAvailableSlotsCLI();      // Feature: View Available Slots
+
 // Doctor
 void doctorAddCLI();
 void setDoctorScheduleCLI();
@@ -39,16 +43,18 @@ int main() {
         std::cout << "5.  Reschedule Appointment\n";
         std::cout << "6.  Pay for Appointment\n";
         std::cout << "7.  View My Appointments\n";
+        std::cout << "8.  Search Appointments\n";          // ⭐ Feature 1
         std::cout << "------------------------------------\n";
-        std::cout << "8.  Doctor: Add Doctor\n";
-        std::cout << "9.  Doctor: Set Schedule\n";
+        std::cout << "9.  Doctor: Add Doctor\n";
+        std::cout << "10. Doctor: Set Schedule\n";
+        std::cout << "11. View Available Slots\n";          // ⭐ Feature 2
         std::cout << "------------------------------------\n";
-        std::cout << "10. Queue: Add to Queue\n";
-        std::cout << "11. Queue: Show Queue\n";
-        std::cout << "12. Queue: Reorder Queue\n";
+        std::cout << "12. Queue: Add to Queue\n";
+        std::cout << "13. Queue: Show Queue\n";
+        std::cout << "14. Queue: Reorder Queue\n";
         std::cout << "------------------------------------\n";
-        std::cout << "13. Notifications: Send\n";
-        std::cout << "14. Notifications: Run Reminders\n";
+        std::cout << "15. Notifications: Send\n";
+        std::cout << "16. Notifications: Run Reminders\n";
         std::cout << "------------------------------------\n";
         std::cout << "0.  Exit\n";
         std::cout << "====================================\n";
@@ -98,30 +104,39 @@ int main() {
                 break;
 
             case 8:
-                doctorAddCLI();
+                if (!loggedIn) { std::cout << "Please login first.\n"; break; }
+                searchAppointmentsCLI();
                 break;
 
             case 9:
-                setDoctorScheduleCLI();
+                doctorAddCLI();
                 break;
 
             case 10:
-                addToQueueCLI();
+                setDoctorScheduleCLI();
                 break;
 
             case 11:
-                showQueueCLI();
+                viewAvailableSlotsCLI();
                 break;
 
             case 12:
-                reorderQueueCLI();
+                addToQueueCLI();
                 break;
 
             case 13:
-                sendNotificationCLI();
+                showQueueCLI();
                 break;
 
             case 14:
+                reorderQueueCLI();
+                break;
+
+            case 15:
+                sendNotificationCLI();
+                break;
+
+            case 16:
                 runRemindersCLI();
                 break;
 

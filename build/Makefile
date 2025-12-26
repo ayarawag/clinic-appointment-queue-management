@@ -293,6 +293,30 @@ database/sqlite3.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/database/sqlite3.c.s
 .PHONY : database/sqlite3.c.s
 
+features/SearchAppointments.o: features/SearchAppointments.cpp.o
+.PHONY : features/SearchAppointments.o
+
+# target to build an object file
+features/SearchAppointments.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/SearchAppointments.cpp.o
+.PHONY : features/SearchAppointments.cpp.o
+
+features/SearchAppointments.i: features/SearchAppointments.cpp.i
+.PHONY : features/SearchAppointments.i
+
+# target to preprocess a source file
+features/SearchAppointments.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/SearchAppointments.cpp.i
+.PHONY : features/SearchAppointments.cpp.i
+
+features/SearchAppointments.s: features/SearchAppointments.cpp.s
+.PHONY : features/SearchAppointments.s
+
+# target to generate assembly for a file
+features/SearchAppointments.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/SearchAppointments.cpp.s
+.PHONY : features/SearchAppointments.cpp.s
+
 features/ViewAppointments.o: features/ViewAppointments.cpp.o
 .PHONY : features/ViewAppointments.o
 
@@ -316,6 +340,30 @@ features/ViewAppointments.s: features/ViewAppointments.cpp.s
 features/ViewAppointments.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/ViewAppointments.cpp.s
 .PHONY : features/ViewAppointments.cpp.s
+
+features/ViewSlots.o: features/ViewSlots.cpp.o
+.PHONY : features/ViewSlots.o
+
+# target to build an object file
+features/ViewSlots.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/ViewSlots.cpp.o
+.PHONY : features/ViewSlots.cpp.o
+
+features/ViewSlots.i: features/ViewSlots.cpp.i
+.PHONY : features/ViewSlots.i
+
+# target to preprocess a source file
+features/ViewSlots.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/ViewSlots.cpp.i
+.PHONY : features/ViewSlots.cpp.i
+
+features/ViewSlots.s: features/ViewSlots.cpp.s
+.PHONY : features/ViewSlots.s
+
+# target to generate assembly for a file
+features/ViewSlots.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/features/ViewSlots.cpp.s
+.PHONY : features/ViewSlots.cpp.s
 
 features/booking.o: features/booking.cpp.o
 .PHONY : features/booking.o
@@ -986,9 +1034,15 @@ help:
 	@echo "... database/sqlite3.o"
 	@echo "... database/sqlite3.i"
 	@echo "... database/sqlite3.s"
+	@echo "... features/SearchAppointments.o"
+	@echo "... features/SearchAppointments.i"
+	@echo "... features/SearchAppointments.s"
 	@echo "... features/ViewAppointments.o"
 	@echo "... features/ViewAppointments.i"
 	@echo "... features/ViewAppointments.s"
+	@echo "... features/ViewSlots.o"
+	@echo "... features/ViewSlots.i"
+	@echo "... features/ViewSlots.s"
 	@echo "... features/booking.o"
 	@echo "... features/booking.i"
 	@echo "... features/booking.s"

@@ -1,1 +1,0 @@
-genhtml final_report_data_filtered.info --output-directory final_lcov_report

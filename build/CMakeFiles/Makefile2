@@ -136,12 +136,12 @@ libs/googletest-1.15.0/googletest/clean: libs/googletest-1.15.0/googletest/CMake
 CMakeFiles/clinic.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clinic.dir/build.make CMakeFiles/clinic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Built target clinic"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 "Built target clinic"
 .PHONY : CMakeFiles/clinic.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/clinic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 22
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/clinic.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles 0
 .PHONY : CMakeFiles/clinic.dir/rule
@@ -163,7 +163,7 @@ CMakeFiles/run_tests.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest
 CMakeFiles/run_tests.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48 "Built target run_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50 "Built target run_tests"
 .PHONY : CMakeFiles/run_tests.dir/all
 
 # Build rule for subdir invocation for target.
@@ -189,7 +189,7 @@ CMakeFiles/run_tests.dir/clean:
 libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/depend
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=21,22 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=23,24 "Built target gmock"
 .PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -216,7 +216,7 @@ libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all: libs/googletest
 libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/build.make libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=23,24 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=25,26 "Built target gmock_main"
 .PHONY : libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -242,7 +242,7 @@ libs/googletest-1.15.0/googlemock/CMakeFiles/gmock_main.dir/clean:
 libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=25,26 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=27,28 "Built target gtest"
 .PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -268,7 +268,7 @@ libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/clean:
 libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all: libs/googletest-1.15.0/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) $(MAKESILENT) -f libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/build.make libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=27,28 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/build/CMakeFiles --progress-num=29,30 "Built target gtest_main"
 .PHONY : libs/googletest-1.15.0/googletest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.

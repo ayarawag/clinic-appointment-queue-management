@@ -127,7 +127,11 @@ CMakeFiles/clinic.dir/features/doctor_schedule.cpp.o: \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/functional_hash.h \
  /usr/include/c++/13/bits/hash_bytes.h \
- /usr/include/c++/13/bits/basic_string.tcc /usr/include/c++/13/iostream \
+ /usr/include/c++/13/bits/basic_string.tcc /usr/include/c++/13/vector \
+ /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/iostream \
  /usr/include/c++/13/ostream /usr/include/c++/13/ios \
  /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
  /usr/include/c++/13/bits/cxxabi_init_exception.h \

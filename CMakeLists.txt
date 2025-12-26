@@ -44,10 +44,13 @@ set(PROJECT_SOURCES
     utils/time_utils.cpp
 )
 
+# -------------------------------------
 # Application Executable
+# -------------------------------------
 add_executable(clinic
     main.cpp
     ${PROJECT_SOURCES}
+
     features/register.cpp
     features/login.cpp
     features/booking.cpp
@@ -57,12 +60,15 @@ add_executable(clinic
     features/queue_managment.cpp
     features/ViewAppointments.cpp
     features/notification.cpp
+
+    # ===== Latest features only =====
+    features/SearchAppointments.cpp
+    features/ViewSlots.cpp
 )
 
 # -------------------------------------
 # TEST EXECUTABLE
 # -------------------------------------
-
 file(GLOB TEST_FILES "tests/test_*.cpp")
 
 add_executable(run_tests
@@ -82,6 +88,6 @@ target_link_libraries(run_tests
     gtest_main
     pthread
     sqlite3
-    ${COVERAGE_LINKER_FLAG} # إضافة ربط مكتبة lgcov
+    ${COVERAGE_LINKER_FLAG}
 )
 # ==========================================================
