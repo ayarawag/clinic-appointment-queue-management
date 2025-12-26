@@ -1,132 +1,135 @@
 #include <gtest/gtest.h>
 #include "../models/appointment.h"
-#include "../models/patient.h"
-#include "../models/doctor.h"
-#include "../database/db_connection.h" 
-#include <fstream>
-#include <sstream>
+#include "../database/db_connection.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
-// اسم قاعدة البيانات التي سيتم استخدامها في الاختبارات فقط
-const std::string TEST_DB = "test_clinic.db";
-inline void initialize_test_db(const std::string& db_name) {
-    DBConnection::destroyInstance(); 
-    std::remove(db_name.c_str()); 
-    std::ifstream sql_file("../database/database.sql");
-    std::stringstream buffer;
-    if (sql_file.is_open()) {
-        buffer << sql_file.rdbuf();
-        std::string sql_script = buffer.str();
-        DBConnection* db = DBConnection::getInstance(db_name); 
-        db->execute(sql_script); 
-    } else {
-        std::cerr<<"failed"<< std::endl;
-    }
-}
-// داله لحساب عدد المواعيد 
-inline int getAppointmentCount(const std::string& db_name) {
-    int count = 0;
-    DBConnection* conn = DBConnection::getInstance(db_name);
-    if (!conn) return -1; 
-    
-    conn->query(
-        "SELECT COUNT(*) FROM appointments;",
-        [](void* data, int argc, char** argv, char** col_names) -> int {
-            if (argv[0]) {
-                try {
-                    *((int*)data) = std::stoi(argv[0]);
-                } catch (...) {}
-            }
-            return 0;
-        },
-        &count
-    );
-    return count;
-}
+/**
+ * ملف اختبارات مواعيد العيادة - الربط مع clinic.db الحقيقية
+ * تغطي هذه الاختبارات ميزات الحجز، الإلغاء، الدفع، والبحث.
+ */
 
-// كلاس الاختبار AppointmentTests
-class AppointmentTests : public ::testing::Test {
+using std::string;
+using std::vector;
+
+// المسار المطلق لقاعدة البيانات (تأكد من مطابقة المسار لجهازك)
+const string REAL_DB = "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/clinic.db";
+
+class AppointmentScenariosTests : public ::testing::Test {
 protected:
     void SetUp() override {
-        // [الحل]: يتم استدعاء initialize_test_db التي تقوم بتدمير النسخة القديمة
-        initialize_test_db(TEST_DB); 
-
-        // تسجيل المستخدمين (يجب أن يتم بنجاح الآن)
-        Patient p("ApptPatient", "100", "p@a.com", "pass");
-        ASSERT_TRUE(p.registerPatient(TEST_DB)); 
-        
-        Doctor d("Dr. Appt", "Generalist");
-        ASSERT_TRUE(d.registerDoctor(TEST_DB)); 
+        DBConnection::getInstance(REAL_DB);
     }
-    
-    // [الحل]: يتم استدعاء TearDown بعد كل اختبار
     void TearDown() override {
-        // [Singleton]: تدمير نسخة Singleton بعد كل اختبار لمنع الحظر (Locking)
-        DBConnection::destroyInstance(); 
+        DBConnection::destroyInstance();
     }
 };
 
-// --------------------------------------------------------
-// الاختبارات
-// --------------------------------------------------------
-
-TEST_F(AppointmentTests, BookingAndLoad) {
-    int initial_count = getAppointmentCount(TEST_DB);
-
-    // 1. الحجز
-    Appointment a;
-    a.patientId = 1; 
-    a.doctorId = 1;  
-    a.dateTime = "2025-01-01 10:00:00";
-
-    bool ok_book = a.book(TEST_DB);
-    EXPECT_TRUE(ok_book);
-    EXPECT_EQ(getAppointmentCount(TEST_DB), initial_count + 1);
+// ---------------------------------------------------------
+// السيناريو 1: تحميل موعد موجود فعلياً (Data Integrity)
+// الهدف: التأكد من أن النظام يقرأ الموعد رقم 1 بشكل صحيح.
+// ---------------------------------------------------------
+TEST_F(AppointmentScenariosTests, Scenario_LoadExistingAppointment) {
+    std::cout << "[SCENARIO] تحميل بيانات الموعد رقم 1 من القاعدة..." << std::endl;
     
-    // 2. التحميل
-    Appointment a_loaded = Appointment::loadById(1, TEST_DB);
+    Appointment app = Appointment::loadById(1, REAL_DB);
     
-    EXPECT_EQ(a_loaded.id, 1);
-    EXPECT_EQ(a_loaded.patientId, 1);
-    EXPECT_EQ(a_loaded.dateTime, "2025-01-01 10:00:00");
+    ASSERT_NE(app.id, 0) << "فشل: الموعد رقم 1 غير موجود في القاعدة!";
+    // بناءً على صورك، الموعد الأول يخص المريض رقم 1
+    EXPECT_EQ(app.patientId, 1);
+    std::cout << "[INFO] تم العثور على موعد المريض رقم: " << app.patientId << " بتاريخ: " << app.dateTime << std::endl;
 }
 
-TEST_F(AppointmentTests, Reschedule) {
-    // 1. الحجز أولاً
-    Appointment a_book(1, 1, "2025-01-02 09:00:00");
-    ASSERT_TRUE(a_book.book(TEST_DB)); 
-
-    Appointment a = Appointment::loadById(1, TEST_DB);
-    std::string new_time = "2025-01-02 14:00:00";
+// ---------------------------------------------------------
+// السيناريو 2: تغيير موعد (Reschedule Feature)
+// الهدف: التأكد من تحديث التاريخ والوقت في القاعدة.
+// ---------------------------------------------------------
+TEST_F(AppointmentScenariosTests, Scenario_RescheduleAppointment) {
+    std::cout << "[SCENARIO] اختبار تغيير وقت الموعد رقم 1..." << std::endl;
     
-    // 2. إعادة الجدولة
-    bool ok_reschedule = a.reschedule(new_time, TEST_DB);
-    EXPECT_TRUE(ok_reschedule);
-
-    // 3. التحقق من التحديث
-    Appointment a_checked = Appointment::loadById(1, TEST_DB);
-    EXPECT_EQ(a_checked.dateTime, new_time);
+    Appointment app = Appointment::loadById(1, REAL_DB);
+    string originalDate = app.dateTime;
+    string newDate = "2025-01-01 10:00:00";
+    
+    bool ok = app.reschedule(newDate, REAL_DB);
+    EXPECT_TRUE(ok);
+    
+    // التحقق من الحفظ
+    Appointment check = Appointment::loadById(1, REAL_DB);
+    EXPECT_EQ(check.dateTime, newDate);
+    
+    // إرجاع التاريخ الأصلي للحفاظ على البيانات
+    app.reschedule(originalDate, REAL_DB);
 }
 
-TEST_F(AppointmentTests, Cancel) {
-    // 1. الحجز أولاً
-    int initial_count = getAppointmentCount(TEST_DB);
-    Appointment a_book(1, 1, "2025-01-03 11:00:00");
-    ASSERT_TRUE(a_book.book(TEST_DB));
+// ---------------------------------------------------------
+// السيناريو 3: دفع قيمة الموعد (Payment Update)
+// الهدف: التحقق من تحول حالة الدفع (Paid) من 0 إلى 1.
+// ---------------------------------------------------------
+TEST_F(AppointmentScenariosTests, Scenario_SetAppointmentPaid) {
+    std::cout << "[SCENARIO] اختبار عملية دفع قيمة الموعد..." << std::endl;
     
-    // [الحل] تحميل الكائن للحصول على ID صحيح
-    Appointment a = Appointment::loadById(a_book.id, TEST_DB); 
+    Appointment app = Appointment::loadById(1, REAL_DB);
+    bool originalStatus = app.paid;
     
-    // 2. الإلغاء
-    bool ok_cancel = a.
-    cancel(TEST_DB);
-    EXPECT_TRUE(ok_cancel);
+    bool ok = app.setPaid(true, REAL_DB);
+    EXPECT_TRUE(ok);
+    
+    Appointment check = Appointment::loadById(1, REAL_DB);
+    EXPECT_EQ(check.paid, 1);
+    
+    // إرجاع الحالة الأصلية
+    app.setPaid(originalStatus, REAL_DB);
+}
 
-    // 3. التحقق من التغيير (التحقق من أن الحالة أصبحت "Cancelled")
-    Appointment a_cancelled = Appointment::loadById(a_book.id, TEST_DB);
-    EXPECT_EQ(a_cancelled.status, "Cancelled"); 
+// ---------------------------------------------------------
+// السيناريو 4: البحث المتقدم (Advanced Search Feature)
+// الهدف: اختبار ميزة البحث عن مواعيد مريض معين في يوم محدد.
+// ---------------------------------------------------------
+TEST_F(AppointmentScenariosTests, Scenario_SearchAppointments) {
+    std::cout << "[SCENARIO] البحث عن مواعيد المريض رقم 1..." << std::endl;
     
-    // تأكد من أن عدد المواعيد لم يتغير (لأن الإلغاء تحديث حالة)
-    EXPECT_EQ(getAppointmentCount(TEST_DB), initial_count + 1);
+    // البحث عن مواعيد المريض 1 (بدون تحديد تاريخ أو طبيب لضمان ظهور نتائج)
+    vector<Appointment> results = Appointment::search(1, "", 0, REAL_DB);
+    
+    EXPECT_FALSE(results.empty());
+    std::cout << "[INFO] تم العثور على " << results.size() << " موعد/مواعيد للمريض." << std::endl;
+    
+    for(const auto& a : results) {
+        EXPECT_EQ(a.patientId, 1);
+    }
+}
+
+// ---------------------------------------------------------
+// السيناريو 5: إلغاء موعد (Cancel Feature)
+// الهدف: التأكد من تغير حالة الموعد إلى 'Cancelled'.
+// ---------------------------------------------------------
+TEST_F(AppointmentScenariosTests, Scenario_CancelAppointment) {
+    std::cout << "[SCENARIO] اختبار إلغاء الموعد..." << std::endl;
+    // سنقوم بحجز موعد مؤقت ثم إلغاؤه لتجنب تخريب المواعيد القديمة
+    Appointment tempApp(1, 1, "2025-12-12 12:00:00");
+    tempApp.book(REAL_DB);
+    
+    bool ok = tempApp.cancel(REAL_DB);
+    EXPECT_TRUE(ok);
+    EXPECT_EQ(tempApp.status, "Cancelled");
+    
+    // التحقق من القاعدة
+    Appointment check = Appointment::loadById(tempApp.id, REAL_DB);
+    EXPECT_EQ(check.status, "Cancelled");
+}
+
+// ---------------------------------------------------------
+// السيناريو 6: حماية البيانات (Validation on Booking)
+// الهدف: منع الحجز إذا كانت البيانات ناقصة (مثل عدم وجود تاريخ).
+// ---------------------------------------------------------
+TEST_F(AppointmentScenariosTests, Scenario_BlockInvalidBooking) {
+    std::cout << "[SCENARIO] محاولة حجز موعد بدون تاريخ..." << std::endl;
+    
+    Appointment badApp(1, 1, ""); // تاريخ فارغ
+    bool result = badApp.book(REAL_DB);
+    
+    EXPECT_FALSE(result);
+    std::cout << "[INFO] تم منع الحجز بنجاح بسبب نقص البيانات." << std::endl;
 }

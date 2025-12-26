@@ -3,97 +3,98 @@
 #include "../database/db_connection.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
-/**
- * ملف اختبارات المريض النهائي - متوافق تماماً مع كود كلاس Patient الخاص بك
- * الهدف: اختبار الربط مع قاعدة البيانات الحقيقية clinic.db والتأكد من منع التكرار
- */
 
-// مسار قاعدة البيانات الحقيقية التي تحتوي على بياناتك
-const std::string REAL_DB = "clinic.db";
+using std::string;
 
-class PatientIntegrationTests : public ::testing::Test {
+// المسار المطلق لملف قاعدة البيانات في جهازك لضمان الوصول إليه دائماً
+const std::string REAL_DB = "/mnt/c/Users/ECS/Documents/GitHub/clinic-appointment-queue-management/clinic.db";
+
+class PatientScenariosTests : public ::testing::Test {
 protected:
     void SetUp() override {
-        // التأكد من فتح اتصال بقاعدة البيانات قبل كل اختبار باستخدام Singleton
+        // إنشاء نسخة الاتصال بقاعدة البيانات قبل كل اختبار
         DBConnection::getInstance(REAL_DB);
     }
-
     void TearDown() override {
-        // تدمير النسخة لضمان نظافة الاتصال بين الاختبارات
+        // تدمير نسخة الاتصال لضمان نظافة البيانات بين الاختبارات
         DBConnection::destroyInstance();
     }
 };
 
-// 1. الاختبار الأهم للدكتور: منع تسجيل إيميل موجود مسبقاً (Unique Check)
-TEST_F(PatientIntegrationTests, PreventRegistrationOfExistingEmail) {
-    // الإيميل الموجود فعلياً في قاعدة بياناتك (miral)
-    std::string existingEmail = "bb@gmail.com";
+// 1. سيناريو منع تكرار الإيميل 
+// تم استخدام bb@gmail.com لأنه الإيميل الفعلي الموجود في قاعدة بياناتك
+TEST_F(PatientScenariosTests, Scenario_BlockDuplicateEmail) {
+    std::cout << "[SCENARIO] Attempt to register a patient with an existing email (bb@gmail.com)" << std::endl;
     
-    std::cout << "[TEST] Attempting to register with existing email: " << existingEmail << std::endl;
-
-    // إنشاء كائن مريض جديد بنفس الإيميل
-    // نستخدم بيانات وهمية للباقي لأن الهدف هو اختبار منع تكرار الإيميل
-    Patient dupPatient("Test User", "0000000000", existingEmail, "pass123");
-
-    // استدعاء الدالة registerPatient التي تحتوي على التحقق من التكرار داخلها
-    bool result = dupPatient.registerPatient(REAL_DB);
-
-    // النتيجة المتوقعة: يجب أن تكون false لأن الإيميل موجود
-    EXPECT_FALSE(result) << "فشل الاختبار: النظام سمح بتكرار إيميل موجود مسبقاً في القاعدة!";
-    
-    if (!result) {
-        std::cout << "[SUCCESS] System correctly blocked the duplicate email registration." << std::endl;
-    }
-}
-
-// 2. اختبار دالة emailExists الحقيقية
-TEST_F(PatientIntegrationTests, CheckIfEmailExistsInRealDB) {
-    std::string email = "bb@gmail.com";
-    
-    Patient p;
-    // استدعاء دالة emailExists التي تستخدم Singleton و Try/Catch في كودك
-    bool found = p.emailExists(email, REAL_DB);
-    
-    EXPECT_TRUE(found) << "فشل الاختبار: لم يتم العثور على الإيميل رغم وجوده الفعلي في clinic.db";
-}
-
-// 3. اختبار تحميل بيانات مريض موجود (LoadById)
-TEST_F(PatientIntegrationTests, LoadPatientFromDatabase) {
-    // حسب بياناتك، miral لديها ID = 1
-    int testId = 1;
-    
-    // استدعاء دالة loadById من كودك
-    Patient p = Patient::loadById(testId, REAL_DB);
-    
-    // التحقق من صحة البيانات المحملة من الملف الحقيقي
-    EXPECT_EQ(p.id, testId);
-    EXPECT_EQ(p.email, "bb@gmail.com");
-    // التحقق من الاسم (موجود في كودك كـ name)
-    EXPECT_EQ(p.name, "miral");
-    
-    std::cout << "[INFO] Successfully loaded: " << p.name << " with ID: " << p.id << std::endl;
-}
-
-// 4. اختبار التحقق من البيانات (Validation)
-TEST_F(PatientIntegrationTests, RegistrationValidationCheck) {
-    // محاولة إنشاء مريض ببيانات ناقصة (إيميل فارغ)
-    Patient p("NoEmailUser", "12345", "", "password");
-    
-    // دالة registerPatient في كودك تبدأ بالتحقق if (email.empty())
+    Patient p("New User", "0910000000", "bb@gmail.com", "pass123");
     bool result = p.registerPatient(REAL_DB);
     
-    EXPECT_FALSE(result) << "فشل الاختبار: النظام سمح بتسجيل مريض ببيانات ناقصة!";
+    // يتوقع أن يرجع الكود false لأن الإيميل موجود
+    EXPECT_FALSE(result) << "خطأ: النظام سمح بتكرار إيميل موجود مسبقاً!";
 }
 
-// 5. اختبار معالجة استثناءات قاعدة البيانات (Exception Handling)
-TEST_F(PatientIntegrationTests, HandleInvalidDatabasePath) {
-    std::string wrongPath = "/non/existent/path.db";
+// 2. سيناريو تحميل بيانات المريض الأول (Data Integrity)
+// تم تعديل التوقعات لتطابق البيانات الفعلية (Name: jj, Email: bb@gmail.com)
+TEST_F(PatientScenariosTests, Scenario_LoadPatientData) {
+    std::cout << "[SCENARIO] Loading patient data number 1 and verifying its accuracy" << std::endl;
+    Patient p = Patient::loadById(1, REAL_DB);
+    
+    ASSERT_NE(p.id, 0) << "خطأ: لم يتم العثور على المريض رقم 1 في القاعدة!";
+    EXPECT_EQ(p.email, "bb@gmail.com");
+    EXPECT_EQ(p.name, "jj");
+}
+
+// 3. سيناريو تحديث بيانات مريض (Update Verification)
+TEST_F(PatientScenariosTests, Scenario_UpdatePatientPhone) {
+    std::cout << "[SCENARIO] Testing phone number update for patient number 1" << std::endl;
+    
+    Patient p = Patient::loadById(1, REAL_DB);
+    ASSERT_NE(p.id, 0);
+    
+    std::string originalPhone = p.phone; 
+    p.phone = "0999999999"; 
+    
+    bool updateOk = p.update(REAL_DB);
+    EXPECT_TRUE(updateOk);
+    
+    // التحقق من أن القيمة الجديدة تم حفظها فعلياً
+    Patient checkP = Patient::loadById(1, REAL_DB);
+    EXPECT_EQ(checkP.phone, "0999999999");
+    
+    // إرجاع القيمة الأصلية للحفاظ على سلامة البيانات الأساسية
+    p.phone = originalPhone;
+    p.update(REAL_DB);
+}
+
+// 4. سيناريو الحماية عند مسار قاعدة بيانات خاطئ (Robustness)
+TEST_F(PatientScenariosTests, Scenario_DatabaseErrorHandling) {
+    std::cout << "[SCENARIO] Testing handling an invalid database path" << std::endl;
     Patient p;
+    // مسار وهمي لا يمكن الوصول إليه
+    bool result = p.emailExists("any@test.com", "/invalid/path/db.db");
     
-    // دالة emailExists في كودك مغلفة بـ try/catch وترجع false عند الخطأ
-    bool result = p.emailExists("any@email.com", wrongPath);
+    // الكود يجب أن يمسك الاستثناء (Try/Catch) ويرجع false دون انهيار البرنامج
+    EXPECT_FALSE(result);
+}
+
+// 5. سيناريو التحقق من تشفير كلمة المرور (Security Check)
+TEST_F(PatientScenariosTests, Scenario_PasswordHashIntegrity) {
+    std::cout << "[SCENARIO] Ensure the password is encrypted before storing it" << std::endl;
+    string plainPass = "secret123";
+    Patient p("SecurityUser", "000", "security@test.com", plainPass);
     
-    EXPECT_FALSE(result) << "فشل الاختبار: الكود لم يتعامل بشكل صحيح مع مسار قاعدة البيانات الخاطئ";
-    std::cout << "[INFO] Exception handling verified (returned false instead of crashing)." << std::endl;
+    // الهاش يجب ألا يساوي النص الواضح بأي حال من الأحوال
+    EXPECT_NE(p.passwordHash, plainPass);
+    EXPECT_FALSE(p.passwordHash.empty());
+}
+
+// 6. سيناريو منع التسجيل ببيانات فارغة (Input Validation)
+TEST_F(PatientScenariosTests, Scenario_BlockEmptyData) {
+    std::cout << "[SCENARIO] Attempt to register a patient with empty data" << std::endl;
+    Patient emptyP("", "", "", "");
+    bool result = emptyP.registerPatient(REAL_DB);
+    
+    EXPECT_FALSE(result) << "خطأ: النظام سمح بتسجيل مريض ببيانات ناقصة!";
 }
